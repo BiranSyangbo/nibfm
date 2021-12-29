@@ -1,6 +1,5 @@
-const JWTHelper = require(`${global.serverUtility}/helpers/jwt.helper`)
-const redisHelper = require(`${global.serverUtility}/helpers/redis.helper`);
-const httpResponseHelper = require(`${global.serverUtility}/helpers/http_response.helper`);
+const JWTHelper = require('../helpers/jwt.helper')
+const httpResponseHelper = require(`../helpers/http_response.helper`);
 const HTTPStatus = require('http-status');
 
 const sendUnAuthorizedError = (res) => {
