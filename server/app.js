@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const uuid = require('uuid')
-
+const mongodbHelper = require('../server/lib/helpers/mongodb.helper')
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 global.rootDir = __dirname;
@@ -20,7 +20,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  req.db = await mongodbHelper();
   req.debug = {
     ip: req.ip,
     debugId: uuid.v4(),
