@@ -29,7 +29,7 @@ try {
       debugId: uuid.v4(),
       userId: null
     }
-    next();
+    return next();
   });
 
   const swaggerDefinitions = require('./swagger.definitions');
