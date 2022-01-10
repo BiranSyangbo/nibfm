@@ -7,6 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const uuid = require('uuid')
 const mongodbHelper = require('../server/lib/helpers/mongodb.helper')
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const defaultAdminMigrationHelper = require('./lib/data-migrations/default-admin.data');
 
 global.rootDir = __dirname;
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 });
 try {
 
+  defaultAdminMigrationHelper();
 
   app.use(async (req, res, next) => {
     req.db = await mongodbHelper();
