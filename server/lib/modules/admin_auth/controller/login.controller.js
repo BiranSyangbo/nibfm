@@ -11,6 +11,14 @@ module.exports = async (req, res, next) => {
 
       const getUserInfoByUserName = await getUserInfoByUsername(req, req.body.username);
       if (getUserInfoByUserName && Object.keys(getUserInfoByUserName).length > 0) {
+
+        //@match user password 
+
+        //@check user is allowed to login or not
+
+        //@generate jwt token if everything is okay
+
+        
         return res.status(HTTPStatus.OK).json({
           status: HTTPStatus.OK,
           msg: "Login success.",
