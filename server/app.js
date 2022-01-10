@@ -19,41 +19,48 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache="Set-Cookie, Set-Cookie2"');
   next();
 });
+try {
 
-app.use(async (req, res, next) => {
-  req.db = await mongodbHelper();
-  req.debug = {
-    ip: req.ip,
-    debugId: uuid.v4(),
-    userId: null
-  }
-  next();
-});
 
-const swaggerDefinitions = require('./swagger.definitions');
-app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
-
-const adminRouter = require('./routes.admin');
-const userRouter = require('./routes.user');
-
-app.set('rateLimit', 100);
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.use('/api/v1/admin', adminRouter);
-
-app.use('/api/v1/user', userRouter);
-
-app.use((err, req, res, next) => {
-  res.status(500);
-  return res.json({
-    message: process.env.NODE_ENV === 'production' ? 'Someting went wrong.' : err.message
+  app.use(async (req, res, next) => {
+    req.db = await mongodbHelper();
+    req.debug = {
+      ip: req.ip,
+      debugId: uuid.v4(),
+      userId: null
+    }
+    return next();
   });
-});
 
-app.use('/api/*', (req, res, next) => {
-  return res.json({ message: 'Api route not found' })
-})
+  const swaggerDefinitions = require('./swagger.definitions');
+  app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
+
+  const adminRouter = require('./routes.admin');
+  const userRouter = require('./routes.user');
+
+  app.set('rateLimit', 100);
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+
+  app.use('/api/v1/admin', adminRouter);
+
+  app.use('/api/v1/user', userRouter);
+
+  app.use((err, req, res, next) => {
+    res.status(500);
+    return res.json({
+      message: process.env.NODE_ENV === 'production' ? 'Someting went wrong.' : err.message
+    });
+  });
+
+  app.use('/api/*', (req, res, next) => {
+    return res.json({ message: 'Api route not found' })
+  })
+
+} catch (error) {
+  console.log('error', error)
+}
+
 
 module.exports = app;
