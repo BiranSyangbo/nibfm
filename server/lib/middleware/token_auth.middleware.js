@@ -1,4 +1,4 @@
-const JWTHelper = require('../helpers/jwt.helper')
+const jwtHelper = require('../helpers/jwt.helper')
 const httpResponseHelper = require(`../helpers/http_response.helper`);
 const HTTPStatus = require('http-status');
 
@@ -15,17 +15,25 @@ const sendUnAuthorizedError = (res) => {
 }
 module.exports = async (req, res, next) => {
   try {
-    const token = req.headers['Authorization'] || req.headers['authorization']
+    const token = req.headers['Authorization'] || req.headers['authorization'];
 
-    const decodedJWT = JWTHelper.decodeJWTToken(token);
+    const checkJwtTokenInfo = await req.db.collection('login-session').findOne({
+      token: token,
+      deleted: false,
+      expiry_time: { $gte: Date.now() }
+    })
 
-    if (decodedJWT) {
-      const verifyJwtToken = await JWTHelper.verifyJWTToken(token, process.env.TOKEN_SECRET);
-      if (verifyJwtToken && !verifyJwtToken.err) {
-        req.decoded = {
-          userId: checkLoginSession.user.id
+    if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
+      const decodedJWT = await jwtHelper.decodeJWTToken(token);
+
+      if (decodedJWT && Object.keys(decodedJWT).length > 0) {
+        const verifyJwtToken = await jwtHelper.verifyToken(token, process.env.TOKEN_SECRET);
+        if (verifyJwtToken && !verifyJwtToken.err) {
+          req.decoded = {
+            userId: verifyJwtToken.user
+          }
+          return next();
         }
-        return next();
       }
     }
     return sendUnAuthorizedError(res);
