@@ -10,7 +10,7 @@ const generateJWTToken = (userInfo) => {
       {
         algorithm: process.env.JWT_HASH_ALGORITHM,
         issuer: process.env.JWT_ISSUER,
-        expiresIn: 60 * 60
+        expiresIn: '24h'
       }
     )
   } catch (error) {
@@ -27,9 +27,9 @@ const verifyToken = (token) => {
 }
 
 
-const decodeToken = () => {
+const decodeJWTToken = (token) => {
   try {
-
+    return jwt.decode(token)
   } catch (error) {
     throw error;
   }
@@ -39,5 +39,5 @@ const decodeToken = () => {
 module.exports = {
   generateJWTToken,
   verifyToken,
-  decodeToken
+  decodeJWTToken
 }
