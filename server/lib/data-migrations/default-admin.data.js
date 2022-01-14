@@ -18,7 +18,7 @@ module.exports = () => {
         const hashPassword = await generateHashPassword(process.env.SUPER_ADMIN_PWD, salt);
 
         const superAdminInfo = {
-          id: process.env.SUPER_ADMIN_ID,
+          _id: process.env.SUPER_ADMIN_ID,
           password: hashPassword,
           email: process.env.SUPER_ADMIN_USERNAME,
           deleted: false,
