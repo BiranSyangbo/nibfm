@@ -17,21 +17,27 @@ module.exports = async (req, res, next) => {
   try {
     const token = req.headers['Authorization'] || req.headers['authorization'];
 
-    const checkJwtTokenInfo = await req.db.collection('login-session').findOne({
-      token: token,
-      deleted: false,
-      expiry_time: { $gte: Date.now() }
-    })
 
-    if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
-      const decodedJWT = await jwtHelper.decodeJWTToken(token);
 
-      if (decodedJWT && Object.keys(decodedJWT).length > 0) {
+    const decodedJWT = await jwtHelper.decodeJWTToken(token);
+
+    if (decodedJWT && Object.keys(decodedJWT).length > 0) {
+
+      const checkJwtTokenInfo = await req.db.collection('login-session').findOne({
+        token: token,
+        deleted: false,
+        expiry_time: { $gte: Date.now() },
+        user: decodedJWT.user
+      })
+
+      if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
+
         const verifyJwtToken = await jwtHelper.verifyToken(token, process.env.TOKEN_SECRET);
         if (verifyJwtToken && !verifyJwtToken.err) {
           req.decoded = {
             userId: verifyJwtToken.user
           }
+          req.authToken = token;
           return next();
         }
       }
