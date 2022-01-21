@@ -3,7 +3,7 @@ const HTTPStatus = require('http-status');
 
 const sendUnAuthorizedError = (res) => {
   try {
-    return res.status(res, HTTPStatus.UNAUTHORIZED).json({
+    return res.status(HTTPStatus.UNAUTHORIZED).json({
       status: HTTPStatus.UNAUTHORIZED,
       message: "UNAUTHORIZED"
     })
