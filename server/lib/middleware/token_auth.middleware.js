@@ -1,14 +1,13 @@
 const jwtHelper = require('../helpers/jwt.helper')
-const httpResponseHelper = require(`../helpers/http_response.helper`);
 const HTTPStatus = require('http-status');
 
 const sendUnAuthorizedError = (res) => {
   try {
-    return httpResponseHelper.sendNormalResponse(res, HTTPStatus.UNAUTHORIZED,
-      {
-        status: HTTPStatus.UNAUTHORIZED,
-        message: "UNAUTHORIZED"
-      })
+    return res.status(HTTPStatus.UNAUTHORIZED).json({
+      status: HTTPStatus.UNAUTHORIZED,
+      message: "UNAUTHORIZED"
+    })
+
   } catch (error) {
     throw error;
   }
