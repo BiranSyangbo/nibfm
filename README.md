@@ -12,3 +12,7 @@ This repo will hold codebase for NBIMF web page
 * cp server/.env.example server/.env
 * npm i
 * npm run start
+
+
+## For apis reference hit this url in browser
+* http://localhost:4001/index.html
