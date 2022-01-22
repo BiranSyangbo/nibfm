@@ -8,21 +8,27 @@ const uuid = require('uuid')
 const mongodbHelper = require('../server/lib/helpers/mongodb.helper')
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const defaultAdminMigrationHelper = require('./lib/data-migrations/default-admin.data');
+const defaultOfficeMigrationHelper = require('./lib/data-migrations/default-office-info');
 
 global.rootDir = __dirname;
 
-app.use(cors())
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization,x-access-token,Accept,Origin');
-  res.setHeader('Cache-Control', 'no-cache="Set-Cookie, Set-Cookie2"');
-  next();
-});
 try {
 
+  app.use(cors())
+
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization,x-access-token,Accept,Origin');
+    res.setHeader('Cache-Control', 'no-cache="Set-Cookie, Set-Cookie2"');
+    next();
+  });
+
   defaultAdminMigrationHelper();
+  defaultOfficeMigrationHelper();
+
+  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
+
 
   app.use(async (req, res, next) => {
     req.db = await mongodbHelper();
