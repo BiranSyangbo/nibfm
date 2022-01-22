@@ -2,6 +2,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const helmet = require("helmet");
+
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const uuid = require('uuid')
@@ -13,7 +15,8 @@ const defaultOfficeMigrationHelper = require('./lib/data-migrations/default-offi
 global.rootDir = __dirname;
 
 try {
-
+  
+  app.use(helmet());
   app.use(cors())
 
   app.use((req, res, next) => {
