@@ -16,12 +16,10 @@ global.rootDir = __dirname;
 
 try {
 
-
-  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
+  const swaggerDefinitions = require('./swagger.definitions');
+  app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
   
   app.use(helmet());
-
-  
   app.use(cors())
   app.options('*', cors());
 
@@ -36,6 +34,7 @@ try {
   defaultAdminMigrationHelper();
   defaultOfficeMigrationHelper();
 
+  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
 
 
   app.use(async (req, res, next) => {
@@ -48,8 +47,7 @@ try {
     return next();
   });
 
-  const swaggerDefinitions = require('./swagger.definitions');
-  app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
+ 
 
   const adminRouter = require('./routes.admin');
   const userRouter = require('./routes.user');
