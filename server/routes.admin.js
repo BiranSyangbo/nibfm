@@ -16,7 +16,7 @@ app.use('/contact-us', contactUsRouter);
 const fileManagementRouter = require('./lib/modules/file-management/routes.admin');
 app.use('/file-management', fileManagementRouter)
 
-app.use('/health-check', (req, res, next) => {
+app.get('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
     status: 200,
