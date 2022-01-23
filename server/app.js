@@ -15,8 +15,12 @@ const defaultOfficeMigrationHelper = require('./lib/data-migrations/default-offi
 global.rootDir = __dirname;
 
 try {
-  
+
   app.use(helmet());
+
+  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
+
+  
   app.use(cors())
   app.options('*', cors());
 
@@ -31,7 +35,6 @@ try {
   defaultAdminMigrationHelper();
   defaultOfficeMigrationHelper();
 
-  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
 
 
   app.use(async (req, res, next) => {
@@ -45,7 +48,7 @@ try {
   });
 
   const swaggerDefinitions = require('./swagger.definitions');
-  app.use('/apidocs', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
+  app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
 
   const adminRouter = require('./routes.admin');
   const userRouter = require('./routes.user');
