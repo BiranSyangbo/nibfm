@@ -1,6 +1,7 @@
 
 (() => {
   const adminAuthApi = require('./lib/modules/admin_auth/api_definitions');
+  const contactUsApi = require('./lib/modules/contact-us/api_definitions');
 
   module.exports = {
     server: {
@@ -12,10 +13,10 @@
       },
       servers: [
         {
-          url: 'http://127.0.0.1:4001/api/v1/admin',
+          url: 'http://localhost:4001/api/v1/admin',
         },
         {
-          url: 'http://127.0.0.1:4001/api/v1/user',
+          url: 'http://localhost:4001/api/v1/user',
         }
       ],
       tags: [
@@ -28,14 +29,16 @@
           description: 'Static files'
         },
         ...adminAuthApi.server.tags,
+        ...contactUsApi.server.tags
       ],
       paths: {
         ...adminAuthApi.server.paths,
+        ...contactUsApi.server.paths,
         '/static/{filename}': {
           get: {
             tags: ['Static files'],
             summary: 'Static files api',
-            description: 'Hit his api inorder to ensure api health.',
+            description: 'User hits this to get membership forms.',
             operationId: 'serveStaticFIle',
             parameters: [
               {
@@ -93,7 +96,8 @@
               status: { type: 'number' }
             },
           },
-          ...adminAuthApi.server.components.schemas
+          ...adminAuthApi.server.components.schemas,
+          ...contactUsApi.server.components.schemas
         },
         securitySchemes: {
           api_key: {
