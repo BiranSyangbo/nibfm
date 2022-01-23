@@ -1,3 +1,10 @@
+/**
+ * @author lekhrazz
+ * @method getContactUsRequestList
+ */
+
+'use strict';
+
 const { getContactUsList, countTotalItems } = require('../utils/db_query.helper')
 const HTTPStatus = require('http-status');
 
