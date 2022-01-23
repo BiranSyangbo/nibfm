@@ -45,7 +45,7 @@ try {
   });
 
   const swaggerDefinitions = require('./swagger.definitions');
-  app.use('/api/v1/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
+  app.use('/apidocs', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
 
   const adminRouter = require('./routes.admin');
   const userRouter = require('./routes.user');
