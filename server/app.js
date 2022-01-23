@@ -16,9 +16,10 @@ global.rootDir = __dirname;
 
 try {
 
-  app.use(helmet());
 
   app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
+  
+  app.use(helmet());
 
   
   app.use(cors())
