@@ -5,7 +5,7 @@ const postContactUsRequest = require('./controllers/post_request.client');
 
 
 router.route('/')
-  .get(postContactUsRequest)
+  .post(postContactUsRequest)
 
 
 
