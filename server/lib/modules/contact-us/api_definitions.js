@@ -13,7 +13,7 @@
         '/contact-us/': {
           post: {
             tags: ['contact-us'],
-            summary: 'contact-us post api',
+            summary: 'USER :: contact-us post api',
             description: 'User hits this api to register contact request.',
             operationId: 'postContactUs',
             requestBody: {
@@ -41,27 +41,43 @@
           },
           get: {
             tags: ['contact-us'],
-            summary: 'contact-us api',
+            summary: 'ADMIN :: contact-us api',
             description: 'Admin hits this api to get client contact request list.',
             operationId: 'getContactUsList',
             parameters: [
               {
-                in: 'page',
-                name: 'query',
+                in: 'query',
+                name: 'page',
                 schema: {
-                  type: 'string',
+                  type: 'string'
                 },
-                description: 'current page number',
+                description: 'current page',
                 required: true
               },
               {
-                in: 'perPage',
-                name: 'query',
+                in: 'query',
+                name: 'perPage',
                 schema: {
-                  type: 'string',
+                  type: 'string'
                 },
-                description: 'perPage item',
+                description: 'total item per page',
                 required: true
+              },
+              {
+                in: 'query',
+                name: 'filter[name]',
+                schema: {
+                  type: 'string'
+                },
+                description: 'filter by name'
+              },
+              {
+                in: 'query',
+                name: 'filter[email]',
+                schema: {
+                  type: 'string'
+                },
+                description: 'filter by email'
               }
             ],
             responses: {
@@ -86,9 +102,20 @@
         '/contact-us/{uuid}': {
           patch: {
             tags: ['contact-us'],
-            summary: 'contact-us logout api',
+            summary: 'ADMIN :: contact-us logout api',
             description: 'Admin hits this api to logout into the system.',
             operationId: 'deleteContactUs',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string',
+                },
+                description: 'uuid',
+                required: true
+              }
+            ],
             responses: {
               default: {
                 description: '',
@@ -109,7 +136,7 @@
           },
           get: {
             tags: ['contact-us'],
-            summary: 'contact-us api',
+            summary: 'ADMIN :: contact-us api',
             description: 'Admin hits this api to get client contact detail request.',
             operationId: 'getContactUsDetail',
             parameters: [
@@ -119,7 +146,7 @@
                 schema: {
                   type: 'string',
                 },
-                description: 'current page number',
+                description: 'uuid',
                 required: true
               }
             ],
