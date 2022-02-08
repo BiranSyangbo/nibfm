@@ -30,10 +30,6 @@
           name: 'Health Check',
           description: 'Api Health check.'
         },
-        {
-          name: 'Static files',
-          description: 'Static files'
-        },
         ...adminAuthApi.server.tags,
         ...contactUsApi.server.tags
       ],
