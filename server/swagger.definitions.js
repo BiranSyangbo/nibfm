@@ -30,48 +30,12 @@
           name: 'Health Check',
           description: 'Api Health check.'
         },
-        {
-          name: 'Static files',
-          description: 'Static files'
-        },
         ...adminAuthApi.server.tags,
         ...contactUsApi.server.tags
       ],
       paths: {
         ...adminAuthApi.server.paths,
         ...contactUsApi.server.paths,
-        '/static/{filename}': {
-          get: {
-            tags: ['Static files'],
-            summary: 'Static files api',
-            description: 'User hits this to get membership forms.',
-            operationId: 'serveStaticFIle',
-            parameters: [
-              {
-                in: 'path',
-                name: 'filename',
-                schema: {
-                  type: 'string',
-                  enum: ['Nepal_BIM_Forum_Application.pdf', 'Nepal_BIM_Forum_Corporate.pdf']
-                },
-                description: 'filename',
-                required: true
-              }
-            ],
-            responses: {
-              default: {
-                description: '',
-                content: {
-                  'application/json': {
-                    schema: {
-                      $ref: '#/components/schemas/CommonResponse',
-                    },
-                  },
-                },
-              },
-            }
-          }
-        },
         '/health-check': {
           get: {
             tags: ['Health Check'],

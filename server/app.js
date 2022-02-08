@@ -18,7 +18,7 @@ try {
 
   const swaggerDefinitions = require('./swagger.definitions');
   app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
-  
+
   app.use(helmet());
   app.use(cors())
   app.options('*', cors());
@@ -34,9 +34,6 @@ try {
   defaultAdminMigrationHelper();
   defaultOfficeMigrationHelper();
 
-  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
-
-
   app.use(async (req, res, next) => {
     req.db = await mongodbHelper();
     req.debug = {
@@ -47,7 +44,7 @@ try {
     return next();
   });
 
- 
+
 
   const adminRouter = require('./routes.admin');
   const userRouter = require('./routes.user');
@@ -73,7 +70,8 @@ try {
   })
 
 } catch (error) {
-  console.log('error', error)
+  console.log('error', error);
+  process.exit(0);
 }
 
 
