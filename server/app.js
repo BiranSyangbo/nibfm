@@ -34,9 +34,6 @@ try {
   defaultAdminMigrationHelper();
   defaultOfficeMigrationHelper();
 
-  app.use('/api/v1/user/static', express.static(path.join(__dirname, 'public')));
-
-
   app.use(async (req, res, next) => {
     req.db = await mongodbHelper();
     req.debug = {
