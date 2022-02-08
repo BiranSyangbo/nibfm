@@ -18,7 +18,7 @@ try {
 
   const swaggerDefinitions = require('./swagger.definitions');
   app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
-  
+
   app.use(helmet());
   app.use(cors())
   app.options('*', cors());
@@ -44,7 +44,7 @@ try {
     return next();
   });
 
- 
+
 
   const adminRouter = require('./routes.admin');
   const userRouter = require('./routes.user');
@@ -70,7 +70,8 @@ try {
   })
 
 } catch (error) {
-  console.log('error', error)
+  console.log('error', error);
+  process.exit(0);
 }
 
 
