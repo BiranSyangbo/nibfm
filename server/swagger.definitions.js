@@ -2,6 +2,7 @@
 (() => {
   const adminAuthApi = require('./lib/modules/admin_auth/api_definitions');
   const contactUsApi = require('./lib/modules/contact-us/api_definitions');
+  const membershipFormApi = require('./lib/modules/membership-form/api_definitions');
 
   module.exports = {
     server: {
@@ -35,11 +36,15 @@
           description: 'Static files'
         },
         ...adminAuthApi.server.tags,
-        ...contactUsApi.server.tags
+        ...contactUsApi.server.tags,
+        ...membershipFormApi.server.tags
+
       ],
       paths: {
         ...adminAuthApi.server.paths,
         ...contactUsApi.server.paths,
+        ...membershipFormApi.server.paths,
+
         '/static/{filename}': {
           get: {
             tags: ['Static files'],
@@ -103,7 +108,9 @@
             },
           },
           ...adminAuthApi.server.components.schemas,
-          ...contactUsApi.server.components.schemas
+          ...contactUsApi.server.components.schemas,
+          ...membershipFormApi.server.components.schemas
+
         },
         securitySchemes: {
           api_key: {

@@ -16,6 +16,9 @@ app.use('/contact-us', contactUsRouter);
 const fileManagementRouter = require('./lib/modules/file-management/routes.admin');
 app.use('/file-management', fileManagementRouter)
 
+const membershipFormRouter = require('./lib/modules/membership-form/routes.admin');
+app.use('/membership-form', membershipFormRouter);
+
 app.get('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
