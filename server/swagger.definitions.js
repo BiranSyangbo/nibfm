@@ -3,6 +3,8 @@
   const adminAuthApi = require('./lib/modules/admin_auth/api_definitions');
   const contactUsApi = require('./lib/modules/contact-us/api_definitions');
   const membershipFormApi = require('./lib/modules/membership-form/api_definitions');
+  const blogsApi = require('./lib/modules/blogs/api_definitions');
+
 
   module.exports = {
     server: {
@@ -33,13 +35,17 @@
         },
         ...adminAuthApi.server.tags,
         ...contactUsApi.server.tags,
-        ...membershipFormApi.server.tags
+        ...membershipFormApi.server.tags,
+        ...blogsApi.server.tags
+
 
       ],
       paths: {
         ...adminAuthApi.server.paths,
         ...contactUsApi.server.paths,
         ...membershipFormApi.server.paths,
+        ...blogsApi.server.paths,
+
 
         '/static/{filename}': {
           get: {
@@ -105,7 +111,9 @@
           },
           ...adminAuthApi.server.components.schemas,
           ...contactUsApi.server.components.schemas,
-          ...membershipFormApi.server.components.schemas
+          ...membershipFormApi.server.components.schemas,
+          ...blogsApi.server.components.schemas
+
 
         },
         securitySchemes: {
