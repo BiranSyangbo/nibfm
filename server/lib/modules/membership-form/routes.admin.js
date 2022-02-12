@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const getMembershipFromListController = require('./controllers/get_forms_list.admin');
+const generalMembershipFromController = require('./controllers/get_general_forms_list.admin');
+const corporateMembershipFromController = require('./controllers/get_corporate_forms_list.admin');
+const UpdateStatusController = require('./controllers/update_status.admin');
 
 const authMiddleware = require('../../middleware/token_auth.middleware');
 
-router.route('/')
-  .get(authMiddleware, getMembershipFromListController)
+router.route('/general')
+  .get(authMiddleware, generalMembershipFromController)
+
+router.route('/corporate')
+  .get(authMiddleware, corporateMembershipFromController)
+
+router.route('/update-status/:uuid')
+  .post(UpdateStatusController)
 
 module.exports = router;

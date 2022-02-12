@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const submitMembershipFromController = require('./controllers/submit_form.cleint');
+const submitGeneralMembershipFromController = require('./controllers/submit_general_form.cleint');
+const submitCorporateMembershipFromController = require('./controllers/submit_corporate_form.cleint');
 
-router.route('/submit')
-  .get(submitMembershipFromController)
+
+router.route('/general')
+  .post(submitGeneralMembershipFromController)
+
+
+router.route('/corporate')
+  .post(submitCorporateMembershipFromController)
 
 module.exports = router;
