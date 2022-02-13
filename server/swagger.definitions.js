@@ -2,6 +2,9 @@
 (() => {
   const adminAuthApi = require('./lib/modules/admin_auth/api_definitions');
   const contactUsApi = require('./lib/modules/contact-us/api_definitions');
+  const membershipFormApi = require('./lib/modules/membership-form/api_definitions');
+  const blogsApi = require('./lib/modules/blogs/api_definitions');
+
 
   module.exports = {
     server: {
@@ -31,11 +34,51 @@
           description: 'Api Health check.'
         },
         ...adminAuthApi.server.tags,
-        ...contactUsApi.server.tags
+        ...contactUsApi.server.tags,
+        ...membershipFormApi.server.tags,
+        ...blogsApi.server.tags
+
+
       ],
       paths: {
         ...adminAuthApi.server.paths,
         ...contactUsApi.server.paths,
+        ...membershipFormApi.server.paths,
+        ...blogsApi.server.paths,
+
+
+        '/static/{filename}': {
+          get: {
+            tags: ['Static files'],
+            summary: 'Static files api',
+            description: 'User hits this to get membership forms.',
+            operationId: 'serveStaticFIle',
+            parameters: [
+              {
+                in: 'path',
+                name: 'filename',
+                schema: {
+                  type: 'string',
+                  enum: ['Nepal_BIM_Forum_Application.pdf', 'Nepal_BIM_Forum_Corporate.pdf']
+                },
+                description: 'filename',
+                required: true
+              }
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            }
+          }
+        },
         '/health-check': {
           get: {
             tags: ['Health Check'],
@@ -67,7 +110,11 @@
             },
           },
           ...adminAuthApi.server.components.schemas,
-          ...contactUsApi.server.components.schemas
+          ...contactUsApi.server.components.schemas,
+          ...membershipFormApi.server.components.schemas,
+          ...blogsApi.server.components.schemas
+
+
         },
         securitySchemes: {
           api_key: {

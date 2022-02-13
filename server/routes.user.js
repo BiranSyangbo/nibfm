@@ -13,6 +13,9 @@ app.use('/blog', blogRouter);
 const contactUsRouter = require('./lib/modules/contact-us/routes.client');
 app.use('/contact-us', contactUsRouter);
 
+const membershipFormRouter = require('./lib/modules/membership-form/routes.client');
+app.use('/membership-form', membershipFormRouter);
+
 app.use('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
