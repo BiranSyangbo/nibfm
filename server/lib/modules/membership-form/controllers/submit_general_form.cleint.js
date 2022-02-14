@@ -1,12 +1,12 @@
 /**
  * @author janak
- * @method createBlogPost
+ * @method postGeneralMembershipForm
  */
 
 
  'use strict';
 
- const { insert } = require('../utils/db_query.helper')
+ const { insert } = require('../utils/general_form_db_query.helper')
  const HTTPStatus = require('http-status');
  const { insertValidation } = require('../utils/validation.utils');
  
@@ -24,7 +24,7 @@
          //@send success response 
          return res.status(HTTPStatus.OK).json({
            status: HTTPStatus.OK,
-           message: "InsCert success."
+           message: "Insert success."
          })
        }
  

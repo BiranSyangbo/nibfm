@@ -10,8 +10,8 @@ const getBlogDetailController = require('./controllers/get_blog_detail.admin');
 const authMiddleware = require('../../middleware/token_auth.middleware');
 
 router.route('/')
-  .get(authMiddleware, getBlogListController)
-  .put(authMiddleware, createBlogController);
+  .get(getBlogListController)
+  .post(createBlogController);
 
 router.route('/:uuid')
   .put(authMiddleware, updateBlogController)

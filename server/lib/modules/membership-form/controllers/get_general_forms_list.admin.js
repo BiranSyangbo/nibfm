@@ -1,11 +1,11 @@
 /**
  * @author janak
- * @method getBlogsList
+ * @method getGeneralMembershipFormListRequest
  */
 
  'use strict';
 
- const { getList, countTotalItems } = require('../utils/db_query.helper')
+ const { getList, countTotalItems } = require('../utils/general_form_db_query.helper')
  const HTTPStatus = require('http-status');
  
  const pagerOptsHelper = (req) => {
@@ -27,20 +27,20 @@
        deleted: false
      };
  
-     if (req.query.filter && req.query.filter['title']) {
-       queryOpts.title = {
-         $regex: new RegExp('.*' + req.query.filter['title'], "i")
+     if (req.query.filter && req.query.filter['name']) {
+       queryOpts.name = {
+         $regex: new RegExp('.*' + req.query.filter['name'], "i")
        }
      }
  
-     if (req.query.filter && req.query.filter['author']) {
-       queryOpts.author = {
-         $regex: new RegExp('.*' + req.query.filter['author'], "i")
+     if (req.query.filter && req.query.filter['email']) {
+       queryOpts.email = {
+         $regex: new RegExp('.*' + req.query.filter['email'], "i")
        }
      }
  
      const [dataList, count] = await Promise.all([
-      getList(req, queryOpts, pagerOpts),
+       getList(req, queryOpts, pagerOpts),
        countTotalItems(req, queryOpts)
      ])
  

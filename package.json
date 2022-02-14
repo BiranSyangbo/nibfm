@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nbimf/nbimfWeb#readme",
   "dependencies": {
+    "ad-bs-converter": "^0.5.0",
     "bcrypt": "^5.0.1",
     "bluebird": "^3.7.2",
     "cors": "^2.8.5",
