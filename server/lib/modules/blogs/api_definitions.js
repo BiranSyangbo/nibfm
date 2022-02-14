@@ -4,15 +4,11 @@
   module.exports = {
     server: {
       tags: [
-        {
-          name: 'blogs',
-          description: 'Api blogs.'
-        }
       ],
       paths: {
         '/blog': {
           post: {
-            tags: ['blogs'],
+            tags: ['ADMIN:- blogs'],
             summary: 'ADMIN :: Create Blog post api',
             description: 'Admin hits this api to create blogs post request.',
             operationId: 'createBlogReq',
@@ -40,8 +36,8 @@
             }
           },
           get: {
-            tags: ['blogs'],
-            summary: 'ADMIN :: blogs api',
+            tags: ['ADMIN:- blogs'],
+            summary: 'ADMIN :: Get blogs list api',
             description: 'Admin hits this api to get blogs list.',
             operationId: 'getblogsList',
             parameters: [
@@ -62,22 +58,87 @@
                 },
                 description: 'total item per page',
                 required: true
+              }
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
               },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
+        '/blog/list': {
+          get: {
+            tags: ['USER:- blogs'],
+            summary: 'USER :: Get blogs list api',
+            description: 'USER hits this api to get blogs list.',
+            operationId: 'getblogsList',
+            parameters: [
               {
                 in: 'query',
-                name: 'filter[title]',
+                name: 'page',
                 schema: {
                   type: 'string'
                 },
-                description: 'filter by title'
+                description: 'current page',
+                required: true
               },
               {
                 in: 'query',
-                name: 'filter[author]',
+                name: 'perPage',
                 schema: {
                   type: 'string'
                 },
-                description: 'filter by author'
+                description: 'total item per page',
+                required: true
+              }
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
+        '/blog/{slug}': {
+          get: {
+            tags: ['USER:- blogs'],
+            summary: 'USER :: Get blogs details api',
+            description: 'USER hits this api to get blogs details.',
+            operationId: 'getblogsdetails',
+            parameters: [
+              {
+                in: 'path',
+                name: 'slug',
+                schema: {
+                  type: 'string'
+                },
+                description: 'slug',
+                required: true
               }
             ],
             responses: {
@@ -101,10 +162,21 @@
         },
         '/blog/{uuid}': {
           put: {
-            tags: ['blogs'],
+            tags: ['ADMIN:- blogs'],
             summary: 'ADMIN :: Update Blog post api',
             description: 'Admin hits this api to Update blogs post request.',
             operationId: 'UpdateBlogReq',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuid',
+                required: true
+              }
+            ],
             requestBody: {
               description: '',
               content: {
@@ -114,6 +186,70 @@
                   },
                 },
               },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            }
+          },
+          patch: {
+            tags: ['ADMIN:- blogs'],
+            summary: 'ADMIN :: Delete Blog post api',
+            description: 'Admin hits this api to Delete blogs post request.',
+            operationId: 'DeleteBlogReq',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuid',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: ''
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            }
+          },
+          get: {
+            tags: ['ADMIN:- blogs'],
+            summary: 'ADMIN :: get blog details post api',
+            description: 'Admin hits this api to get blog details request.',
+            operationId: ' blogDetailsReq',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuid',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: ''
             },
             responses: {
               default: {
@@ -137,6 +273,7 @@
             type: 'object',
             properties: {
               title: { type: 'string' },
+              slug: { type: 'string' },
               author: { type: 'string' },
               content: { type: 'string' },
               publishedDate: { type: 'string' },
@@ -158,6 +295,7 @@
             properties: {
               title: { type: 'string' },
               author: { type: 'string' },
+              slug: { type: 'string' },
               content: { type: 'string' },
               publishedDate: { type: 'string' },
               image: { type: 'string' },
