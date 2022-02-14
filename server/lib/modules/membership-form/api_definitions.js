@@ -4,15 +4,12 @@
   module.exports = {
     server: {
       tags: [
-        {
-          name: 'membership-form',
-          description: 'Api membership-form.'
-        }
+       
       ],
       paths: {
         '/membership-form/general': {
           post: {
-            tags: ['membership-form'],
+            tags: ['USER:- membership-form'],
             summary: 'USER :: General membership-form post api',
             description: 'User hits this api to submit general membership form  request.',
             operationId: 'submitGeneralForm',
@@ -40,7 +37,7 @@
             }
           },
           get: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: general membership-form api',
             description: 'Admin hits this api to get client general membership request list.',
             operationId: 'getList',
@@ -85,7 +82,7 @@
         },
         '/membership-form/corporate': {
           post: {
-            tags: ['membership-form'],
+            tags: ['USER:- membership-form'],
             summary: 'USER :: Corporate membership-form post api',
             description: 'User hits this api to submit corporate membership form  request.',
             operationId: 'submitcorporateForm',
@@ -113,7 +110,7 @@
             }
           },
           get: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: corporate membership-form api',
             description: 'Admin hits this api to get client corporate membership request list.',
             operationId: 'getCorporateList',
@@ -158,7 +155,7 @@
         },
         '/membership-form/update-status/{uuid}': {
           post: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: Update is approved status for membership-form post api',
             description: 'Update is approved status for membership-form post api.',
             operationId: 'UpdateIsApprovedForm',
