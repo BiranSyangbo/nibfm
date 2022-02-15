@@ -13,5 +13,23 @@ module.exports = {
       deleted: false,
       createdAt: new Date()
     }
+  },
+  aboutUsInfo: {
+    collectionName: "about-us",
+    insertObj: {
+      _id: '6d0409f6-8e80-11ec-8af2-db06f7fb15ac',
+      title: 'About Us',
+      slug: 'about-us',
+      description: 'This is the description ',
+      image: '',
+      isActive: 1,
+      metaTags: {
+        metaTitle : 'about-us',
+        metaKeyword : 'about-us',
+        metaDescription : 'about-us'
+      },
+      deleted: false,
+      createdAt: new Date()
+    }
   }
 }

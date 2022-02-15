@@ -231,9 +231,9 @@
               organizationalInformation: {
                 type: 'object',
                 properties: {
-                  organizatioName: { type: 'string' },
+                  organizationName: { type: 'string' },
                   chairpersonName: { type: 'string' },
-                  organizatioType: {
+                  organizationType: {
                     type: 'object',
                     properties: {
                       architecturalEngineering: { type: 'boolean' },
@@ -250,7 +250,7 @@
                   bussinessContactNumber: { type: 'string' },
                   organizationPanNumber: { type: 'string' },
                   phoneNumber: { type: 'string' },
-                  organizatioHeadOfcaddress: {
+                  organizationHeadOfcaddress: {
                     type: 'object',
                     properties: {
                       country: { type: 'string' },
@@ -260,7 +260,7 @@
                       wardNumber: { type: 'string' }
                     }
                   },
-                  organizatioDesccription :  { type: 'string' },
+                  organizationDesccription :  { type: 'string' },
                   note :  { type: 'string' },
 
 

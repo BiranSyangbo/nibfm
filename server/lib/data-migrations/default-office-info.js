@@ -1,6 +1,6 @@
 const mongodbHelper = require('../helpers/mongodb.helper')
 
-const { officeInfo } = require('../configs/app.config');
+const { aboutUsInfo } = require('../configs/app.config');
 
 module.exports = () => {
   return new Promise(async (resolve, reject) => {
@@ -8,18 +8,18 @@ module.exports = () => {
 
       const dbConnection = await mongodbHelper();
 
-      const checkOfficeInfoExists = await dbConnection.collection(officeInfo.collectionName).findOne({
+      const checkaboutUsInfoExists = await dbConnection.collection(aboutUsInfo.collectionName).findOne({
         deleted: false,
-        _id: officeInfo.insertObj._id
+        _id: aboutUsInfo.insertObj._id
       });
-      if (!checkOfficeInfoExists || Object.keys(checkOfficeInfoExists).length < 1) {
+      if (!checkaboutUsInfoExists || Object.keys(checkaboutUsInfoExists).length < 1) {
 
 
-        const insertResponse = await dbConnection.collection(officeInfo.collectionName).insertOne(officeInfo.insertObj);
+        const insertResponse = await dbConnection.collection(aboutUsInfo.collectionName).insertOne(aboutUsInfo.insertObj);
         if (insertResponse) {
-          console.log('Office information inserted successfully.')
+          console.log('about us  information inserted successfully.')
         } else {
-          console.log('Office information can not be inserted.')
+          console.log('about us can not be inserted.')
         }
       }
       return resolve(true);
