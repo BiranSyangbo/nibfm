@@ -26,26 +26,26 @@ const insert = (req, insertObj) => {
       societyEngineering : insertObj?.organizationalInformation?.organizatioType?.societyEngineering || false
     }
 
-    const organizatioHeadOfcaddress = {
-      country : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.country,
-      provinceNumber : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.provinceNumber,
-      district : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.district,
-      tole : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.tole,
-      wardNumber : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.wardNumber
+    const organizationHeadOfcaddress = {
+      country : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
+      provinceNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.provinceNumber,
+      district : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.district,
+      tole : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.tole,
+      wardNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.wardNumber
     }
 
     const organizationalInformation = {
-      organizatioName: insertObj?.organizationalInformation?.organizatioName,
+      organizationName: insertObj?.organizationalInformation?.organizationName,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
       date: new Date(insertObj?.organizationalInformation?.date),
       email: insertObj?.organizationalInformation?.email,
       bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
       organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
-      organizatioDesccription: insertObj?.organizationalInformation?.organizatioDesccription,
+      organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
       organizatioType : organizatioType,
-      organizatioHeadOfcaddress : organizatioHeadOfcaddress
+      organizatioHeadOfcaddress : organizationHeadOfcaddress
     }
 
     const insertObject = {

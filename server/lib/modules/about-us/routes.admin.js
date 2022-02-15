@@ -7,8 +7,8 @@ const postAboutUsController = require('./controllers/update_about_us.admin');
 const authMiddleware = require('../../middleware/token_auth.middleware');
 
 router.route('/')
-  .get(authMiddleware, getAboutUsController)
-  .put(authMiddleware, postAboutUsController)
+  .get(getAboutUsController)
+  .put(postAboutUsController)
 
 
 module.exports = router;
