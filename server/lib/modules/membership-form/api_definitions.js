@@ -250,7 +250,7 @@
                   bussinessContactNumber: { type: 'string' },
                   organizationPanNumber: { type: 'string' },
                   phoneNumber: { type: 'string' },
-                  organizationHeadOfcaddress: {
+                  organizationHeadOfcAddress: {
                     type: 'object',
                     properties: {
                       country: { type: 'string' },

@@ -5,6 +5,8 @@
   const membershipFormApi = require('./lib/modules/membership-form/api_definitions');
   const blogsApi = require('./lib/modules/blogs/api_definitions');
   const aboutUsApi = require('./lib/modules/about-us/api_definitions');
+  const fileManagemetApi = require('./lib/modules/file-management/api_definitions');
+
 
 
 
@@ -39,7 +41,9 @@
         ...contactUsApi.server.tags,
         ...membershipFormApi.server.tags,
         ...blogsApi.server.tags,
-        ...aboutUsApi.server.tags
+        ...aboutUsApi.server.tags,
+        ...fileManagemetApi.server.tags
+
 
 
 
@@ -50,6 +54,8 @@
         ...membershipFormApi.server.paths,
         ...blogsApi.server.paths,
         ...aboutUsApi.server.paths,
+        ...fileManagemetApi.server.paths,
+
 
 
         '/static/{filename}': {
@@ -118,7 +124,9 @@
           ...contactUsApi.server.components.schemas,
           ...membershipFormApi.server.components.schemas,
           ...blogsApi.server.components.schemas,
-          ...aboutUsApi.server.components.schemas
+          ...aboutUsApi.server.components.schemas,
+          ...fileManagemetApi.server.components.schemas,
+
 
 
 
