@@ -12,9 +12,10 @@
  module.exports = async (req, res, next) => {
    try {
  
-     if (req.params.slug) {
+     if (req) {
  
        const projection = {
+         _id : 1,
          title :1,
          slug : 1,
          description : 1,
@@ -23,7 +24,7 @@
          metaTags : 1,
          deleted : 1
        }
-       const data = await getDetailsInfo(req, req.params.slug, projection)
+       const data = await getDetailsInfo(req, projection)
  
        if (data) {
          return res.status(HTTPStatus.OK).json({

@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const update = (req, data,tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
-      _id: tableId
+      _id: '6d0409f6-8e80-11ec-8af2-db06f7fb15ac'  // TODO Env
     },
       {
         $set: {
@@ -36,11 +36,10 @@ const getDetails = (req, projection) => {
     throw error;
   }
 }
-const getDetailsInfo = (req, slug, projection) => {
+const getDetailsInfo = (req, projection) => {
   try {
     return req.db.collection(collectionName).findOne(
       {
-        slug: slug,
         deleted: false
       },
       {

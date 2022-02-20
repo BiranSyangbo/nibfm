@@ -10,8 +10,8 @@
         '/about-us': {
           get: {
             tags: ['ADMIN:- about-us'],
-            summary: 'ADMIN :: general about-us api',
-            description: 'Admin hits this api to get client general about-us request list.',
+            summary: 'ADMIN ::  about-us api',
+            description: 'Admin hits this api to get client about-us request list.',
             operationId: 'getList',
             parameters: [
             ],
@@ -62,22 +62,13 @@
             }
           },
         },
-        '/about-us/info/{slug}': {
+        '/about-us/info': {
           get: {
             tags: ['CUSTOMER:- about-us'],
-            summary: 'CUSTOMER :: corporate about-us api',
-            description: 'CUSTOMER hits this api to get client corporate about-us request list.',
+            summary: 'CUSTOMER ::  about-us api',
+            description: 'CUSTOMER hits this api to get client about-us request list.',
             operationId: 'getaboutUs',
             parameters: [
-              {
-                in: 'path',
-                name: 'slug',
-                schema: {
-                  type: 'string'
-                },
-                description: 'slug',
-                required: true
-              }
             ],
             responses: {
               default: {
