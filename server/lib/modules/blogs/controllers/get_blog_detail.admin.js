@@ -5,7 +5,7 @@
 
  'use strict';
 
- const { getDetails } = require('../utils/db_query.helper')
+ const { checkBlogInfo } = require('../utils/db_query.helper')
  const HTTPStatus = require('http-status');
  
  
@@ -26,7 +26,7 @@
          metaTags : 1,
          deleted : 1
        }
-       const data = await getDetails(req, req.params.uuid, projection)
+       const data = await checkBlogInfo(req, req.params.uuid, projection)
  
        if (data) {
          return res.status(HTTPStatus.OK).json({
