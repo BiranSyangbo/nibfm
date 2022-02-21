@@ -16,6 +16,9 @@ app.use('/contact-us', contactUsRouter);
 const membershipFormRouter = require('./lib/modules/membership-form/routes.client');
 app.use('/membership-form', membershipFormRouter);
 
+const userAuthRouter = require('./lib/modules/user-auth/route');
+app.use('/user-auth', userAuthRouter);
+
 app.use('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({

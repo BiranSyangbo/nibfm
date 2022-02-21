@@ -21,7 +21,7 @@
          author : 1,
          content : 1,
          publishedDate : 1,
-         images : 1,
+         image : 1,
          isActive : 1,
          metaTags : 1,
          deleted : 1

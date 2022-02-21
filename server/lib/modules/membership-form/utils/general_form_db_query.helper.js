@@ -38,6 +38,7 @@ const insert = (req, insertObj) => {
       phoneNumber : insertObj?.personalInformation?.phoneNumber,
       dateOfBirthBs : adbs.ad2bs(insertObj?.personalInformation?.dateOfBirthBs),
       dateOfBirthAd : new Date(insertObj?.personalInformation?.dateOfBirthAd),
+      email : insertObj?.personalInformation?.email,
       nationality : insertObj?.personalInformation?.nationality,
       necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
       address : address,
