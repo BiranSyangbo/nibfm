@@ -6,6 +6,8 @@
   const blogsApi = require('./lib/modules/blogs/api_definitions');
   const aboutUsApi = require('./lib/modules/about-us/api_definitions');
   const fileManagemetApi = require('./lib/modules/file-management/api_definitions');
+  const userAuthApi = require('./lib/modules/user-auth/api_definitions');
+
 
 
 
@@ -42,7 +44,8 @@
         ...membershipFormApi.server.tags,
         ...blogsApi.server.tags,
         ...aboutUsApi.server.tags,
-        ...fileManagemetApi.server.tags
+        ...fileManagemetApi.server.tags,
+        ...userAuthApi.server.tags
 
 
 
@@ -55,6 +58,8 @@
         ...blogsApi.server.paths,
         ...aboutUsApi.server.paths,
         ...fileManagemetApi.server.paths,
+        ...userAuthApi.server.paths,
+
 
 
 
@@ -126,6 +131,8 @@
           ...blogsApi.server.components.schemas,
           ...aboutUsApi.server.components.schemas,
           ...fileManagemetApi.server.components.schemas,
+          ...userAuthApi.server.components.schemas,
+
 
 
 

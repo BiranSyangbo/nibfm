@@ -8,10 +8,10 @@ const UpdateStatusController = require('./controllers/update_status.admin');
 const authMiddleware = require('../../middleware/token_auth.middleware');
 
 router.route('/general')
-  .get(authMiddleware, generalMembershipFromController)
+  .get(generalMembershipFromController)
 
 router.route('/corporate')
-  .get(authMiddleware, corporateMembershipFromController)
+  .get(corporateMembershipFromController)
 
 router.route('/update-status/:uuid')
   .post(UpdateStatusController)
