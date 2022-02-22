@@ -24,7 +24,8 @@
      const pagerOpts = pagerOptsHelper(req);
  
      let queryOpts = {
-       deleted: false
+       deleted: false,
+       isActive : true
      };
  
      if (req.query.filter && req.query.filter['title']) {
