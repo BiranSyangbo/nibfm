@@ -157,7 +157,7 @@
           post: {
             tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: Update is approved status for membership-form post api',
-            description: 'Update is approved status for membership-form post api.',
+            description: 'Update is approved status [0: default, 1:approved , 2 : reject ]',
             operationId: 'UpdateIsApprovedForm',
             parameters: [
               {
@@ -341,7 +341,7 @@
           UpdateIsApprovedFormRequest: {
             type: 'object',
             properties: {
-              isApproved: { type: 'boolean' },
+              isApproved: { type: 'number' },
             },
           }
         }

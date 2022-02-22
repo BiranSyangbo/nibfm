@@ -57,7 +57,7 @@ const insert = (req, insertObj) => {
       enterpriseSizeType : enterpriseSizeType,
       membershipPeriod : membershipPeriod,
       organizationalInformation : organizationalInformation,
-      isApproved : false,
+      isApproved : 0,
       deleted: false,
       createdAt: new Date().toISOString().slice(0, 10)
       

@@ -56,7 +56,7 @@ const insert = (req, insertObj) => {
       notes : insertObj.notes,
       singnature : insertObj.singnature,
       personalInformation : personalInformation,
-      isApproved : false,
+      isApproved : 0,
       deleted: false,
       createdAt: new Date().toISOString().slice(0, 10)
     }
@@ -72,7 +72,7 @@ const generalFormUpdateStatus = (req, tableId) => {
     },
       {
         $set: {
-          isApproved: true
+          isApproved: req.body.isApproved
         }
       })
   } catch (error) {
