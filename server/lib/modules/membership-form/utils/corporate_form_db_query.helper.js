@@ -37,7 +37,7 @@ const insert = (req, insertObj) => {
     const organizationalInformation = {
       organizationName: insertObj?.organizationalInformation?.organizationName,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
-      date: new Date(insertObj?.organizationalInformation?.date),
+      date: insertObj?.organizationalInformation?.date,
       email: insertObj?.organizationalInformation?.email,
       bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
       organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
@@ -51,7 +51,7 @@ const insert = (req, insertObj) => {
     const insertObject = {
       uuid: uuid.v4(),
       corporateMembershipNumber: insertObj?.corporateMembershipNumber,
-      date: new Date(insertObj?.date),
+      date: insertObj?.date,
       enterpriseSize: insertObj?.enterpriseSize,
       profileImage : insertObj?.profileImage,
       enterpriseSizeType : enterpriseSizeType,
@@ -59,7 +59,8 @@ const insert = (req, insertObj) => {
       organizationalInformation : organizationalInformation,
       isApproved : false,
       deleted: false,
-      createdAt: new Date()
+      createdAt: new Date().toISOString().slice(0, 10)
+      
     }
     return req.db.collection(collectionName).insertOne(insertObject);
   } catch (error) {

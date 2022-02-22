@@ -36,8 +36,8 @@ const insert = (req, insertObj) => {
     const personalInformation = {
       name : insertObj?.personalInformation?.name,
       phoneNumber : insertObj?.personalInformation?.phoneNumber,
-      dateOfBirthBs : adbs.ad2bs(insertObj?.personalInformation?.dateOfBirthBs),
-      dateOfBirthAd : new Date(insertObj?.personalInformation?.dateOfBirthAd),
+      dateOfBirthBs : insertObj?.personalInformation?.dateOfBirthBs,
+      dateOfBirthAd : insertObj?.personalInformation?.dateOfBirthAd,
       email : insertObj?.personalInformation?.email,
       nationality : insertObj?.personalInformation?.nationality,
       necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
@@ -48,7 +48,7 @@ const insert = (req, insertObj) => {
 
     const insertObject = {
       uuid: uuid.v4(),
-      date : new Date(insertObj.date),
+      date : insertObj.date,
       membershipNumber: insertObj.membershipNumber,
       profileImage : insertObj.profileImage,
       membershipPeriod: membershipPeriod,
@@ -58,7 +58,7 @@ const insert = (req, insertObj) => {
       personalInformation : personalInformation,
       isApproved : false,
       deleted: false,
-      createdAt: new Date()
+      createdAt: new Date().toISOString().slice(0, 10)
     }
     return req.db.collection(collectionName).insertOne(insertObject);
   } catch (error) {
