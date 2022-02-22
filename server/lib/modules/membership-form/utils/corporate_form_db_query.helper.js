@@ -17,13 +17,13 @@ const insert = (req, insertObj) => {
       lifetime : insertObj?.membershipPeriod?.lifetime || false,
     }
 
-    const organizatioType = {
-      architecturalEngineering : insertObj?.organizationalInformation?.organizatioType?.architecturalEngineering || false,
-      architecturalConstruction : insertObj?.organizationalInformation?.organizatioType?.architecturalConstruction || false,
-      interiorConstruction : insertObj?.organizationalInformation?.organizatioType?.interiorConstruction || false,
-      interiorEngineering : insertObj?.organizationalInformation?.organizatioType?.interiorEngineering || false,
-      societyConstruction : insertObj?.organizationalInformation?.organizatioType?.societyConstruction || false,
-      societyEngineering : insertObj?.organizationalInformation?.organizatioType?.societyEngineering || false
+    const organizationType = {
+      architecturalEngineering : insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
+      architecturalConstruction : insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
+      interiorConstruction : insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
+      interiorEngineering : insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
+      societyConstruction : insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
+      societyEngineering : insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
     }
 
     const organizationHeadOfcaddress = {
@@ -44,7 +44,7 @@ const insert = (req, insertObj) => {
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
       organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
-      organizatioType : organizatioType,
+      organizatioType : organizationType,
       organizatioHeadOfcaddress : organizationHeadOfcaddress
     }
 
