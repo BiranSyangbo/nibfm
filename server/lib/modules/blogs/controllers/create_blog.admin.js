@@ -27,7 +27,7 @@
          //@send success response 
          return res.status(HTTPStatus.OK).json({
            status: HTTPStatus.OK,
-           message: "InsCert success."
+           message: "Insert success."
          })
        }
  
