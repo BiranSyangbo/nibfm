@@ -203,6 +203,60 @@
             }
           },
         },
+        '/membership-form/general-form-info': {
+          get: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER:- general membership-form api',
+            description: 'Admin hits this api to get general membership-form api',
+            operationId: 'getGenInfo',
+            parameters: [
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
+        '/membership-form/corporate-form-info': {
+          get: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER:- corporate membership-form api',
+            description: 'Admin hits this api to get corporate membership-form api',
+            operationId: 'getGenInfo',
+            parameters: [
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
       },
    
       components: {
