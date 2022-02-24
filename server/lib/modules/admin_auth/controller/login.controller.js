@@ -20,6 +20,7 @@ const generateLoginSessionInfo = (userinfo, token) => {
     return {
       _id: uuid.v4(),
       user: userinfo._id,
+      type: 'admin',//TODO
       token: token,
       expiry_time: new Date().setDate(new Date().getDate() + 1),  // increment date by 1 day store in epoch time
       deleted: false

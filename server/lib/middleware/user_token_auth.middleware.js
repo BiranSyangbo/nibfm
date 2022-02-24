@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
         token: token,
         deleted: false,
         user: decodedJWT.user,
-        type : 'admin'
+        type : 'user'
       })
 
       if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
@@ -35,8 +35,7 @@ module.exports = async (req, res, next) => {
         const verifyJwtToken = await jwtHelper.verifyToken(token, process.env.TOKEN_SECRET);
         if (verifyJwtToken && !verifyJwtToken.err) {
           req.decoded = {
-            userId: verifyJwtToken.user
-                    }
+            userId: verifyJwtToken.user          }
           req.authToken = token;
           return next();
         }
