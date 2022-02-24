@@ -228,7 +228,53 @@
                 api_key: []
               }
             ]
-          }
+          },
+        },
+        '/membership-form/general-form-info/{uuid}': {
+          put: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER :: General membership-form update api',
+            description: 'User hits this api to submit general membership form  request.',
+            operationId: 'updateGeneralForm',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: '',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/CreateGeneralMembershipFormRequest',
+                  },
+                },
+              },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
         },
         '/membership-form/corporate-form-info': {
           get: {
@@ -256,6 +302,53 @@
               }
             ]
           }
+        },
+        '/membership-form/corporate-form-info/{uuid}': {
+          put: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER :: Corporate membership-form update api',
+            description: 'User hits this api to submit corporate membership form  request.',
+            operationId: 'updatecorporateForm',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: '',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/CreateCorporateMembershipFormRequest',
+                  },
+                },
+              },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                  
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
         },
       },
    

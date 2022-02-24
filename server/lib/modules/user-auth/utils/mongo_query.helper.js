@@ -78,6 +78,20 @@ const deleteUserLoginInfo = async (db, id) => {
     throw error;
   }
 }
+const updatePassword = async (req, userId,password) => {
+  try {
+    return req.db.collection(collectionName).updateOne({
+      uuid: userId
+    },
+      {
+        $set: {
+          password: password
+        }
+      })
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = {
   insert,
@@ -85,5 +99,6 @@ module.exports = {
   insertLoginInfo,
   getUserLoginInfo,
   deleteUserLoginInfo,
-  getUserInfoByUserId
+  getUserInfoByUserId,
+  updatePassword
 }

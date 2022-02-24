@@ -81,6 +81,72 @@ const corporateFormUpdateStatus = (req, tableId) => {
     throw error;
   }
 }
+const update = (req, insertObj,tableId) => {
+  try {
+
+    const enterpriseSizeType = {
+      smallScale : insertObj?.enterpriseSizeType?.smallScale || false,
+      mediumScale : insertObj?.enterpriseSizeType?.mediumScale || false,
+      largeScale : insertObj?.enterpriseSizeType?.largeScale || false,
+
+    }
+
+    const membershipPeriod = {
+      annual : insertObj?.membershipPeriod?.annual || false,
+      lifetime : insertObj?.membershipPeriod?.lifetime || false,
+    }
+
+    const organizationType = {
+      architecturalEngineering : insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
+      architecturalConstruction : insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
+      interiorConstruction : insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
+      interiorEngineering : insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
+      societyConstruction : insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
+      societyEngineering : insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
+    }
+
+    const organizationHeadOfcaddress = {
+      country : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
+      provinceNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.provinceNumber,
+      district : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.district,
+      tole : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.tole,
+      wardNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.wardNumber
+    }
+
+    const organizationalInformation = {
+      organizationName: insertObj?.organizationalInformation?.organizationName,
+      chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
+      date: insertObj?.organizationalInformation?.date,
+      email: insertObj?.organizationalInformation?.email,
+      bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
+      organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
+      phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
+      organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
+      note: insertObj?.organizationalInformation?.note,
+      organizatioType : organizationType,
+      organizatioHeadOfcaddress : organizationHeadOfcaddress
+    }
+
+
+    return req.db.collection(collectionName).updateOne({
+      uuid: tableId
+    },
+      {
+        $set: {
+      corporateMembershipNumber: insertObj?.corporateMembershipNumber,
+      date: insertObj?.date,
+      enterpriseSize: insertObj?.enterpriseSize,
+      profileImage : insertObj?.profileImage,
+      enterpriseSizeType : enterpriseSizeType,
+      membershipPeriod : membershipPeriod,
+      organizationalInformation : organizationalInformation,
+      modifiedDate : new Date().toISOString().slice(0, 10)
+        }
+      })
+  } catch (error) {
+    throw error;
+  }
+}
 
 const deleteDocument = (req, tableId) => {
   try {
@@ -150,5 +216,6 @@ module.exports = {
   corporateFormUpdateStatus,
   getList,
   getCorporateFormDetail,
-  countTotalItems
+  countTotalItems,
+  update
 }

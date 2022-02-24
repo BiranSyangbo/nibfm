@@ -7,12 +7,18 @@ const submitCorporateMembershipFromController = require('./controllers/submit_co
 const getGeneralMembershipFromController = require('./controllers/get_user_general_form_info.client');
 const getCorporateMembershipFromController = require('./controllers/get_user_corporate_form_info.client');
 
+const updateGeneralMembershipFromController = require('./controllers/update_general.client');
+const updateCorporateMembershipFromController = require('./controllers/update_corporate.client');
+
 
 router.route('/general')
   .post(submitGeneralMembershipFromController)
 
 router.route('/general-form-info')
   .get(authMiddleware, getGeneralMembershipFromController)
+
+router.route('/general-form-info/:uuid')
+  .put(authMiddleware, updateGeneralMembershipFromController)
 
 
 router.route('/corporate')
@@ -21,5 +27,8 @@ router.route('/corporate')
 
 router.route('/corporate-form-info')
   .post(authMiddleware, getCorporateMembershipFromController)
+
+router.route('/corporate-form-info/:uuid')
+  .put(authMiddleware, updateCorporateMembershipFromController)
 
 module.exports = router;
