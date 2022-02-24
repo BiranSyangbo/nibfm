@@ -93,6 +93,42 @@
             ]
           }
         },
+        '/user-auth/change-password': {
+          put: {
+            tags: ['user-auth'],
+            summary: 'change-password',
+            description: 'user hits this api to change-password on the system.',
+            operationId: 'changePassword',
+            requestBody: {
+              description: '',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/changePassRequest',
+                  },
+                },
+              },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
+        
       },
       components: {
         schemas: {
@@ -101,6 +137,15 @@
             properties: {
               username: { type: 'string' },
               password: { type: 'string' }
+            },
+          },
+          changePassRequest: {
+            type: 'object',
+            properties: {
+              oldPassword: { type: 'string' },
+              newPassword: { type: 'string' },
+              confirmPassword: { type: 'string' }
+
             },
           },
           LoginResponse: {

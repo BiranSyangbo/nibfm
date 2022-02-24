@@ -11,6 +11,10 @@
     },
     tables: {
       login_session: "login_session"
-    }
+    },
+    config: {
+      passwordStrengthRegex:/^(?=.*\d)(?=.*[a-z]).{6,}$/i,
+
+  },
   }
 })();
