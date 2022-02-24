@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const insert = (req,email, hashPassword) => {
   try {
     const insertObject = {
-      uuid: uuid.v4(),
+      uuid: req.params.uuid,
       password: hashPassword,
       email : email,
       type: 'user', //TODO
@@ -24,6 +24,19 @@ const getUserInfoByUsername = async (req, username) => {
     return req.db.collection(collectionName).findOne({
       deleted: false,
       email: username
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+const getUserInfoByUserId= async (req, projection,userId) => {
+  try {
+    return req.db.collection(collectionName).findOne({
+      deleted: false,
+      uuid: userId
+    },
+    {
+      projection: projection
     });
   } catch (error) {
     throw error;
@@ -71,5 +84,6 @@ module.exports = {
   getUserInfoByUsername,
   insertLoginInfo,
   getUserLoginInfo,
-  deleteUserLoginInfo
+  deleteUserLoginInfo,
+  getUserInfoByUserId
 }

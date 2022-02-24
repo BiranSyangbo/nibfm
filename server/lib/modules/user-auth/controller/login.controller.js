@@ -21,9 +21,10 @@ const generateLoginSessionInfo = (userinfo, token) => {
   try {
     return {
       _id: uuid.v4(),
-      user: userinfo._id,
+      user: userinfo.uuid,
       token: token,
-      expiry_time: new Date().setDate(new Date().getDate() + 1),  // increment date by 1 day store in epoch time
+      type: 'user',
+      expiry_time: new Date().setDate(new Date().getDate() + 1),
       deleted: false
     }
   } catch (error) {
@@ -50,7 +51,7 @@ module.exports = async (req, res, next) => {
 
             //@generate jwt token if everything is okay
             const token = await generateJWTToken({
-              _id: userInfo._id,
+              _id: userInfo.uuid,
               role: userInfo.type
             });
 

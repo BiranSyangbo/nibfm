@@ -65,7 +65,34 @@
             },
 
           }
-        }
+        },
+        '/user-auth/my-profile': {
+          get: {
+            tags: ['user-auth'],
+            summary: 'USER:- my-profile',
+            description: 'USER:- my-profile',
+            operationId: 'getMyProfile',
+            parameters: [
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
       },
       components: {
         schemas: {
