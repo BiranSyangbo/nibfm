@@ -93,7 +93,7 @@ module.exports = async (req, res, next) => {
           }
 
           // SEND EMAIL
-          const fullName = "Janak Raikhola" // TODO:
+          const fullName = "User" // TODO:
           const emailResponse = await internalHelper.sendResetEmail(req, customerInfo.email, fullName, token);
           if (!emailResponse) {
             return res.status(HTTPStatus.BAD_REQUEST).json({
