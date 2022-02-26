@@ -7,6 +7,8 @@
   const aboutUsApi = require('./lib/modules/about-us/api_definitions');
   const fileManagemetApi = require('./lib/modules/file-management/api_definitions');
   const userAuthApi = require('./lib/modules/user-auth/api_definitions');
+  const forgotPasswordApis = require('./lib/modules/forgot-password/api_definitions');
+
 
 
 
@@ -45,7 +47,9 @@
         ...blogsApi.server.tags,
         ...aboutUsApi.server.tags,
         ...fileManagemetApi.server.tags,
-        ...userAuthApi.server.tags
+        ...userAuthApi.server.tags,
+        ...forgotPasswordApis.server.tags
+
 
 
 
@@ -59,6 +63,8 @@
         ...aboutUsApi.server.paths,
         ...fileManagemetApi.server.paths,
         ...userAuthApi.server.paths,
+        ...forgotPasswordApis.server.paths,
+
 
 
 
@@ -132,6 +138,8 @@
           ...aboutUsApi.server.components.schemas,
           ...fileManagemetApi.server.components.schemas,
           ...userAuthApi.server.components.schemas,
+          ...forgotPasswordApis.server.components.schemas,
+
 
 
 
