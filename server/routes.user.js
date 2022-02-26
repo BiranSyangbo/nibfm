@@ -19,6 +19,9 @@ app.use('/membership-form', membershipFormRouter);
 const userAuthRouter = require('./lib/modules/user-auth/route');
 app.use('/user-auth', userAuthRouter);
 
+const forgotPasswordRouter = require('./lib/modules/forgot-password/route');
+app.use('/forgot-password', forgotPasswordRouter);
+
 app.use('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
