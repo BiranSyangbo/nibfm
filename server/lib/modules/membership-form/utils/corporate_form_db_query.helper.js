@@ -17,49 +17,50 @@ const insert = (req, insertObj) => {
       lifetime : insertObj?.membershipPeriod?.lifetime || false,
     }
 
-    const organizatioType = {
-      architecturalEngineering : insertObj?.organizationalInformation?.organizatioType?.architecturalEngineering || false,
-      architecturalConstruction : insertObj?.organizationalInformation?.organizatioType?.architecturalConstruction || false,
-      interiorConstruction : insertObj?.organizationalInformation?.organizatioType?.interiorConstruction || false,
-      interiorEngineering : insertObj?.organizationalInformation?.organizatioType?.interiorEngineering || false,
-      societyConstruction : insertObj?.organizationalInformation?.organizatioType?.societyConstruction || false,
-      societyEngineering : insertObj?.organizationalInformation?.organizatioType?.societyEngineering || false
+    const organizationType = {
+      architecturalEngineering : insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
+      architecturalConstruction : insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
+      interiorConstruction : insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
+      interiorEngineering : insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
+      societyConstruction : insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
+      societyEngineering : insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
     }
 
-    const organizatioHeadOfcaddress = {
-      country : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.country,
-      provinceNumber : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.provinceNumber,
-      district : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.district,
-      tole : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.tole,
-      wardNumber : insertObj?.organizationalInformation?.organizatioHeadOfcaddress?.wardNumber
+    const organizationHeadOfcaddress = {
+      country : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
+      provinceNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.provinceNumber,
+      district : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.district,
+      tole : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.tole,
+      wardNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.wardNumber
     }
 
     const organizationalInformation = {
-      organizatioName: insertObj?.organizationalInformation?.organizatioName,
+      organizationName: insertObj?.organizationalInformation?.organizationName,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
-      date: new Date(insertObj?.organizationalInformation?.date),
+      date: insertObj?.organizationalInformation?.date,
       email: insertObj?.organizationalInformation?.email,
       bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
       organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
-      organizatioDesccription: insertObj?.organizationalInformation?.organizatioDesccription,
+      organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
-      organizatioType : organizatioType,
-      organizatioHeadOfcaddress : organizatioHeadOfcaddress
+      organizatioType : organizationType,
+      organizatioHeadOfcaddress : organizationHeadOfcaddress
     }
 
     const insertObject = {
       uuid: uuid.v4(),
       corporateMembershipNumber: insertObj?.corporateMembershipNumber,
-      date: new Date(insertObj?.date),
+      date: insertObj?.date,
       enterpriseSize: insertObj?.enterpriseSize,
       profileImage : insertObj?.profileImage,
       enterpriseSizeType : enterpriseSizeType,
       membershipPeriod : membershipPeriod,
       organizationalInformation : organizationalInformation,
-      isApproved : false,
+      isApproved : 0,
       deleted: false,
-      createdAt: new Date()
+      createdAt: new Date().toISOString().slice(0, 10)
+      
     }
     return req.db.collection(collectionName).insertOne(insertObject);
   } catch (error) {
@@ -74,6 +75,72 @@ const corporateFormUpdateStatus = (req, tableId) => {
       {
         $set: {
           isApproved: true
+        }
+      })
+  } catch (error) {
+    throw error;
+  }
+}
+const update = (req, insertObj,tableId) => {
+  try {
+
+    const enterpriseSizeType = {
+      smallScale : insertObj?.enterpriseSizeType?.smallScale || false,
+      mediumScale : insertObj?.enterpriseSizeType?.mediumScale || false,
+      largeScale : insertObj?.enterpriseSizeType?.largeScale || false,
+
+    }
+
+    const membershipPeriod = {
+      annual : insertObj?.membershipPeriod?.annual || false,
+      lifetime : insertObj?.membershipPeriod?.lifetime || false,
+    }
+
+    const organizationType = {
+      architecturalEngineering : insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
+      architecturalConstruction : insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
+      interiorConstruction : insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
+      interiorEngineering : insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
+      societyConstruction : insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
+      societyEngineering : insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
+    }
+
+    const organizationHeadOfcaddress = {
+      country : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
+      provinceNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.provinceNumber,
+      district : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.district,
+      tole : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.tole,
+      wardNumber : insertObj?.organizationalInformation?.organizationHeadOfcaddress?.wardNumber
+    }
+
+    const organizationalInformation = {
+      organizationName: insertObj?.organizationalInformation?.organizationName,
+      chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
+      date: insertObj?.organizationalInformation?.date,
+      email: insertObj?.organizationalInformation?.email,
+      bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
+      organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
+      phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
+      organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
+      note: insertObj?.organizationalInformation?.note,
+      organizatioType : organizationType,
+      organizatioHeadOfcaddress : organizationHeadOfcaddress
+    }
+
+
+    return req.db.collection(collectionName).updateOne({
+      uuid: tableId
+    },
+      {
+        $set: {
+      corporateMembershipNumber: insertObj?.corporateMembershipNumber,
+      date: insertObj?.date,
+      enterpriseSize: insertObj?.enterpriseSize,
+      profileImage : insertObj?.profileImage,
+      enterpriseSizeType : enterpriseSizeType,
+      membershipPeriod : membershipPeriod,
+      organizationalInformation : organizationalInformation,
+      modifiedDate : new Date().toISOString().slice(0, 10)
         }
       })
   } catch (error) {
@@ -149,5 +216,6 @@ module.exports = {
   corporateFormUpdateStatus,
   getList,
   getCorporateFormDetail,
-  countTotalItems
+  countTotalItems,
+  update
 }

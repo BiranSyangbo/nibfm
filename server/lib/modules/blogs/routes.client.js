@@ -5,7 +5,7 @@ const getBlogListController = require('./controllers/get_blog_list.client');
 const getBlogDetailController = require('./controllers/get_blog_detail.client');
 
 
-router.route('/')
+router.route('/list')
   .get(getBlogListController)
 
 router.route('/:slug')

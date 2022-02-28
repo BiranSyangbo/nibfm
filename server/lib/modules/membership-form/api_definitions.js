@@ -4,15 +4,12 @@
   module.exports = {
     server: {
       tags: [
-        {
-          name: 'membership-form',
-          description: 'Api membership-form.'
-        }
+       
       ],
       paths: {
         '/membership-form/general': {
           post: {
-            tags: ['membership-form'],
+            tags: ['USER:- membership-form'],
             summary: 'USER :: General membership-form post api',
             description: 'User hits this api to submit general membership form  request.',
             operationId: 'submitGeneralForm',
@@ -40,7 +37,7 @@
             }
           },
           get: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: general membership-form api',
             description: 'Admin hits this api to get client general membership request list.',
             operationId: 'getList',
@@ -85,7 +82,7 @@
         },
         '/membership-form/corporate': {
           post: {
-            tags: ['membership-form'],
+            tags: ['USER:- membership-form'],
             summary: 'USER :: Corporate membership-form post api',
             description: 'User hits this api to submit corporate membership form  request.',
             operationId: 'submitcorporateForm',
@@ -113,7 +110,7 @@
             }
           },
           get: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: corporate membership-form api',
             description: 'Admin hits this api to get client corporate membership request list.',
             operationId: 'getCorporateList',
@@ -158,9 +155,9 @@
         },
         '/membership-form/update-status/{uuid}': {
           post: {
-            tags: ['membership-form'],
+            tags: ['ADMIN:- membership-form'],
             summary: 'ADMIN :: Update is approved status for membership-form post api',
-            description: 'Update is approved status for membership-form post api.',
+            description: 'Update is approved status [0: default, 1:approved , 2 : reject ]',
             operationId: 'UpdateIsApprovedForm',
             parameters: [
               {
@@ -206,6 +203,153 @@
             }
           },
         },
+        '/membership-form/general-form-info': {
+          get: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER:- general membership-form api',
+            description: 'Admin hits this api to get general membership-form api',
+            operationId: 'getGenInfo',
+            parameters: [
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
+        },
+        '/membership-form/general-form-info/{uuid}': {
+          put: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER :: General membership-form update api',
+            description: 'User hits this api to submit general membership form  request.',
+            operationId: 'updateGeneralForm',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: '',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/CreateGeneralMembershipFormRequest',
+                  },
+                },
+              },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
+        },
+        '/membership-form/corporate-form-info': {
+          get: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER:- corporate membership-form api',
+            description: 'Admin hits this api to get corporate membership-form api',
+            operationId: 'getGenInfo',
+            parameters: [
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          }
+        },
+        '/membership-form/corporate-form-info/{uuid}': {
+          put: {
+            tags: ['USER:- membership-form'],
+            summary: 'USER :: Corporate membership-form update api',
+            description: 'User hits this api to submit corporate membership form  request.',
+            operationId: 'updatecorporateForm',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              }
+            ],
+            requestBody: {
+              description: '',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/components/schemas/CreateCorporateMembershipFormRequest',
+                  },
+                },
+              },
+            },
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+                  
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
+        },
       },
    
       components: {
@@ -234,9 +378,9 @@
               organizationalInformation: {
                 type: 'object',
                 properties: {
-                  organizatioName: { type: 'string' },
+                  organizationName: { type: 'string' },
                   chairpersonName: { type: 'string' },
-                  organizatioType: {
+                  organizationType: {
                     type: 'object',
                     properties: {
                       architecturalEngineering: { type: 'boolean' },
@@ -253,7 +397,7 @@
                   bussinessContactNumber: { type: 'string' },
                   organizationPanNumber: { type: 'string' },
                   phoneNumber: { type: 'string' },
-                  organizatioHeadOfcaddress: {
+                  organizationHeadOfcAddress: {
                     type: 'object',
                     properties: {
                       country: { type: 'string' },
@@ -263,7 +407,7 @@
                       wardNumber: { type: 'string' }
                     }
                   },
-                  organizatioDesccription :  { type: 'string' },
+                  organizationDesccription :  { type: 'string' },
                   note :  { type: 'string' },
 
 
@@ -344,7 +488,7 @@
           UpdateIsApprovedFormRequest: {
             type: 'object',
             properties: {
-              isApproved: { type: 'boolean' },
+              isApproved: { type: 'number' },
             },
           }
         }

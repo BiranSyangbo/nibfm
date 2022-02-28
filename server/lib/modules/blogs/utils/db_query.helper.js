@@ -7,6 +7,7 @@ const insert = (req, insertObj) => {
     const insertObject = {
       uuid: uuid.v4(),
       title: insertObj.title,
+      slug : insertObj.slug,
       author: insertObj.author,
       content: insertObj.content,
       publishedDate : new Date(insertObj.publishedDate),
@@ -25,11 +26,32 @@ const insert = (req, insertObj) => {
 const deleteBlog = (req, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
-      _id: tableId
+      uuid: tableId
     },
       {
         $set: {
           deleted: true
+        }
+      })
+  } catch (error) {
+    throw error;
+  }
+}
+const updateBlog = (req, data,tableId) => {
+  try {
+    return req.db.collection(collectionName).updateOne({
+      uuid: tableId
+    },
+      {
+        $set: {
+          title: data.title,
+          slug : data.slug,
+          author : data.author,
+          content : data.content,
+          publishedDate : new Date(data.publishedDate),
+          image : data.image,
+          isActive : data.isActive,
+          metaTags : data.metaTags
         }
       })
   } catch (error) {
@@ -41,7 +63,8 @@ const getList = (req, queryOpts, pagerOpts) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
       .project({ uuid: 1, 
-                title: 1, 
+                title: 1,
+                slug : 1,
                 author: 1,
                 content : 1,
                 publishedDate : 1,
@@ -66,12 +89,28 @@ const countTotalItems = (req, queryOpts) => {
   }
 }
 
-
-const getDetails = (req, uuid, projection) => {
+const checkBlogInfo = (req, uuid, projection) => {
   try {
     return req.db.collection(collectionName).findOne(
       {
-        _id: uuid,
+        uuid: uuid,
+        deleted: false
+      },
+      {
+        projection: projection
+      }
+    )
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+const getDetails = (req, slug, projection) => {
+  try {
+    return req.db.collection(collectionName).findOne(
+      {
+        slug: slug,
         deleted: false
       },
       {
@@ -88,5 +127,7 @@ module.exports = {
   deleteBlog,
   getList,
   getDetails,
-  countTotalItems
+  countTotalItems,
+  updateBlog,
+  checkBlogInfo
 }

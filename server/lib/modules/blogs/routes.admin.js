@@ -14,9 +14,9 @@ router.route('/')
   .post(createBlogController);
 
 router.route('/:uuid')
-  .put(authMiddleware, updateBlogController)
-  .patch(authMiddleware, deletBlogControlelr)
-  .get(authMiddleware, getBlogDetailController);
+  .put(updateBlogController)
+  .patch (deletBlogControlelr)
+  .get(getBlogDetailController);
 
 
 

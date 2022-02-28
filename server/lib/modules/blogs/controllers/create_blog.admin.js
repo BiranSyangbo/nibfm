@@ -3,7 +3,6 @@
  * @method createBlogPost
  */
 
-
  'use strict';
 
  const { insert } = require('../utils/db_query.helper')
@@ -15,6 +14,10 @@
  
      //@check user form validation
      const checkValidation = insertValidation(req.body);
+
+     //TODO slug validation
+     //const checkSlug 
+     
      if (checkValidation.isValid) {
  
        //@insert user data if valid
@@ -24,7 +27,7 @@
          //@send success response 
          return res.status(HTTPStatus.OK).json({
            status: HTTPStatus.OK,
-           message: "InsCert success."
+           message: "Insert success."
          })
        }
  

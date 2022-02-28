@@ -11,6 +11,7 @@ const mongodbHelper = require('../server/lib/helpers/mongodb.helper')
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const defaultAdminMigrationHelper = require('./lib/data-migrations/default-admin.data');
 const defaultOfficeMigrationHelper = require('./lib/data-migrations/default-office-info');
+const defaultAboutUsMigrationHelper = require('./lib/data-migrations/default-about-us');
 
 global.rootDir = __dirname;
 
@@ -33,6 +34,7 @@ try {
 
   defaultAdminMigrationHelper();
   defaultOfficeMigrationHelper();
+  defaultAboutUsMigrationHelper();
 
   app.use(async (req, res, next) => {
     req.db = await mongodbHelper();

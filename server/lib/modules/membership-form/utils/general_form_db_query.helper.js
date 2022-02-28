@@ -36,8 +36,9 @@ const insert = (req, insertObj) => {
     const personalInformation = {
       name : insertObj?.personalInformation?.name,
       phoneNumber : insertObj?.personalInformation?.phoneNumber,
-      dateOfBirthBs : adbs.ad2bs(insertObj?.personalInformation?.dateOfBirthBs),
-      dateOfBirthAd : new Date(insertObj?.personalInformation?.dateOfBirthAd),
+      dateOfBirthBs : insertObj?.personalInformation?.dateOfBirthBs,
+      dateOfBirthAd : insertObj?.personalInformation?.dateOfBirthAd,
+      email : insertObj?.personalInformation?.email,
       nationality : insertObj?.personalInformation?.nationality,
       necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
       address : address,
@@ -47,7 +48,7 @@ const insert = (req, insertObj) => {
 
     const insertObject = {
       uuid: uuid.v4(),
-      date : new Date(insertObj.date),
+      date : insertObj.date,
       membershipNumber: insertObj.membershipNumber,
       profileImage : insertObj.profileImage,
       membershipPeriod: membershipPeriod,
@@ -55,9 +56,9 @@ const insert = (req, insertObj) => {
       notes : insertObj.notes,
       singnature : insertObj.singnature,
       personalInformation : personalInformation,
-      isApproved : false,
+      isApproved : 0,
       deleted: false,
-      createdAt: new Date()
+      createdAt: new Date().toISOString().slice(0, 10)
     }
     return req.db.collection(collectionName).insertOne(insertObject);
   } catch (error) {
@@ -71,7 +72,7 @@ const generalFormUpdateStatus = (req, tableId) => {
     },
       {
         $set: {
-          isApproved: true
+          isApproved: req.body.isApproved
         }
       })
   } catch (error) {
@@ -87,6 +88,68 @@ const deleteDocument = (req, tableId) => {
       {
         $set: {
           deleted: true
+        }
+      })
+  } catch (error) {
+    throw error;
+  }
+}
+
+const update = (req, insertObj,tableId) => {
+  try {
+
+    const membershipPeriod = {
+      annual : insertObj?.membershipPeriod?.annual || false,
+      lifetime : insertObj?.membershipPeriod?.lifetime || false,
+    }
+
+    const membershipType = {
+      general : insertObj?.membershipType?.general || false,
+      student : insertObj?.membershipType?.student || false,
+      honorary : insertObj?.membershipType?.honorary || false,
+    }
+  
+    const address = {
+      country :  insertObj?.personalInformation?.address?.country,
+      district :  insertObj?.personalInformation?.address?.district,
+      provinceNumber :  insertObj?.personalInformation?.address?.provinceNumber,
+      tole :  insertObj?.personalInformation?.address?.tole,
+      wardNumber :  insertObj?.personalInformation?.address?.wardNumber
+
+    }
+
+    const gender = {
+      female: insertObj?.personalInformation?.gender?.female || false,
+      male: insertObj?.personalInformation?.gender?.male || false,
+      other: insertObj?.personalInformation?.gender?.other || false,
+    }
+
+    const personalInformation = {
+      name : insertObj?.personalInformation?.name,
+      phoneNumber : insertObj?.personalInformation?.phoneNumber,
+      dateOfBirthBs : insertObj?.personalInformation?.dateOfBirthBs,
+      dateOfBirthAd : insertObj?.personalInformation?.dateOfBirthAd,
+      email : insertObj?.personalInformation?.email,
+      nationality : insertObj?.personalInformation?.nationality,
+      necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
+      address : address,
+      gender : gender,
+      academicInformation : insertObj?.personalInformation?.academicInformation
+    }
+
+    return req.db.collection(collectionName).updateOne({
+      uuid: tableId
+    },
+      {
+        $set: {
+          membershipNumber: insertObj.membershipNumber,
+          profileImage : insertObj.profileImage,
+          membershipPeriod: membershipPeriod,
+          membershipType : membershipType,
+          notes : insertObj.notes,
+          singnature : insertObj.singnature,
+          personalInformation : personalInformation,
+          modifiedDate : new Date().toISOString().slice(0, 10)
         }
       })
   } catch (error) {
@@ -151,5 +214,6 @@ module.exports = {
   generalFormUpdateStatus,
   getList,
   getGeneralFormDetail,
-  countTotalItems
+  countTotalItems,
+  update
 }
