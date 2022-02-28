@@ -30,10 +30,10 @@
           url: 'http://localhost:4001/api/v1/user',
         },
         {
-          url: 'http://3.145.156.84/api/v1/user'
+          url: 'http://http://18.116.19.66:4001/api/v1/user'
         },
         {
-          url: 'http://3.145.156.84/api/v1/admin'
+          url: 'http://http://18.116.19.66:4001/api/v1/admin'
         }
       ],
       tags: [
