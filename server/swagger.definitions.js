@@ -30,10 +30,10 @@
           url: 'http://localhost:4001/api/v1/user',
         },
         {
-          url: 'http://http://18.116.19.66:4001/api/v1/user'
+          url: 'http://18.116.19.66:4001/api/v1/user'
         },
         {
-          url: 'http://http://18.116.19.66:4001/api/v1/admin'
+          url: 'http://18.116.19.66:4001/api/v1/admin'
         }
       ],
       tags: [
@@ -65,42 +65,6 @@
         ...userAuthApi.server.paths,
         ...forgotPasswordApis.server.paths,
 
-
-
-
-
-        '/static/{filename}': {
-          get: {
-            tags: ['Static files'],
-            summary: 'Static files api',
-            description: 'User hits this to get membership forms.',
-            operationId: 'serveStaticFIle',
-            parameters: [
-              {
-                in: 'path',
-                name: 'filename',
-                schema: {
-                  type: 'string',
-                  enum: ['Nepal_BIM_Forum_Application.pdf', 'Nepal_BIM_Forum_Corporate.pdf']
-                },
-                description: 'filename',
-                required: true
-              }
-            ],
-            responses: {
-              default: {
-                description: '',
-                content: {
-                  'application/json': {
-                    schema: {
-                      $ref: '#/components/schemas/CommonResponse',
-                    },
-                  },
-                },
-              },
-            }
-          }
-        },
         '/health-check': {
           get: {
             tags: ['Health Check'],
