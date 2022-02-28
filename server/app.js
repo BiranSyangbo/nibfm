@@ -20,9 +20,9 @@ try {
   const swaggerDefinitions = require('./swagger.definitions');
   app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
 
-  app.use(helmet());
-  app.use(cors())
-  app.options('*', cors());
+  // app.use(helmet());
+  // app.use(cors())
+  // app.options('*', cors());
 
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
