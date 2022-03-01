@@ -2,14 +2,14 @@ const moduleConfig = require('../config');
 const collectionName = process.env.USERS_COLLECTION
 const uuid = require('uuid');
 
-const insert = (req,email, hashPassword) => {
+const insert = (req, memberInfo, hashPassword) => {
   try {
     const insertObject = {
       uuid: req.params.uuid,
       password: hashPassword,
-      email : email,
+      ...memberInfo,
       type: 'user', //TODO
-      status : true,
+      status: true,
       deleted: false,
       createdAt: new Date()
     }
@@ -29,15 +29,15 @@ const getUserInfoByUsername = async (req, username) => {
     throw error;
   }
 }
-const getUserInfoByUserId= async (req, projection,userId) => {
+const getUserInfoByUserId = async (req, projection, userId) => {
   try {
     return req.db.collection(collectionName).findOne({
       deleted: false,
       uuid: userId
     },
-    {
-      projection: projection
-    });
+      {
+        projection: projection
+      });
   } catch (error) {
     throw error;
   }
@@ -78,7 +78,7 @@ const deleteUserLoginInfo = async (db, id) => {
     throw error;
   }
 }
-const updatePassword = async (req, userId,password) => {
+const updatePassword = async (req, userId, password) => {
   try {
     return req.db.collection(collectionName).updateOne({
       uuid: userId
