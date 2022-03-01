@@ -43,6 +43,10 @@ module.exports = async (req, res, next) => {
     }
     return sendUnAuthorizedError(res);
   } catch (error) {
-    return next(error)
+    if (error.name === 'TokenExpiredError') {
+      return sendUnAuthorizedError(res);
+    } else {
+      return next(error);
+    }
   }
 }
