@@ -8,22 +8,22 @@ const uuid = require('uuid');
 const insert = (req, insertObj) => {
   try {
     const membershipPeriod = {
-      annual : insertObj?.membershipPeriod?.annual || false,
-      lifetime : insertObj?.membershipPeriod?.lifetime || false,
+      annual: insertObj?.membershipPeriod?.annual || false,
+      lifetime: insertObj?.membershipPeriod?.lifetime || false,
     }
 
     const membershipType = {
-      general : insertObj?.membershipType?.general || false,
-      student : insertObj?.membershipType?.student || false,
-      honorary : insertObj?.membershipType?.honorary || false,
+      general: insertObj?.membershipType?.general || false,
+      student: insertObj?.membershipType?.student || false,
+      honorary: insertObj?.membershipType?.honorary || false,
     }
-  
+
     const address = {
-      country :  insertObj?.personalInformation?.address?.country,
-      district :  insertObj?.personalInformation?.address?.district,
-      provinceNumber :  insertObj?.personalInformation?.address?.provinceNumber,
-      tole :  insertObj?.personalInformation?.address?.tole,
-      wardNumber :  insertObj?.personalInformation?.address?.wardNumber
+      country: insertObj?.personalInformation?.address?.country,
+      district: insertObj?.personalInformation?.address?.district,
+      provinceNumber: insertObj?.personalInformation?.address?.provinceNumber,
+      tole: insertObj?.personalInformation?.address?.tole,
+      wardNumber: insertObj?.personalInformation?.address?.wardNumber
 
     }
 
@@ -34,30 +34,31 @@ const insert = (req, insertObj) => {
     }
 
     const personalInformation = {
-      name : insertObj?.personalInformation?.name,
-      phoneNumber : insertObj?.personalInformation?.phoneNumber,
-      dateOfBirthBs : insertObj?.personalInformation?.dateOfBirthBs,
-      dateOfBirthAd : insertObj?.personalInformation?.dateOfBirthAd,
-      email : insertObj?.personalInformation?.email,
-      nationality : insertObj?.personalInformation?.nationality,
-      necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
-      address : address,
-      gender : gender,
-      academicInformation : insertObj?.personalInformation?.academicInformation
+      name: insertObj?.personalInformation?.name,
+      phoneNumber: insertObj?.personalInformation?.phoneNumber,
+      dateOfBirthBs: new Date(insertObj?.personalInformation?.dateOfBirthBs),
+      dateOfBirthAd: new Date(insertObj?.personalInformation?.dateOfBirthAd),
+      email: insertObj?.personalInformation?.email,
+      nationality: insertObj?.personalInformation?.nationality,
+      necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
+      address: address,
+      gender: gender,
+      academicInformation: insertObj?.personalInformation?.academicInformation
     }
 
     const insertObject = {
       uuid: uuid.v4(),
-      date : insertObj.date,
+      date: insertObj.date,
       membershipNumber: insertObj.membershipNumber,
-      profileImage : insertObj.profileImage,
+      profileImage: insertObj.profileImage,
       membershipPeriod: membershipPeriod,
-      membershipType : membershipType,
-      notes : insertObj.notes,
-      singnature : insertObj.singnature,
-      personalInformation : personalInformation,
-      isApproved : 0,
+      membershipType: membershipType,
+      notes: insertObj.notes,
+      singnature: insertObj.singnature,
+      personalInformation: personalInformation,
+      isApproved: 0,
       deleted: false,
+      status: 'Pending',
       createdAt: new Date().toISOString().slice(0, 10)
     }
     return req.db.collection(collectionName).insertOne(insertObject);
@@ -72,7 +73,8 @@ const generalFormUpdateStatus = (req, tableId) => {
     },
       {
         $set: {
-          isApproved: req.body.isApproved
+          isApproved: req.body.isApproved,
+          status: req.body.isApproved === 1 ? 'Approved' : 'Rejected'
         }
       })
   } catch (error) {
@@ -95,26 +97,26 @@ const deleteDocument = (req, tableId) => {
   }
 }
 
-const update = (req, insertObj,tableId) => {
+const update = (req, insertObj, tableId) => {
   try {
 
     const membershipPeriod = {
-      annual : insertObj?.membershipPeriod?.annual || false,
-      lifetime : insertObj?.membershipPeriod?.lifetime || false,
+      annual: insertObj?.membershipPeriod?.annual || false,
+      lifetime: insertObj?.membershipPeriod?.lifetime || false,
     }
 
     const membershipType = {
-      general : insertObj?.membershipType?.general || false,
-      student : insertObj?.membershipType?.student || false,
-      honorary : insertObj?.membershipType?.honorary || false,
+      general: insertObj?.membershipType?.general || false,
+      student: insertObj?.membershipType?.student || false,
+      honorary: insertObj?.membershipType?.honorary || false,
     }
-  
+
     const address = {
-      country :  insertObj?.personalInformation?.address?.country,
-      district :  insertObj?.personalInformation?.address?.district,
-      provinceNumber :  insertObj?.personalInformation?.address?.provinceNumber,
-      tole :  insertObj?.personalInformation?.address?.tole,
-      wardNumber :  insertObj?.personalInformation?.address?.wardNumber
+      country: insertObj?.personalInformation?.address?.country,
+      district: insertObj?.personalInformation?.address?.district,
+      provinceNumber: insertObj?.personalInformation?.address?.provinceNumber,
+      tole: insertObj?.personalInformation?.address?.tole,
+      wardNumber: insertObj?.personalInformation?.address?.wardNumber
 
     }
 
@@ -125,16 +127,16 @@ const update = (req, insertObj,tableId) => {
     }
 
     const personalInformation = {
-      name : insertObj?.personalInformation?.name,
-      phoneNumber : insertObj?.personalInformation?.phoneNumber,
-      dateOfBirthBs : insertObj?.personalInformation?.dateOfBirthBs,
-      dateOfBirthAd : insertObj?.personalInformation?.dateOfBirthAd,
-      email : insertObj?.personalInformation?.email,
-      nationality : insertObj?.personalInformation?.nationality,
-      necLicenseNumber : insertObj?.personalInformation?.necLicenseNumber,
-      address : address,
-      gender : gender,
-      academicInformation : insertObj?.personalInformation?.academicInformation
+      name: insertObj?.personalInformation?.name,
+      phoneNumber: insertObj?.personalInformation?.phoneNumber,
+      dateOfBirthBs: new Date(insertObj?.personalInformation?.dateOfBirthBs),
+      dateOfBirthAd: new Date(insertObj?.personalInformation?.dateOfBirthAd),
+      email: insertObj?.personalInformation?.email,
+      nationality: insertObj?.personalInformation?.nationality,
+      necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
+      address: address,
+      gender: gender,
+      academicInformation: insertObj?.personalInformation?.academicInformation
     }
 
     return req.db.collection(collectionName).updateOne({
@@ -143,13 +145,13 @@ const update = (req, insertObj,tableId) => {
       {
         $set: {
           membershipNumber: insertObj.membershipNumber,
-          profileImage : insertObj.profileImage,
+          profileImage: insertObj.profileImage,
           membershipPeriod: membershipPeriod,
-          membershipType : membershipType,
-          notes : insertObj.notes,
-          singnature : insertObj.singnature,
-          personalInformation : personalInformation,
-          modifiedDate : new Date().toISOString().slice(0, 10)
+          membershipType: membershipType,
+          notes: insertObj.notes,
+          singnature: insertObj.singnature,
+          personalInformation: personalInformation,
+          modifiedDate: new Date().toISOString().slice(0, 10)
         }
       })
   } catch (error) {
@@ -160,18 +162,20 @@ const update = (req, insertObj,tableId) => {
 const getList = (req, queryOpts, pagerOpts) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
-      .project({ uuid: 1, 
-                date: 1, 
-                membershipNumber: 1,
-                profileImage: 1,
-                membershipPeriod: 1,
-                membershipType: 1,
-                notes: 1,
-                singnature: 1,
-                personalInformation: 1,
-                isApproved : 1,
-                createdAt: 1,
-               })
+      .project({
+        uuid: 1,
+        date: 1,
+        membershipNumber: 1,
+        profileImage: 1,
+        membershipPeriod: 1,
+        membershipType: 1,
+        notes: 1,
+        singnature: 1,
+        personalInformation: 1,
+        isApproved: 1,
+        createdAt: 1,
+        status: 1
+      })
 
 
       .skip(pagerOpts.offset)
