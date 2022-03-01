@@ -23,12 +23,12 @@ module.exports = async (req, res, next) => {
     if (decodedJWT && Object.keys(decodedJWT).length > 0) {
 
       const checkJwtTokenInfo = await req.db.collection('login-session').findOne(
-      {
-        token: token,
-        deleted: false,
-        user: decodedJWT.user,
-        type : 'admin'
-      })
+        {
+          token: token,
+          deleted: false,
+          user: decodedJWT.user,
+          type: 'admin'
+        })
 
       if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
 
@@ -36,7 +36,7 @@ module.exports = async (req, res, next) => {
         if (verifyJwtToken && !verifyJwtToken.err) {
           req.decoded = {
             userId: verifyJwtToken.user
-                    }
+          }
           req.authToken = token;
           return next();
         }
@@ -44,6 +44,10 @@ module.exports = async (req, res, next) => {
     }
     return sendUnAuthorizedError(res);
   } catch (error) {
-    return next(error)
+    if (error.name === 'TokenExpiredError') {
+      return sendUnAuthorizedError(res);
+    } else {
+      return next(error);
+    }
   }
 }
