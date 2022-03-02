@@ -5,26 +5,6 @@ const uuid = require('uuid');
 
 const insert = (req, insertObj) => {
   try {
-    const enterpriseSizeType = {
-      smallScale: insertObj?.enterpriseSizeType?.smallScale || false,
-      mediumScale: insertObj?.enterpriseSizeType?.mediumScale || false,
-      largeScale: insertObj?.enterpriseSizeType?.largeScale || false,
-
-    }
-
-    const membershipPeriod = {
-      annual: insertObj?.membershipPeriod?.annual || false,
-      lifetime: insertObj?.membershipPeriod?.lifetime || false,
-    }
-
-    const organizationType = {
-      architecturalEngineering: insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
-      architecturalConstruction: insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
-      interiorConstruction: insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
-      interiorEngineering: insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
-      societyConstruction: insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
-      societyEngineering: insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
-    }
 
     const organizationHeadOfcaddress = {
       country: insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
@@ -35,7 +15,7 @@ const insert = (req, insertObj) => {
     }
 
     const organizationalInformation = {
-      name: insertObj?.organizationalInformation?.organizationName,
+      name: insertObj?.organizationalInformation?.name,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
       establishedDate: new Date(insertObj?.organizationalInformation?.date),
       email: insertObj?.organizationalInformation?.email,
@@ -44,18 +24,18 @@ const insert = (req, insertObj) => {
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
       organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
-      organizatioType: organizationType,
+      organizatioType: insertObj?.organizationalInformation?.organizationType,
       organizatioHeadOfcaddress: organizationHeadOfcaddress
     }
 
     const insertObject = {
-      uuid: uuid.v4(),
+      _id: uuid.v4(),
       corporateMembershipNumber: insertObj?.corporateMembershipNumber,
       date: new Date(insertObj?.date),
       enterpriseSize: insertObj?.enterpriseSize,
       profileImage: insertObj?.profileImage,
-      enterpriseSizeType: enterpriseSizeType,
-      membershipPeriod: membershipPeriod,
+      enterpriseSizeType: insertObj?.enterpriseSizeType,
+      membershipPeriod: insertObj?.membershipPeriod,
       organizationalInformation,
       isApproved: 0,
       status: 'Pending',
@@ -71,7 +51,7 @@ const insert = (req, insertObj) => {
 const corporateFormUpdateStatus = (req, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
-      uuid: tableId
+      _id: tableId
     },
       {
         $set: {
@@ -86,27 +66,6 @@ const corporateFormUpdateStatus = (req, tableId) => {
 const update = (req, insertObj, tableId) => {
   try {
 
-    const enterpriseSizeType = {
-      smallScale: insertObj?.enterpriseSizeType?.smallScale || false,
-      mediumScale: insertObj?.enterpriseSizeType?.mediumScale || false,
-      largeScale: insertObj?.enterpriseSizeType?.largeScale || false,
-
-    }
-
-    const membershipPeriod = {
-      annual: insertObj?.membershipPeriod?.annual || false,
-      lifetime: insertObj?.membershipPeriod?.lifetime || false,
-    }
-
-    const organizationType = {
-      architecturalEngineering: insertObj?.organizationalInformation?.organizationType?.architecturalEngineering || false,
-      architecturalConstruction: insertObj?.organizationalInformation?.organizationType?.architecturalConstruction || false,
-      interiorConstruction: insertObj?.organizationalInformation?.organizationType?.interiorConstruction || false,
-      interiorEngineering: insertObj?.organizationalInformation?.organizationType?.interiorEngineering || false,
-      societyConstruction: insertObj?.organizationalInformation?.organizationType?.societyConstruction || false,
-      societyEngineering: insertObj?.organizationalInformation?.organizationType?.societyEngineering || false
-    }
-
     const organizationHeadOfcaddress = {
       country: insertObj?.organizationalInformation?.organizationHeadOfcaddress?.country,
       provinceNumber: insertObj?.organizationalInformation?.organizationHeadOfcaddress?.provinceNumber,
@@ -116,7 +75,7 @@ const update = (req, insertObj, tableId) => {
     }
 
     const organizationalInformation = {
-      name: insertObj?.organizationalInformation?.organizationName,
+      name: insertObj?.organizationalInformation?.name,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
       establishedDate: new Date(insertObj?.organizationalInformation?.date),
       email: insertObj?.organizationalInformation?.email,
@@ -125,13 +84,13 @@ const update = (req, insertObj, tableId) => {
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,
       organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
-      organizatioType: organizationType,
+      organizatioType: insertObj?.organizationalInformation?.organizationType,
       organizatioHeadOfcaddress: organizationHeadOfcaddress
     }
 
 
     return req.db.collection(collectionName).updateOne({
-      uuid: tableId
+      _id: tableId
     },
       {
         $set: {
@@ -139,8 +98,8 @@ const update = (req, insertObj, tableId) => {
           // date: insertObj?.date,
           enterpriseSize: insertObj?.enterpriseSize,
           profileImage: insertObj?.profileImage,
-          enterpriseSizeType: enterpriseSizeType,
-          membershipPeriod: membershipPeriod,
+          enterpriseSizeType: insertObj?.enterpriseSizeType,
+          membershipPeriod: insertObj?.membershipPeriod,
           organizationalInformation,
           modifiedDate: new Date().toISOString().slice(0, 10)
         }
@@ -201,7 +160,7 @@ const getCorporateFormDetail = (req, uuid, projection) => {
   try {
     return req.db.collection(collectionName).findOne(
       {
-        uuid: uuid,
+        _id: uuid,
         deleted: false
       },
       {

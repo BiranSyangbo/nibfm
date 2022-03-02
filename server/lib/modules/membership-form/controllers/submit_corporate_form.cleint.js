@@ -8,13 +8,13 @@
 
  const { insert } = require('../utils/corporate_form_db_query.helper')
  const HTTPStatus = require('http-status');
- const { insertValidation } = require('../utils/validation.utils');
+ const { validateCorporateForm } = require('../utils/validation.utils');
  
  module.exports = async (req, res, next) => {
    try {
  
      //@check user form validation
-     const checkValidation = insertValidation(req.body);
+     const checkValidation = validateCorporateForm(req.body);
      if (checkValidation.isValid) {
  
        //@insert user data if valid

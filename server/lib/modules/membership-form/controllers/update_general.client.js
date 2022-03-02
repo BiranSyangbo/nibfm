@@ -8,13 +8,13 @@
 
  const { update } = require('../utils/general_form_db_query.helper')
  const HTTPStatus = require('http-status');
- const { insertValidation } = require('../utils/validation.utils');
+ const { validateGeneralForm } = require('../utils/validation.utils');
  
  module.exports = async (req, res, next) => {
    try {
  
      //@check user form validation
-     const checkValidation = insertValidation(req.body);
+     const checkValidation = validateGeneralForm(req.body);
      const projection = {
       uuid: 1
       }
