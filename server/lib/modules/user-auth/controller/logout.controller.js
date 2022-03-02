@@ -1,5 +1,6 @@
 const HTTPStatus = require('http-status');
-const { getUserLoginInfo, deleteUserLoginInfo } = require('../utils/mongo_query.helper')
+const { getUserLoginInfo, deleteUserLoginInfo } = require('../utils/mongo_query.helper');
+
 module.exports = async (req, res, next) => {
   try {
     const checkJwtTokenInfo = await getUserLoginInfo(req, req.decoded.userId)
