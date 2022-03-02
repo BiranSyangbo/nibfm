@@ -23,19 +23,20 @@ module.exports = async (req, res, next) => {
     if (decodedJWT && Object.keys(decodedJWT).length > 0) {
 
       const checkJwtTokenInfo = await req.db.collection('login-session').findOne(
-      {
-        token: token,
-        deleted: false,
-        user: decodedJWT.user,
-        type : 'user'
-      })
+        {
+          token: token,
+          deleted: false,
+          user: decodedJWT.user,
+          type: 'user'
+        })
 
       if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
 
         const verifyJwtToken = await jwtHelper.verifyToken(token, process.env.TOKEN_SECRET);
         if (verifyJwtToken && !verifyJwtToken.err) {
           req.decoded = {
-            userId: verifyJwtToken.user          }
+            userId: verifyJwtToken.user
+          }
           req.authToken = token;
           return next();
         }
