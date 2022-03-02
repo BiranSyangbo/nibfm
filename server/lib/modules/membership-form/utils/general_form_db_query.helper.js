@@ -7,16 +7,6 @@ const uuid = require('uuid');
 
 const insert = (req, insertObj) => {
   try {
-    const membershipPeriod = {
-      annual: insertObj?.membershipPeriod?.annual || false,
-      lifetime: insertObj?.membershipPeriod?.lifetime || false,
-    }
-
-    const membershipType = {
-      general: insertObj?.membershipType?.general || false,
-      student: insertObj?.membershipType?.student || false,
-      honorary: insertObj?.membershipType?.honorary || false,
-    }
 
     const address = {
       country: insertObj?.personalInformation?.address?.country,
@@ -24,13 +14,6 @@ const insert = (req, insertObj) => {
       provinceNumber: insertObj?.personalInformation?.address?.provinceNumber,
       tole: insertObj?.personalInformation?.address?.tole,
       wardNumber: insertObj?.personalInformation?.address?.wardNumber
-
-    }
-
-    const gender = {
-      female: insertObj?.personalInformation?.gender?.female || false,
-      male: insertObj?.personalInformation?.gender?.male || false,
-      other: insertObj?.personalInformation?.gender?.other || false,
     }
 
     const personalInformation = {
@@ -42,17 +25,17 @@ const insert = (req, insertObj) => {
       nationality: insertObj?.personalInformation?.nationality,
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
-      gender: gender,
+      gender: insertObj?.personalInformation?.gender,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
 
     const insertObject = {
-      uuid: uuid.v4(),
+      _id: uuid.v4(),
       date: insertObj.date,
       membershipNumber: insertObj.membershipNumber,
       profileImage: insertObj.profileImage,
-      membershipPeriod: membershipPeriod,
-      membershipType: membershipType,
+      membershipPeriod: insertObj?.membershipPeriod,
+      membershipType: insertObj?.membershipType,
       notes: insertObj.notes,
       singnature: insertObj.singnature,
       personalInformation: personalInformation,
@@ -69,7 +52,7 @@ const insert = (req, insertObj) => {
 const generalFormUpdateStatus = (req, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
-      uuid: tableId
+      _id: tableId
     },
       {
         $set: {
@@ -100,30 +83,12 @@ const deleteDocument = (req, tableId) => {
 const update = (req, insertObj, tableId) => {
   try {
 
-    const membershipPeriod = {
-      annual: insertObj?.membershipPeriod?.annual || false,
-      lifetime: insertObj?.membershipPeriod?.lifetime || false,
-    }
-
-    const membershipType = {
-      general: insertObj?.membershipType?.general || false,
-      student: insertObj?.membershipType?.student || false,
-      honorary: insertObj?.membershipType?.honorary || false,
-    }
-
     const address = {
       country: insertObj?.personalInformation?.address?.country,
       district: insertObj?.personalInformation?.address?.district,
       provinceNumber: insertObj?.personalInformation?.address?.provinceNumber,
       tole: insertObj?.personalInformation?.address?.tole,
       wardNumber: insertObj?.personalInformation?.address?.wardNumber
-
-    }
-
-    const gender = {
-      female: insertObj?.personalInformation?.gender?.female || false,
-      male: insertObj?.personalInformation?.gender?.male || false,
-      other: insertObj?.personalInformation?.gender?.other || false,
     }
 
     const personalInformation = {
@@ -135,19 +100,19 @@ const update = (req, insertObj, tableId) => {
       nationality: insertObj?.personalInformation?.nationality,
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
-      gender: gender,
+      gender: insertObj?.personalInformation,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
 
     return req.db.collection(collectionName).updateOne({
-      uuid: tableId
+      _id: tableId
     },
       {
         $set: {
           membershipNumber: insertObj.membershipNumber,
           profileImage: insertObj.profileImage,
-          membershipPeriod: membershipPeriod,
-          membershipType: membershipType,
+          membershipPeriod: insertObj?.membershipPeriod,
+          membershipType: insertObj?.membershipType,
           notes: insertObj.notes,
           singnature: insertObj.singnature,
           personalInformation: personalInformation,
@@ -200,7 +165,7 @@ const getGeneralFormDetail = (req, uuid, projection) => {
   try {
     return req.db.collection(collectionName).findOne(
       {
-        uuid: uuid,
+        _id: uuid,
         deleted: false
       },
       {
