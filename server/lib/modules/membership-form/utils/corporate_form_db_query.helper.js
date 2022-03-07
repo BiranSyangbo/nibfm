@@ -17,7 +17,7 @@ const insert = (req, insertObj) => {
     const organizationalInformation = {
       name: insertObj?.organizationalInformation?.name,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
-      establishedDate: new Date(insertObj?.organizationalInformation?.date),
+      establishedDate: new Date(insertObj?.organizationalInformation?.date).toISOString().slice(0, 10),
       email: insertObj?.organizationalInformation?.email,
       bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
       organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
