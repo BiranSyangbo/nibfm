@@ -22,6 +22,9 @@ app.use('/user-auth', userAuthRouter);
 const forgotPasswordRouter = require('./lib/modules/forgot-password/route');
 app.use('/forgot-password', forgotPasswordRouter);
 
+const donationManagementRouter = require('./lib/modules/donation-management/router.client');
+app.use('/donation-management', donationManagementRouter)
+
 app.use('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
