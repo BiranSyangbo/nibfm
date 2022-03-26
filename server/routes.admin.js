@@ -20,7 +20,10 @@ const membershipFormRouter = require('./lib/modules/membership-form/routes.admin
 app.use('/membership-form', membershipFormRouter);
 
 const donationManagementRouter = require('./lib/modules/donation-management/router.admin');
-app.use('/donation-management', donationManagementRouter)
+app.use('/donation-management', donationManagementRouter);
+
+const eventManaagementRouter = require('./lib/modules/event-management/route.admin');
+app.use('/event-management', eventManaagementRouter);
 
 app.get('/health-check', (req, res, next) => {
   res.status(200);
