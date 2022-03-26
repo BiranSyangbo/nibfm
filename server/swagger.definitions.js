@@ -9,7 +9,7 @@
   const userAuthApi = require('./lib/modules/user-auth/api_definitions');
   const forgotPasswordApis = require('./lib/modules/forgot-password/api_definitions');
   const donationManagementApis = require('./lib/modules/donation-management/api_definition');
-
+  const eventManagementApis = require('./lib/modules/event-management/api_definition');
 
 
 
@@ -49,8 +49,8 @@
         ...fileManagemetApi.server.tags,
         ...userAuthApi.server.tags,
         ...forgotPasswordApis.server.tags,
-        ...donationManagementApis.server.tags
-
+        ...donationManagementApis.server.tags,
+        ...eventManagementApis.server.tags,
 
 
 
@@ -65,6 +65,7 @@
         ...userAuthApi.server.paths,
         ...forgotPasswordApis.server.paths,
         ...donationManagementApis.server.paths,
+        ...eventManagementApis.server.paths,
         '/health-check': {
           get: {
             tags: ['Health Check'],
@@ -103,7 +104,8 @@
           ...fileManagemetApi.server.components.schemas,
           ...userAuthApi.server.components.schemas,
           ...forgotPasswordApis.server.components.schemas,
-          ...donationManagementApis.server.components.schemas
+          ...donationManagementApis.server.components.schemas,
+          ...eventManagementApis.server.components.schemas
 
         },
         securitySchemes: {
