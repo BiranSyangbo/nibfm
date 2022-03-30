@@ -222,6 +222,26 @@
             summary: 'Get Donation List',
             description: 'Using this api user can list donation',
             operationId: 'getUserDonationList',
+            parameters: [
+              {
+                in: 'query',
+                name: 'page',
+                schema: {
+                  type: 'string'
+                },
+                description: 'current page',
+                required: true
+              },
+              {
+                in: 'query',
+                name: 'perPage',
+                schema: {
+                  type: 'string'
+                },
+                description: 'total item per page',
+                required: true
+              }
+            ],
             responses: {
               default: {
                 description: 'donation list response',
@@ -245,7 +265,8 @@
               date: { type: 'string' },
               donerName: { type: 'string' },
               donerCountry: { type: 'string' },
-              amount: { type: 'number' }
+              amount: { type: 'number' },
+              isAnonymous: { type: 'boolean' }
             }
           },
           GetDonationListResponse: {
@@ -306,20 +327,20 @@
                   type: 'object',
                   properties: {
                     _id: { type: 'string' },
-                    list: {
-                      type: 'array',
-                      items: {
-                        type: 'object',
-                        properties: {
-                          date: { type: 'string' },
-                          donerName: { type: 'string' },
-                          donerCountry: { type: 'string' },
-                          amount: { type: 'number' },
-                          createdAt: { type: 'string' }
-                        }
-                      }
-                    }
+                    date: { type: 'string' },
+                    donerName: { type: 'string' },
+                    donerCountry: { type: 'string' },
+                    amount: { type: 'number' }
                   }
+                }
+              },
+              pagination: {
+                type: 'object',
+                properties: {
+                  perPage: { type: 'number' },
+                  totalItems: { type: 'number' },
+                  currentPage: { type: 'number' },
+                  totalPages: { type: 'number' }
                 }
               }
             }
