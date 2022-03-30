@@ -9,6 +9,7 @@ const insert = (req, insertObj) => {
       donerName: insertObj.donerName,
       donerCountry: insertObj.donerCountry,
       amount: parseFloat(insertObj.amount),
+      isAnonymous: insertObj.isAnonymous,
       deleted: false,
       // active: true,
       createdAt: new Date(),
@@ -32,6 +33,7 @@ const update = (req, insertObj, tableId) => {
           donerName: insertObj.donerName,
           donerCountry: insertObj.donerCountry,
           amount: parseFloat(insertObj.amount),
+          isAnonymous: insertObj.isAnonymous,
           updatedAt: new Date(),
           updatedBy: req.decoded.userId
         }
@@ -104,27 +106,26 @@ const checkDonationExists = (req, uuid, projection) => {
   }
 }
 
-const getDonationListForCustomer = (req) => {
+const getDonationListForCustomer = (req, queryOpts, pagerOpts) => {
   try {
     return req.db.collection(collectionName).aggregate([
-      { $match: { deleted: false } },
+      { $sort: { createdAt: -1 } },
+      { $match: queryOpts },
       {
-        $group: {
-          _id: {
-            year: { $year: "$date" }, month: { $month: "$date" }
+        $project: {
+          date: 1,
+          donerName: {
+            $cond: { if: { $eq: ["$isAnonymous", true] }, then: "", else: '$donerName' }
           },
-          list: {
-            $push: { date: "$date", donerName: "$donerName", donerCountry: "$donerCountry", amount: "$amount" }
-          }
+          donerCountry: 1,
+          amount: 1
         }
       },
       {
-        $match: {
-          "_id.year": new Date().getFullYear()
-        }
+        $skip: pagerOpts.offset
       },
       {
-        $sort: { "_id.month": 1 }
+        $limit: pagerOpts.perPage
       }
     ]).toArray()
   } catch (error) {
