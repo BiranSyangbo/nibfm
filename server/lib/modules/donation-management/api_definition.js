@@ -266,7 +266,8 @@
               donerName: { type: 'string' },
               donerCountry: { type: 'string' },
               amount: { type: 'number' },
-              isAnonymous: { type: 'boolean' }
+              isAnonymous: { type: 'boolean' },
+              currency: { type: 'string' }
             }
           },
           GetDonationListResponse: {
@@ -284,7 +285,9 @@
                     donerName: { type: 'string' },
                     donerCountry: { type: 'string' },
                     amount: { type: 'number' },
-                    createdAt: { type: 'string' }
+                    createdAt: { type: 'string' },
+                    isAnonymous: { type: 'boolean' },
+                    currency: { type: 'string' }
                   }
                 }
               },
@@ -311,6 +314,8 @@
                   donerName: { type: 'string' },
                   donerCountry: { type: 'string' },
                   amount: { type: 'string' },
+                  isAnonymous: { type: 'boolean' },
+                  currency: { type: 'string' },
                   createdAt: { type: 'string' }
                 }
               }

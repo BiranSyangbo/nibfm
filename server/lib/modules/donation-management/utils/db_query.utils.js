@@ -10,6 +10,7 @@ const insert = (req, insertObj) => {
       donerCountry: insertObj.donerCountry,
       amount: parseFloat(insertObj.amount),
       isAnonymous: insertObj.isAnonymous,
+      currency: insertObj.currency,
       deleted: false,
       // active: true,
       createdAt: new Date(),
@@ -34,6 +35,7 @@ const update = (req, insertObj, tableId) => {
           donerCountry: insertObj.donerCountry,
           amount: parseFloat(insertObj.amount),
           isAnonymous: insertObj.isAnonymous,
+          currency: insertObj.currency,
           updatedAt: new Date(),
           updatedBy: req.decoded.userId
         }
@@ -69,6 +71,7 @@ const getList = (req, queryOpts, pagerOpts) => {
         donerName: 1,
         donerCountry: 1,
         amount: 1,
+        currency: 1,
         createdAt: 1
 
       })
@@ -118,7 +121,8 @@ const getDonationListForCustomer = (req, queryOpts, pagerOpts) => {
             $cond: { if: { $eq: ["$isAnonymous", true] }, then: "", else: '$donerName' }
           },
           donerCountry: 1,
-          amount: 1
+          amount: 1,
+          currency: 1
         }
       },
       {
