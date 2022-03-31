@@ -9,6 +9,8 @@ const donationDetailProjection = {
   donerName: 1,
   donerCountry: 1,
   amount: 1,
+  currency: 1,
+  isAnonymous: 1,
   createdAt: 1,
 }
 
