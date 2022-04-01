@@ -72,6 +72,7 @@ const getList = (req, queryOpts, pagerOpts) => {
         donerCountry: 1,
         amount: 1,
         currency: 1,
+        isAnonymous: 1,
         createdAt: 1
 
       })
