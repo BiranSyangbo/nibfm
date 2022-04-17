@@ -1,6 +1,7 @@
-const sendGridMail = require('@sendgrid/mail');
 
 ((sendGridMailHelper) => {
+    const sendGridMail = require('@sendgrid/mail');
+    const emailTemplateConfig = require('../configs/email-template-config');
 
     sendGridMailHelper.sendMail = async (message) => {
         try {
@@ -32,13 +33,13 @@ const sendGridMail = require('@sendgrid/mail');
 
             // Prepare the mail message recipient
             const RECIPIENT_EMAILS = [...new Set([message.email].flat())];
-
+            let emailHtml = emailTemplateConfig.replace('%body%', message.body)
             const mail = {
                 to: RECIPIENT_EMAILS,
                 from: SENDGRID_SENDER_EMAIL,
                 subject: message.title,
-                html: message.body,
-               
+                html: emailHtml,//message.body,
+
             }
 
             // Finally send the email
