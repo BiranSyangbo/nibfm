@@ -18,7 +18,7 @@ global.rootDir = __dirname;
 try {
 
   const swaggerDefinitions = require('./swagger.definitions');
-  app.use('/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
+  app.use('/api/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDefinitions.server));
 
   app.use(helmet());
   app.use(cors())
