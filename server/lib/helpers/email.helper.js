@@ -51,6 +51,7 @@
             }
 
         } catch (error) {
+            console.log("ERROR on email.helper", error.stack);
             return {
                 success: false,
                 message: error.message,
