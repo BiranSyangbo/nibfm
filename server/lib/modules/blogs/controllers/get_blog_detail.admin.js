@@ -26,9 +26,13 @@ module.exports = async (req, res, next) => {
         metaTags: 1,
         slug: 1
       }
-      const data = await checkBlogInfo(req, req.params.uuid, projection)
+      let data = await checkBlogInfo(req, req.params.uuid, projection)
 
       if (data) {
+
+        data.image = data.images;
+        delete data.images;
+
         return res.status(HTTPStatus.OK).json({
           status: HTTPStatus.OK,
           message: "Data fetched.",
