@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         author: 1,
         content: 1,
         publishedDate: 1,
-        image: 1,
+        images: 1,
         isActive: 1,
         metaTags: 1,
         slug: 1
