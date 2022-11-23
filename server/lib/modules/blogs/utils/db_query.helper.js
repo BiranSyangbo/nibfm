@@ -7,12 +7,12 @@ const insert = (req, insertObj) => {
     const insertObject = {
       uuid: uuid.v4(),
       title: insertObj.title,
-      slug : insertObj.slug,
+      slug: insertObj.slug,
       author: insertObj.author,
       content: insertObj.content,
-      publishedDate : new Date(insertObj.publishedDate),
-      images : insertObj.image,
-      isActive : insertObj.isActive,
+      publishedDate: new Date(insertObj.publishedDate),
+      images: insertObj.image,
+      isActive: insertObj.isActive,
       metaTags: insertObj.metaTags,
       deleted: false,
       createdAt: new Date()
@@ -37,7 +37,7 @@ const deleteBlog = (req, tableId) => {
     throw error;
   }
 }
-const updateBlog = (req, data,tableId) => {
+const updateBlog = (req, data, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
       uuid: tableId
@@ -45,13 +45,13 @@ const updateBlog = (req, data,tableId) => {
       {
         $set: {
           title: data.title,
-          slug : data.slug,
-          author : data.author,
-          content : data.content,
-          publishedDate : new Date(data.publishedDate),
-          image : data.image,
-          isActive : data.isActive,
-          metaTags : data.metaTags
+          slug: data.slug,
+          author: data.author,
+          content: data.content,
+          publishedDate: new Date(data.publishedDate),
+          images: data.image,
+          isActive: data.isActive,
+          metaTags: data.metaTags
         }
       })
   } catch (error) {
@@ -62,16 +62,17 @@ const updateBlog = (req, data,tableId) => {
 const getList = (req, queryOpts, pagerOpts) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
-      .project({ uuid: 1, 
-                title: 1,
-                slug : 1,
-                author: 1,
-                content : 1,
-                publishedDate : 1,
-                images : 1,
-                isActive: 1,
-                metaTags: 1
-              })
+      .project({
+        uuid: 1,
+        title: 1,
+        slug: 1,
+        author: 1,
+        content: 1,
+        publishedDate: 1,
+        images: 1,
+        isActive: 1,
+        metaTags: 1
+      })
       .skip(pagerOpts.offset)
       .limit(pagerOpts.perPage)
       .sort({ createdAt: -1 })
