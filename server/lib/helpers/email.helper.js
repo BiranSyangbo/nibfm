@@ -36,7 +36,7 @@
             let emailHtml = emailTemplateConfig.replace('%body%', message.body)
             const mail = {
                 to: RECIPIENT_EMAILS,
-                from: SENDGRID_SENDER_EMAIL,
+                from: `NBIMF <${SENDGRID_SENDER_EMAIL}>`,
                 subject: message.title,
                 html: emailHtml,//message.body,
 
