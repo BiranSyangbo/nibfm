@@ -18,17 +18,17 @@
             status: HTTPStatus.Ok,
             err: false,
             success: true,
-            message: "File Upload Successfully",
+            message: "Image file has been successfully uploaded",
             data : responseData
           })
         }
-        
+
      //@send validation fail response
      return res.status(HTTPStatus.BAD_REQUEST).json({
        status: HTTPStatus.BAD_REQUEST,
        message: checkValidation.msg
      })
- 
+
    } catch (error) {
      return next(error);
    }

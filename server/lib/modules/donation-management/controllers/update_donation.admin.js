@@ -24,13 +24,13 @@ module.exports = async (req, res, next) => {
           if (updateDonationResponse) {
             return res.status(HTTPStatus.OK).json({
               status: HTTPStatus.OK,
-              message: "Data updated."
+              message: "Donation record has been updated."
             })
           }
 
           return res.status(HTTPStatus.NOT_MODIFIED).json({
             status: HTTPStatus.NOT_MODIFIED,
-            message: "Data update failed."
+            message: "We're sorry, but we were unable to save your changes."
           })
         }
 

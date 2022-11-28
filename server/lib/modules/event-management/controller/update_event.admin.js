@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
             if (checkSlugExists && Object.keys(checkSlugExists).length > 0) {
               return res.status(HTTPStatus.CONFLICT).json({
                 status: HTTPStatus.CONFLICT,
-                message: "Duplicate event slug."
+                message: "We're sorry, but provided slug is alreday existed."
               })
             }
           }
@@ -35,13 +35,13 @@ module.exports = async (req, res, next) => {
           if (updateResponse) {
             return res.status(HTTPStatus.OK).json({
               status: HTTPStatus.OK,
-              message: "Data updated."
+              message: "Event has been successfuly updated."
             })
           }
 
           return res.status(HTTPStatus.NOT_MODIFIED).json({
             status: HTTPStatus.NOT_MODIFIED,
-            message: "Data update failed."
+            message: "We're sorry, but we were unable to save your changes."
           })
         }
 
@@ -54,7 +54,7 @@ module.exports = async (req, res, next) => {
 
     return res.status(HTTPStatus.NOT_FOUND).json({
       status: HTTPStatus.NOT_FOUND,
-      message: "Data not found."
+      message: "We're sorry, but we were unable to find the data you were looking for."
     })
   } catch (error) {
     return next(error);

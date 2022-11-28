@@ -8,18 +8,18 @@ module.exports = async (req, res, next) => {
     const { isValid, msg } = validationUtils(req.body);
     if (isValid) {
 
-      
+
       const insertResponse = await dbQueryUtils.insert(req, req.body);
       if (insertResponse) {
         return res.status(HTTPStatus.OK).json({
           status: HTTPStatus.OK,
-          message: "Donation created successfully."
+          message: "A donation has been successfully created."
         })
       }
 
       return res.status(HTTPStatus.NOT_MODIFIED).json({
         status: HTTPStatus.NOT_MODIFIED,
-        message: "Donation can not be created."
+        message: "We're sorry, but we were unable to create donation records."
       })
     }
 

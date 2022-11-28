@@ -1,24 +1,26 @@
-(() => {
-  module.exports = {
-    message: {
-      userNotFound: "User not found",
-      wentWront: "Something went wrong",
-      emailSent: "A link to reset your password has been sent to your email address. Please follow the instructions in the email.",
-      notAllowed: "User is not allowed to reset password.",
-      linkNotFound: "Link not found",
-      passwordNotMatch: "Password does not match",
-      weakPassword: "Weak password provided",
-      passwordNotProvided: "Password and confirm password required",
-      passwordResetSuccess: "Password reset success",
-      passwordResetFail: "Password reset fail"
-    },
-    tables: {
-      customer_forgot_password : "customer_forgot_password"
-    },
-    config: {
-      forgotPasswordTokenLength: 32,
-      passwordStrengthRegex:/^(?=.*\d)(?=.*[a-z]).{6,}$/i,
+/** @format */
 
-  },
-  }
+(() => {
+    module.exports = {
+        message: {
+            userNotFound: "We're sorry, but user is not found on the system.",
+            wentWront: "We're sorry, but something went wrong",
+            emailSent:
+                'A link to reset your password has been sent to your email address. Please follow the instructions in the email.',
+            notAllowed: "We're sorry, but user is not allowed to reset password.",
+            linkNotFound: "We're sorry, but link not found",
+            passwordNotMatch: "We're sorry, but password does not match",
+            weakPassword: "We're sorry, but weak password provided",
+            passwordNotProvided: "We're sorry, but password and confirm password required",
+            passwordResetSuccess: "We're sorry, but password reset success",
+            passwordResetFail: "We're sorry, but password reset fail",
+        },
+        tables: {
+            customer_forgot_password: 'customer_forgot_password',
+        },
+        config: {
+            forgotPasswordTokenLength: 32,
+            passwordStrengthRegex: /^(?=.*\d)(?=.*[a-z]).{6,}$/i,
+        },
+    };
 })();

@@ -4,7 +4,7 @@ const changePasswordHelper = require('../utils/change_password_helper')
 
 const moduleConfig = require('../config')
 
-const internalHelper = { 
+const internalHelper = {
   hasRecord: (list) => {
       return (list && (list.length > 0));
     },
@@ -48,7 +48,7 @@ module.exports = async (req, res, next) => {
             if (!internalHelper.checkPasswordStrength(req?.body?.newPassword)) {
               return res.status(HTTPStatus.BAD_REQUEST).json({
                 status: HTTPStatus.BAD_REQUEST,
-                msg: "Weak Password"
+                msg: "We're sorry, but provided password is weak."
               });
               }
           const changePasswordObj = {
@@ -62,30 +62,30 @@ module.exports = async (req, res, next) => {
             if (!changePwResp){
                 return res.status(HTTPStatus.BAD_REQUEST).json({
                 status: HTTPStatus.BAD_REQUEST,
-                msg: "Invalid Password"
+                msg: "We're sorry, but provided password is invalid."
               });
             }
 
             //Logout Method TODO:
-            
+
             return res.status(HTTPStatus.OK).json({
               status: HTTPStatus.OK,
               message: "Password Changed Sucessfully, Please relogin to the system."
             })
-                
+
         }
         else{
           return res.status(HTTPStatus.BAD_REQUEST).json({
             status: HTTPStatus.BAD_REQUEST,
-            msg: "Passwprd Mismatch"
-          });                  
+            msg: "We're sorry, but provided password doesn't match"
+          });
         }
     }
 
     }
     return res.status(HTTPStatus.BAD_REQUEST).json({
       status: HTTPStatus.BAD_REQUEST,
-      msg: "Operation Failed."
+      msg: "We're sorry, but unexpected happend please contact to adminstration"
     })
   } catch (error) {
     return next(error)

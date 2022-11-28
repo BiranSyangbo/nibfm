@@ -27,13 +27,13 @@ module.exports = async (req, res, next) => {
         if (deleteResponse) {
           return res.status(HTTPStatus.OK).json({
             status: HTTPStatus.OK,
-            message: "Delete success."
+            message: "we have successfully removed the blog post."
           })
         }
 
         return res.status(HTTPStatus.BAD_REQUEST).json({
           status: HTTPStatus.BAD_REQUEST,
-          message: "Delete fail."
+          message: "We're sorry, but we were unable to remove blog post."
         })
 
       }
@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
 
     return res.status(HTTPStatus.NOT_FOUND).json({
       status: HTTPStatus.NOT_FOUND,
-      message: "Data not found."
+      message: "We're sorry, but we were unable to find the data you were looking for."
     })
   } catch (error) {
     return next(error);

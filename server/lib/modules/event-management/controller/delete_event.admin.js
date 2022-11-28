@@ -19,13 +19,13 @@ module.exports = async (req, res, next) => {
         if (deleteEventResponse) {
           return res.status(HTTPStatus.OK).json({
             status: HTTPStatus.OK,
-            message: "Data deleted."
+            message: "We have successfully removed event."
           })
         }
 
         return res.status(HTTPStatus.NOT_MODIFIED).json({
           status: HTTPStatus.NOT_MODIFIED,
-          message: "Data delete failed."
+          message: "We're sorry, but we were unable remove event."
         })
 
       }

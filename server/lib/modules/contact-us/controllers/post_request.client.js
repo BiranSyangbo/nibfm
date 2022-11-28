@@ -21,17 +21,17 @@ module.exports = async (req, res, next) => {
       const insertRes = await insert(req, req.body);
       if (insertRes) {
 
-        //@send success response 
+        //@send success response
         return res.status(HTTPStatus.OK).json({
           status: HTTPStatus.OK,
-          message: "Insert success."
+          message: "Thank you for reaching out to us"
         })
       }
 
       //@send insert fail response
       return res.status(HTTPStatus.BAD_REQUEST).json({
         status: HTTPStatus.BAD_REQUEST,
-        message: "Insert failed."
+        message: "We're sorry, but unexpected error happened. Please contact to these number: Phone (Finland): +358 451448433 Phone (Nepal++977 9741803161)."
       })
     }
 

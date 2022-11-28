@@ -14,7 +14,7 @@
           post: {
             tags: ['admin-auth'],
             summary: 'admin-auth login api',
-            description: 'Admin hits this api to login into the system.',
+            description: 'If you are an administrator and need to login to the system, simply hit the api.',
             operationId: 'login',
             requestBody: {
               description: '',
@@ -44,7 +44,7 @@
           put: {
             tags: ['admin-auth'],
             summary: 'admin-auth logout api',
-            description: 'Admin hits this api to logout into the system.',
+            description: "If you need to logout of the system, the admin can hit this api. This will ensure that you are no longer logged in and won't be able to access any sensitive information.",
             operationId: 'logout',
             security: [
               {

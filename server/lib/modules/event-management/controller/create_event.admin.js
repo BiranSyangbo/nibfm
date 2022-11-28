@@ -14,18 +14,18 @@ module.exports = async (req, res, next) => {
         if (insertResponse) {
           return res.status(HTTPStatus.OK).json({
             status: HTTPStatus.OK,
-            message: "Event created successfully."
+            message: "A new event has been successfully created."
           })
         }
 
         return res.status(HTTPStatus.NOT_MODIFIED).json({
           status: HTTPStatus.NOT_MODIFIED,
-          message: "Event can not be created."
+          message: "We're sorry, but we were unable to create new event."
         })
       }
       return res.status(HTTPStatus.CONFLICT).json({
         status: HTTPStatus.CONFLICT,
-        message: "Duplicate event slug."
+        message: "We're sorry, but provided event slug is alreaday existed."
       })
 
     }
