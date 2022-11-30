@@ -5,7 +5,10 @@ const { getUserLoginInfo, deleteUserLoginInfo } = require('../utils/mongo_query.
 
 module.exports = async (req, res, next) => {
     try {
+        console.log("logout controller initialize");
+
         const checkJwtTokenInfo = await getUserLoginInfo(req, req.decoded.userId);
+        console.log("user jwt info ", checkJwtTokenInfo);
 
         if (checkJwtTokenInfo && Object.keys(checkJwtTokenInfo).length > 0) {
             const deleteResponse = await deleteUserLoginInfo(req.db, checkJwtTokenInfo._id);
