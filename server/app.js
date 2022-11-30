@@ -61,6 +61,7 @@ try {
   app.use('/api/v1/user', userRouter);
 
   app.use((err, req, res, next) => {
+    console.log("error", err);
     res.status(500);
     return res.json({
       message: process.env.NODE_ENV === 'production' ? 'Someting went wrong.' : err.message
