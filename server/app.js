@@ -37,6 +37,8 @@ try {
   defaultAboutUsMigrationHelper();
 
   app.use(async (req, res, next) => {
+    console.log("request meta info", req.originalUrl);
+
     req.db = await mongodbHelper();
     req.debug = {
       ip: req.ip,
