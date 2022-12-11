@@ -25,7 +25,9 @@ const insert = (req, insertObj) => {
       organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
       organizatioType: insertObj?.organizationalInformation?.organizationType,
-      organizatioHeadOfcaddress: organizationHeadOfcaddress
+      organizatioHeadOfcaddress: organizationHeadOfcaddress,
+      companyRegistration: insertObj.company_registration
+
     }
 
     const insertObject = {
@@ -85,7 +87,8 @@ const update = (req, insertObj, tableId) => {
       organizationDesccription: insertObj?.organizationalInformation?.organizationDesccription,
       note: insertObj?.organizationalInformation?.note,
       organizatioType: insertObj?.organizationalInformation?.organizationType,
-      organizatioHeadOfcaddress: organizationHeadOfcaddress
+      organizatioHeadOfcaddress: organizationHeadOfcaddress,
+      companyRegistration: insertObj.company_registration,
     }
 
 
