@@ -26,9 +26,9 @@ const insert = (req, insertObj) => {
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
       citizenshipFront: insertObj?.personalInformation?.citizenship_front,
-      citizenshipBack: insertObj?.personalInformation?.citizen_back,
+      citizenshipBack: insertObj?.personalInformation?.citizenship_back,
       academicCertificate: insertObj?.personalInformation?.academic_certificate,
-      depositeSlip: data?.personalInformation?.deposite_slip,
+      depositSlip: insertObj?.personalInformation?.deposit_slip,
       gender: insertObj?.personalInformation?.gender,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
@@ -105,9 +105,9 @@ const update = (req, insertObj, tableId) => {
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
       citizenshipFront: insertObj?.personalInformation?.citizenship_front,
-      citizenshipBack: insertObj?.personalInformation?.citizen_back,
+      citizenshipBack: insertObj?.personalInformation?.citizenship_back,
       academicCertificate: insertObj?.personalInformation?.academic_certificate,
-      depositeSlip: data?.personalInformation?.deposite_slip,
+      depositSlip: data?.personalInformation?.deposit_slip,
       gender: insertObj?.personalInformation,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
