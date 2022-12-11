@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
             getList(req, queryOpts, pagerOpts, projectionField),
             countTotalItems(req, queryOpts),
         ]);
-
+        console.log('eventList: ', { dataList });
         if (dataList && dataList.length > 0) {
             return res.status(HTTPStatus.OK).json({
                 status: HTTPStatus.OK,
