@@ -10,13 +10,12 @@ module.exports = async (req, res, next) => {
             const projection = {
                 uuid: 1,
                 title: 1,
+                slug: 1,
                 author: 1,
-                content: 1,
-                publishedDate: 1,
-                images: 1,
-                isActive: 1,
-                metaTags: 1,
-                deleted: 1,
+                description: 1,
+                date: 1,
+                meta: 1,
+                image: 1,
             };
             const data = await getDetails(req, req.params.slug, projection);
 
