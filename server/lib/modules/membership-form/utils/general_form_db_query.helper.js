@@ -25,9 +25,9 @@ const insert = (req, insertObj) => {
       nationality: insertObj?.personalInformation?.nationality,
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
-      citizenshipFront: insertObj.citizenship_front,
-      citizenshipBack: insertObj.citizen_back,
-      academicCertificate: insertObj.academic_certificate,
+      citizenshipFront: insertObj?.personalInformation?.citizenship_front,
+      citizenshipBack: insertObj?.personalInformation?.citizen_back,
+      academicCertificate: insertObj?.personalInformation?.academic_certificate,
       gender: insertObj?.personalInformation?.gender,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
@@ -103,9 +103,9 @@ const update = (req, insertObj, tableId) => {
       nationality: insertObj?.personalInformation?.nationality,
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
-      citizenshipFront: insertObj.citizenship_front,
-      citizenshipBack: insertObj.citizen_back,
-      academicCertificate: insertObj.academic_certificate,
+      citizenshipFront: insertObj?.personalInformation?.citizenship_front,
+      citizenshipBack: insertObj?.personalInformation?.citizen_back,
+      academicCertificate: insertObj?.personalInformation?.academic_certificate,
       gender: insertObj?.personalInformation,
       academicInformation: insertObj?.personalInformation?.academicInformation
     }
