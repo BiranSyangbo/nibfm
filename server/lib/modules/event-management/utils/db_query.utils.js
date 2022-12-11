@@ -110,7 +110,21 @@ const checkDonationExists = (req, uuid, projection) => {
     throw error;
   }
 }
-
+const getDetails = (req, slug, projection) => {
+  try {
+    return req.db.collection(collectionName).findOne(
+      {
+        slug: slug,
+        deleted: false
+      },
+      {
+        projection: projection
+      }
+    )
+  } catch (error) {
+    throw error;
+  }
+}
 const checkDuplicateSlug = (req, slug) => {
   try {
     return req.db.collection(collectionName).findOne(
@@ -135,5 +149,6 @@ module.exports = {
   checkDonationExists,
   countTotalItems,
   update,
-  checkDuplicateSlug
+  checkDuplicateSlug,
+  getDetails
 }
