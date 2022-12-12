@@ -9,6 +9,36 @@
 const { insert } = require('../utils/db_query.helper')
 const HTTPStatus = require('http-status');
 const { insertValidation } = require('../utils/validation.utils');
+const emailHelper = require('../../../helpers/email.helper');
+
+const sendResetEmail = async (name) => {
+  try {
+    const username = name || "";
+
+    const message = {
+      email: process.env.ADMIN_EMAIL_RECEIVE_ID,
+      title: 'Contact us notification',
+
+      body: `
+    <div>
+    <div>
+    <p>Dear Admin,
+
+    User ${username} has dropped a contact request in the system. Please log in to the website's backend to review the submission and respond as necessary.
+    
+    Thank you for your attention to this matter.
+    </p>
+    </div>
+    </div>
+   `
+
+    }
+
+    return emailHelper.sendMail(message)
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = async (req, res, next) => {
   try {
@@ -21,6 +51,7 @@ module.exports = async (req, res, next) => {
       const insertRes = await insert(req, req.body);
       if (insertRes) {
 
+        await sendResetEmail(req.body.name);
         //@send success response
         return res.status(HTTPStatus.OK).json({
           status: HTTPStatus.OK,
