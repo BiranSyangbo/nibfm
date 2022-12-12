@@ -1,88 +1,76 @@
 /**
+ * @format
  * @author lekhrazz
  * @method postContactUs
  */
 
-
 'use strict';
 
-const { insert } = require('../utils/db_query.helper')
+const { insert } = require('../utils/db_query.helper');
 const HTTPStatus = require('http-status');
 const { insertValidation } = require('../utils/validation.utils');
 const emailHelper = require('../../../helpers/email.helper');
 
 const sendResetEmail = async (name) => {
-  try {
-    const username = name || "";
+    try {
+        const username = name || '';
 
-    const message = {
-      email: process.env.ADMIN_EMAIL_RECEIVE_ID,
-      title: 'Contact us notification',
+        const message = {
+            email: process.env.ADMIN_EMAIL_RECEIVE_ID,
+            title: 'Contact us notification',
 
-      body: `
-    <div>
-    <div>
-      <p><b>Dear Admin,</b></p>
-    </div>
-    <div>
-    <div>
-    <p>
-      User ${username} has dropped a contact request in the system.
-    </p>
-    <p> 
-      Please log in to the website's backend to review the submission and respond as necessary.
-    </p>
-    </div>
-    <div>
-      <p>
-        Thank you for your attention to this matter.
-      </p>
-    </div>
-    </div>
-    </div>
-   `
+            body: `<table>
+      <tr>
+          <td>
+              <div class="text" style="padding: 0 2.5em; text-align: center;">
+                  <h2>Dear Admin,</h2>
+                  <h3>User ${username} has dropped a contact request in the system.</h3>
+                  <p>Please log in to the website's backend to review the submission and respond as necessary.</p>
+                  <p>Thank you for your attention to this matter.</p>
+                  <p>Visit <a href="https://admin.nbimf.com/" class="btn btn-primary">Admin Dashboard</a></p>
+              </div>
+          </td>
+      </tr>
+  </table>
+   `,
+        };
 
+        return emailHelper.sendMail(message);
+    } catch (error) {
+        throw error;
     }
-
-    return emailHelper.sendMail(message)
-  } catch (error) {
-    throw error;
-  }
-}
+};
 
 module.exports = async (req, res, next) => {
-  try {
+    try {
+        //@check user form validation
+        const checkValidation = insertValidation(req.body);
+        if (checkValidation.isValid) {
+            //@insert user data if valid
+            const insertRes = await insert(req, req.body);
+            if (insertRes) {
+                await sendResetEmail(req.body.name);
+                //@send success response
+                return res.status(HTTPStatus.OK).json({
+                    status: HTTPStatus.OK,
+                    message: 'Thank you for reaching out to us',
+                });
+            }
 
-    //@check user form validation
-    const checkValidation = insertValidation(req.body);
-    if (checkValidation.isValid) {
+            //@send insert fail response
+            return res.status(HTTPStatus.BAD_REQUEST).json({
+                status: HTTPStatus.BAD_REQUEST,
+                message:
+                    "We're sorry, but unexpected error happened. Please contact to these number: Phone (Finland): +358 451448433 Phone (Nepal++977 9741803161).",
+            });
+        }
 
-      //@insert user data if valid
-      const insertRes = await insert(req, req.body);
-      if (insertRes) {
-
-        await sendResetEmail(req.body.name);
-        //@send success response
-        return res.status(HTTPStatus.OK).json({
-          status: HTTPStatus.OK,
-          message: "Thank you for reaching out to us"
-        })
-      }
-
-      //@send insert fail response
-      return res.status(HTTPStatus.BAD_REQUEST).json({
-        status: HTTPStatus.BAD_REQUEST,
-        message: "We're sorry, but unexpected error happened. Please contact to these number: Phone (Finland): +358 451448433 Phone (Nepal++977 9741803161)."
-      })
+        //@send validation fail response
+        return res.status(HTTPStatus.BAD_REQUEST).json({
+            status: HTTPStatus.BAD_REQUEST,
+            message: checkValidation.msg,
+        });
+    } catch (error) {
+        return next(error);
     }
-
-    //@send validation fail response
-    return res.status(HTTPStatus.BAD_REQUEST).json({
-      status: HTTPStatus.BAD_REQUEST,
-      message: checkValidation.msg
-    })
-
-  } catch (error) {
-    return next(error);
-  }
-}
+};

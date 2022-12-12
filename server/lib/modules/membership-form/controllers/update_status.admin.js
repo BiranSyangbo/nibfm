@@ -36,17 +36,20 @@ const internalFun = {
                     const message = {
                         email: memberInfo.email,
                         title: 'Membership form approved.',
-                        body: `<tr>
-          <td valign="middle" style="padding:0 1.5em">
-          <div>
-              <p><b>Dear ${memberInfo.name}, </b></p>
-              <p>
-              Your membership form is approved. Please use this Credentials for login our system.</p>
-                <p> Your username is : ${memberInfo.email}</p>
-                <p> Your password is : ${passwordAlgorithm}</p>
-              </div>
-            </td>
-        </tr>`,
+                        body: `
+                        <table>
+                        <tr>
+                            <td>
+                                <div class="text" style="padding: 0 2.5em; text-align: center;">
+                                    <h2>Dear ${memberInfo.name},</h2>
+                                    <h3>Your membership form is approved. Please use this Credentials for login our system.</h3>
+                                    <p> Your <b>username</b> is : ${memberInfo.email}</p>
+                                    <p> Your <b>password</b> is : ${passwordAlgorithm}</p>
+                                    <p><a href="https://nbimf.com/login?username=${memberInfo.email}&password=${passwordAlgorithm}" class="btn btn-primary">Login</a></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>`,
                     };
 
                     const hashPassword = await generateHashPassword(passwordAlgorithm, salt);
@@ -62,18 +65,20 @@ const internalFun = {
                         email: memberInfo.email,
                         title: 'Membership form rejected.',
                         body: `
-          <tr>
-          <td valign="middle" style="padding:0 1.5em">
-          <div>
-              <p><b>Dear ${memberInfo.name}, </b></p>
-              <p>Thank you for your interest in our company.</p>
-              <p>I am sorry to inform you that your membership form has been rejected.</p>
-              <p>Please contact our office so that we can further process your application.</p>
+                        <table>
+                        <tr>
+                            <td>
+                                <div class="text" style="padding: 0 2.5em; text-align: center;">
+                                    <h2>Dear ${memberInfo.name},</h2>
+                                    <h3>Thank you for your interest in our company.</h3>
+                                    <p>I am sorry to inform you that your membership form has been rejected.</p>
+                                    <p>Please contact our office so that we can further process your application.</p>
 
-              Thank you,</p>
-          </div>
-          </td>
-          </tr>
+                                    <p style='margin-top:"5px"'>Thank you,</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
         `,
                     };
                     emailHelper.sendMail(message);
@@ -164,7 +169,7 @@ module.exports = async (req, res, next) => {
                     if (updateResponse) {
                         return res.status(HTTPStatus.OK).json({
                             status: HTTPStatus.OK,
-                            message: "We have successfully save your changes.",
+                            message: 'We have successfully save your changes.',
                         });
                     }
 
