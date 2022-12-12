@@ -17,7 +17,7 @@ const sendResetEmail = async (name) => {
 
     const message = {
       email: process.env.ADMIN_EMAIL_RECEIVE_ID,
-      title: 'Membership registration notification',
+      title: 'Corporate membership registration notification',
 
       body: `
      <div>
