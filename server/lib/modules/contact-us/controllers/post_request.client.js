@@ -22,12 +22,22 @@ const sendResetEmail = async (name) => {
       body: `
     <div>
     <div>
-    <p>Dear Admin,
-
-    User ${username} has dropped a contact request in the system. Please log in to the website's backend to review the submission and respond as necessary.
-    
-    Thank you for your attention to this matter.
+      <p><b>Dear Admin,</b></p>
+    </div>
+    <div>
+    <div>
+    <p>
+      User ${username} has dropped a contact request in the system.
     </p>
+    <p> 
+      Please log in to the website's backend to review the submission and respond as necessary.
+    </p>
+    </div>
+    <div>
+      <p>
+        Thank you for your attention to this matter.
+      </p>
+    </div>
     </div>
     </div>
    `
