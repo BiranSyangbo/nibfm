@@ -325,79 +325,87 @@ ul.social li{
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
           			<td class="logo" style="text-align: center;">
-			            <h1><b>Nepal BIM Fourm</b></h1>
+			            <img alt="logo" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;" src="https://nbimf.com/NBIMF-logo.png"/>
 			          </td>
           		</tr>
           	</table>
           </td>
 	      </tr>
-	      <tr>
-          <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
+			<tr>
+          <td valign="middle" class="hero bg_white" style="padding: 3em 0 4em 0;background-image: url('https://nbimf.com/img/city.png');background-repeat:no-repeat;background-position: center -115px;">
 
-          </td>
-	      </tr>
-				<tr>
-          <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
 		        %body%
-            </td>
-            </tr>
-
-          </table>
-          <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+            <table>
             <tr>
-              <td valign="middle" class="bg_light footer email-section">
-                <table>
+              <td>
+                <div class="text" style="padding: 0 2.5em; text-align: center;">
+                  <h2>Please verify your email</h2>
+                  <h3>Amazing deals, updates, interesting news right in your inbox</h3>
+                  <p><a href="#" class="btn btn-primary">Yes! Subscribe Me</a></p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr><!-- end tr -->
+    <!-- 1 Column Text + Button : END -->
+    </table>
+    <table align="center" class="bg_white"role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;background-image: url('https://nbimf.com/img/footer-bg.png');">
+      <tr>
+        <td valign="middle" class="footer email-section">
+          <table>
+            <tr>
+              <td valign="top" width="33.333%" style="padding-top: 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                   <tr>
-                    <td valign="top" width="33.333%" style="padding-top: 20px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="text-align: left; padding-right: 10px;">
-                            <h3 class="heading">About</h3>
-                            <p>Nepal BIM Forum abbreviated as NBIMF is a non-profit organization that is established to promote the use of Building Information Modelling commonly known as BIM for Nepalese Architecture, Engineering, Construction and Operation stakeholders.</p>
-                          </td>
-                        </tr>
-                      </table>
+                    <td style="text-align: left; padding-right: 10px;">
+                      <h3 class="heading">About</h3>
+                      <p>Nepal BIM Forum abbreviated as NBIMF is a non-profit organization that is established to promote the use of Building Information Modelling commonly known as BIM for Nepalese Architecture, Engineering, Construction and Operation stakeholders.</p>
                     </td>
-                    <td valign="top" width="33.333%" style="padding-top: 20px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
-                            <h3 class="heading">Contact Info</h3>
-                            <ul>
-                              <li><span class="text">Koteshwor Kathmandu, Nepal</span></li>
-                      <li><span class="text">Phone (Nepal): +977 9741803161 </span></a></li>
-                      <li><span class="text">Otaniementie Finland, 02150 Espoo</span></li>
-                              <li><span class="text">Phone (Finland): +358 451448433</span></a></li>
-                      <li><span class="text">Email: info@nbimf.com</span></a></li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </table>
+                  </tr>
+                </table>
+              </td>
+              <td valign="top" width="33.333%" style="padding-top: 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
+                      <h3 class="heading">Contact Info</h3>
+                      <ul>
+                        <li><span class="text">Koteshwor Kathmandu, Nepal</span></li>
+                <li><span class="text">Phone (Nepal): +977 9741803161 </span></a></li>
+                <li><span class="text">Otaniementie Finland, 02150 Espoo</span></li>
+                        <li><span class="text">Phone (Finland): +358 451448433</span></a></li>
+                <li><span class="text">Email: info@nbimf.com</span></a></li>
+                      </ul>
                     </td>
-                    <td valign="top" width="33.333%" style="padding-top: 20px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="text-align: left; padding-left: 10px;">
-                            <h3 class="heading">Useful Links</h3>
-                            <ul>
-                              <li><a href="https://nbimf.com">Home</a></li>
-                      <li><a href="https://nbimf.com/blogs">Blogs</a></li>
-                              <li><a href="https://nbimf.com/events">Event</a></li>
-                              <li><a href="https://nbimf.com/donate">Donate</a></li>
-                              <li><a href="https://nbimf.com/about">About Us</a></li>
-                      <li><a href="https://nbimf.com/contact">Contact Us</a></li>
-                      <li><a href="https://nbimf.com/member">Members</a></li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </table>
+                  </tr>
+                </table>
+              </td>
+              <td valign="top" width="33.333%" style="padding-top: 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td style="text-align: left; padding-left: 10px;">
+                      <h3 class="heading">Useful Links</h3>
+                      <ul>
+                        <li><a href="https://nbimf.com">Home</a></li>
+                <li><a href="https://nbimf.com/blogs">Blogs</a></li>
+                        <li><a href="https://nbimf.com/events">Event</a></li>
+                        <li><a href="https://nbimf.com/donate">Donate</a></li>
+                        <li><a href="https://nbimf.com/about">About Us</a></li>
+                <li><a href="https://nbimf.com/contact">Contact Us</a></li>
+                <li><a href="https://nbimf.com/member">Members</a></li>
+                      </ul>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
           </table>
-        </div>
-      </center>
-    </body>
-    </html>`;
+        </td>
+      </tr><!-- end: tr -->
+    </table>
+
+  </div>
+</center>
+</body>
+</html>`;
