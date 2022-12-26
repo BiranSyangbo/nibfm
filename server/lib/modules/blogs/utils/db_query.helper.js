@@ -10,7 +10,7 @@ const insert = (req, insertObj) => {
       slug: insertObj.slug,
       author: insertObj.author,
       content: insertObj.content,
-      publishedDate: new Date(insertObj.publishedDate),
+      publishedDate: new Date(insertObj.publishedDate) || new Date(),
       images: insertObj.image,
       isActive: insertObj.isActive,
       metaTags: insertObj.metaTags,

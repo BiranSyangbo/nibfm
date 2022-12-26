@@ -18,12 +18,11 @@ const { generateHashPassword, generateSalt } = require('../../../helpers/bcrypt'
 const {
     insert,
     getUserInfoByUsername,
+    checkMemberId
 } = require('../../../../lib/modules/user-auth/utils/mongo_query.helper');
 const emailHelper = require('../../../helpers/email.helper');
 const passwordGeneratorHelper = require('../../../helpers/password_generator_helper');
-
 const HTTPStatus = require('http-status');
-const { reject } = require('bluebird');
 
 const internalFun = {
     registerUser: async (req, memberInfo) => {
@@ -89,6 +88,27 @@ const internalFun = {
             }
         });
     },
+    getMemberId: async (req) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let continueLoop = true;
+                let memberId = null;
+                while (continueLoop) {
+                    const randomByte = Date.now().toString().slice(6);
+                    memberId = new Date().getFullYear().toString().slice(2) + "-" + randomByte;
+
+                    const checkMemberIdExists = await checkMemberId(req, memberId);
+                    if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
+                        continueLoop = false;
+                    }
+                }
+
+                return resolve(memberId);
+            } catch (error) {
+                return reject(error);
+            }
+        })
+    }
 };
 
 module.exports = async (req, res, next) => {
@@ -120,7 +140,7 @@ module.exports = async (req, res, next) => {
                 }
 
                 data.personalInformation['memberType'] = 'General';
-                data.personalInformation['memberId'] = data.uuid;
+                data.personalInformation['memberId'] = await internalFun.getMemberId(req);//data.uuid;
                 registerUersRes = await internalFun.registerUser(req, data?.personalInformation);
 
                 if (data && registerUersRes && Object.keys(data).length > 0) {
@@ -157,7 +177,7 @@ module.exports = async (req, res, next) => {
                 }
 
                 data.organizationalInformation['memberType'] = 'Corporate';
-                data.organizationalInformation['memberId'] = data.uuid;
+                data.organizationalInformation['memberId'] = await internalFun.getMemberId(req);
 
                 registerUersRes = await internalFun.registerUser(
                     req,

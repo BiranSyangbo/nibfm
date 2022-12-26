@@ -93,6 +93,17 @@ const updatePassword = async (req, userId, password) => {
   }
 }
 
+const checkMemberId = async (req, memberId) => {
+  try {
+    return req.db.collection(collectionName).findOne({
+      deleted: false,
+      "memberId": memberId
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   insert,
   getUserInfoByUsername,
@@ -100,5 +111,6 @@ module.exports = {
   getUserLoginInfo,
   deleteUserLoginInfo,
   getUserInfoByUserId,
-  updatePassword
+  updatePassword,
+  checkMemberId
 }
