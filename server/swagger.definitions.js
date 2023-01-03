@@ -10,7 +10,7 @@
   const forgotPasswordApis = require('./lib/modules/forgot-password/api_definitions');
   const donationManagementApis = require('./lib/modules/donation-management/api_definition');
   const eventManagementApis = require('./lib/modules/event-management/api_definition');
-
+  const profileYearApis = require('./lib/modules/profile-year/api_definitions')
 
 
 
@@ -51,7 +51,7 @@
         ...forgotPasswordApis.server.tags,
         ...donationManagementApis.server.tags,
         ...eventManagementApis.server.tags,
-
+        ...profileYearApis.server.tags
 
 
       ],
@@ -66,6 +66,7 @@
         ...forgotPasswordApis.server.paths,
         ...donationManagementApis.server.paths,
         ...eventManagementApis.server.paths,
+        ...profileYearApis.server.paths,
         '/health-check': {
           get: {
             tags: ['Health Check'],
@@ -105,7 +106,8 @@
           ...userAuthApi.server.components.schemas,
           ...forgotPasswordApis.server.components.schemas,
           ...donationManagementApis.server.components.schemas,
-          ...eventManagementApis.server.components.schemas
+          ...eventManagementApis.server.components.schemas,
+          ...profileYearApis.server.components.schemas
 
         },
         securitySchemes: {
