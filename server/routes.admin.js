@@ -25,6 +25,9 @@ app.use('/donation-management', donationManagementRouter);
 const eventManaagementRouter = require('./lib/modules/event-management/route.admin');
 app.use('/event-management', eventManaagementRouter);
 
+const profileYearManagementRouter = require('./lib/modules/profile-year/routes.admin');
+app.use("/profile-year", profileYearManagementRouter);
+
 app.get('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
