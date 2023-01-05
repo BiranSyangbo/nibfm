@@ -46,7 +46,7 @@ const insert = (req, insertObj) => {
       isApproved: 0,
       deleted: false,
       status: 'Pending',
-      createdAt: new Date().toISOString().slice(0, 10)
+      createdAt: new Date()
     }
     return req.db.collection(collectionName).insertOne(insertObject);
   } catch (error) {
@@ -151,8 +151,6 @@ const getList = (req, queryOpts, pagerOpts) => {
         createdAt: 1,
         status: 1
       })
-
-
       .skip(pagerOpts.offset)
       .limit(pagerOpts.perPage)
       .sort({ createdAt: -1 })

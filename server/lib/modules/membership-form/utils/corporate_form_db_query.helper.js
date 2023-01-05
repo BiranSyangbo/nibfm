@@ -42,7 +42,7 @@ const insert = (req, insertObj) => {
       isApproved: 0,
       status: 'Pending',
       deleted: false,
-      createdAt: new Date().toISOString().slice(0, 10)
+      createdAt: new Date()
 
     }
     return req.db.collection(collectionName).insertOne(insertObject);
