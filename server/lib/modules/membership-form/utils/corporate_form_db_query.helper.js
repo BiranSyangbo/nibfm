@@ -50,7 +50,7 @@ const insert = (req, insertObj) => {
     throw error;
   }
 }
-const corporateFormUpdateStatus = (req, tableId) => {
+const corporateFormUpdateStatus = (req, tableId, profileYearObj) => {
   try {
     return req.db.collection(collectionName).updateOne({
       _id: tableId
@@ -58,7 +58,8 @@ const corporateFormUpdateStatus = (req, tableId) => {
       {
         $set: {
           isApproved: req.body.isApproved,
-          status: req.body.isApproved === 1 ? 'Approved' : 'Rejected'
+          status: req.body.isApproved === 1 ? 'Approved' : 'Rejected',
+          profileYear: profileYearObj?.profileYear ? new Date(profileYearObj?.profileYear) : null
         }
       })
   } catch (error) {
@@ -138,6 +139,7 @@ const getList = (req, queryOpts, pagerOpts) => {
         membershipPeriod: 1,
         organizationalInformation: 1,
         isApproved: 1,
+        profileYear: 1,
         createdAt: 1
 
       })

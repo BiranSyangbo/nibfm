@@ -108,6 +108,23 @@ const internalFun = {
                 return reject(error);
             }
         })
+    },
+    getProfileYear: async (req) => {
+        try {
+            return req.db.collection("profile_year").findOne(
+                {
+                    deleted: false
+                },
+                {
+                    projection: {
+                        _id: 0,
+                        profileYear: 1
+                    }
+                }
+            )
+        } catch (error) {
+            throw error;
+        }
     }
 };
 
@@ -120,6 +137,7 @@ module.exports = async (req, res, next) => {
             let updateResponse = null;
             let registerUersRes = null;
 
+            const profileYearObj = await internalFun.getProfileYear(req);
             //@check user type and do appect/reject operation
             if (req?.query?.formType === 'general') {
                 projection = {
@@ -141,10 +159,11 @@ module.exports = async (req, res, next) => {
 
                 data.personalInformation['memberType'] = 'General';
                 data.personalInformation['memberId'] = await internalFun.getMemberId(req);//data.uuid;
+                data.personalInformation['profileYear'] = profileYearObj?.profileYear || null;
                 registerUersRes = await internalFun.registerUser(req, data?.personalInformation);
 
                 if (data && registerUersRes && Object.keys(data).length > 0) {
-                    updateResponse = await generalFormUpdateStatus(req, req.params.uuid);
+                    updateResponse = await generalFormUpdateStatus(req, req.params.uuid, profileYearObj);
                     if (updateResponse) {
                         return res.status(HTTPStatus.OK).json({
                             status: HTTPStatus.OK,
@@ -178,6 +197,7 @@ module.exports = async (req, res, next) => {
 
                 data.organizationalInformation['memberType'] = 'Corporate';
                 data.organizationalInformation['memberId'] = await internalFun.getMemberId(req);
+                data.organizationalInformation['profileYear'] = profileYearObj?.profileYear || null;
 
                 registerUersRes = await internalFun.registerUser(
                     req,
@@ -185,7 +205,7 @@ module.exports = async (req, res, next) => {
                 );
 
                 if (data && registerUersRes && Object.keys(data).length > 0) {
-                    updateResponse = await corporateFormUpdateStatus(req, req.params.uuid);
+                    updateResponse = await corporateFormUpdateStatus(req, req.params.uuid, profileYearObj);
                     if (updateResponse) {
                         return res.status(HTTPStatus.OK).json({
                             status: HTTPStatus.OK,
