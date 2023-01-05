@@ -16,6 +16,15 @@ module.exports = async (req, res, next) => {
             const projection = {
                 uuid: 1,
                 email: 1,
+                memberId: 1,
+                profileYear: 1,
+                name: 1,
+                phoneNumber: 1,
+                dateOfBirthBs: 1,
+                dateOfBirthAd: 1,
+                nationality: 1,
+                necLicenseNumber: 1,
+                address: 1
             };
             const data = await getUserInfoByUserId(req, projection, userId);
 
