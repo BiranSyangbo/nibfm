@@ -147,6 +147,7 @@ const getList = (req, queryOpts, pagerOpts) => {
         singnature: 1,
         personalInformation: 1,
         isApproved: 1,
+        profileYear: 1,
         createdAt: 1,
         status: 1
       })
