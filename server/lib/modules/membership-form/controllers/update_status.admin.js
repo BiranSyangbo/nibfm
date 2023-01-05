@@ -163,7 +163,7 @@ module.exports = async (req, res, next) => {
                 registerUersRes = await internalFun.registerUser(req, data?.personalInformation);
 
                 if (data && registerUersRes && Object.keys(data).length > 0) {
-                    updateResponse = await generalFormUpdateStatus(req, req.params.uuid);
+                    updateResponse = await generalFormUpdateStatus(req, req.params.uuid, profileYearObj);
                     if (updateResponse) {
                         return res.status(HTTPStatus.OK).json({
                             status: HTTPStatus.OK,
@@ -205,7 +205,7 @@ module.exports = async (req, res, next) => {
                 );
 
                 if (data && registerUersRes && Object.keys(data).length > 0) {
-                    updateResponse = await corporateFormUpdateStatus(req, req.params.uuid);
+                    updateResponse = await corporateFormUpdateStatus(req, req.params.uuid, profileYearObj);
                     if (updateResponse) {
                         return res.status(HTTPStatus.OK).json({
                             status: HTTPStatus.OK,
