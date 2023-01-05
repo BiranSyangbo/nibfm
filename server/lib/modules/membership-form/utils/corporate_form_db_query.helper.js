@@ -139,6 +139,7 @@ const getList = (req, queryOpts, pagerOpts) => {
         membershipPeriod: 1,
         organizationalInformation: 1,
         isApproved: 1,
+        profileYear: 1,
         createdAt: 1
 
       })
