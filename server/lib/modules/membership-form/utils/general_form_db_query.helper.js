@@ -1,6 +1,6 @@
 const moduleConfig = require('../config');
 const collectionName = moduleConfig.generalFormCollectionName;
-const adbs = require("ad-bs-converter");
+// const adbs = require("ad-bs-converter");
 
 
 const uuid = require('uuid');
@@ -53,7 +53,7 @@ const insert = (req, insertObj) => {
     throw error;
   }
 }
-const generalFormUpdateStatus = (req, tableId) => {
+const generalFormUpdateStatus = (req, tableId, profileYearObj) => {
   try {
     return req.db.collection(collectionName).updateOne({
       _id: tableId
@@ -61,7 +61,8 @@ const generalFormUpdateStatus = (req, tableId) => {
       {
         $set: {
           isApproved: req.body.isApproved,
-          status: req.body.isApproved === 1 ? 'Approved' : 'Rejected'
+          status: req.body.isApproved === 1 ? 'Approved' : 'Rejected',
+          profileYear: profileYearObj?.profileYear ? new Date(profileYearObj?.profileYear) : null
         }
       })
   } catch (error) {
