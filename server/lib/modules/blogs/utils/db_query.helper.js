@@ -10,7 +10,7 @@ const insert = (req, insertObj) => {
       slug: insertObj.slug,
       author: insertObj.author,
       content: insertObj.content,
-      publishedDate: new Date(insertObj.publishedDate) || new Date(),
+      publishedDate: insertObj.publishedDate ? new Date(insertObj.publishedDate) : new Date(),
       images: insertObj.image,
       isActive: insertObj.isActive,
       metaTags: insertObj.metaTags,
@@ -48,7 +48,7 @@ const updateBlog = (req, data, tableId) => {
           slug: data.slug,
           author: data.author,
           content: data.content,
-          publishedDate: new Date() || new Date(data.publishedDate),
+          publishedDate: data.publishedDate ? new Date(data.publishedDate): new Date(),
           images: data.image,
           isActive: data.isActive,
           metaTags: data.metaTags
