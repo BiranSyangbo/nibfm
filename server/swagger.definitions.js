@@ -30,10 +30,10 @@
           url: 'http://localhost:4001/api/v1/user',
         },
         {
-          url: 'https://devapi.nbimf.com/api/v1/user'
+          url: 'https://nbimf.com/api/v1/user'
         },
         {
-          url: 'https://devapi.nbimf.com/api/v1/admin'
+          url: 'https://nbimf.com/api/v1/admin'
         }
       ],
       tags: [
