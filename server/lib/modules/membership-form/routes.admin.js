@@ -10,8 +10,14 @@ const authMiddleware = require('../../middleware/token_auth.middleware');
 router.route('/general')
   .get(authMiddleware,generalMembershipFromController)
 
+router.route('/general/delete/:uuid')
+  .patch(authMiddleware,generalMembershipFromController)
+
 router.route('/corporate')
   .get(authMiddleware,corporateMembershipFromController)
+
+router.route('/corporate/delete/:uuid')
+  .patch(authMiddleware,generalMembershipFromController)
 
 router.route('/update-status/:uuid')
   .post(UpdateStatusController)

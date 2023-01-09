@@ -70,7 +70,7 @@ const generalFormUpdateStatus = (req, tableId, profileYearObj) => {
   }
 }
 
-const deleteDocument = (req, tableId) => {
+const deleteGeneralMember = (req, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
       _id: tableId
@@ -80,6 +80,21 @@ const deleteDocument = (req, tableId) => {
           deleted: true
         }
       })
+  } catch (error) {
+    throw error;
+  }
+}
+const checkGeneralInfo = (req, uuid, projection) => {
+  try {
+    return req.db.collection(collectionName).findOne(
+      {
+        uuid: uuid,
+        deleted: false
+      },
+      {
+        projection: projection
+      }
+    )
   } catch (error) {
     throw error;
   }
