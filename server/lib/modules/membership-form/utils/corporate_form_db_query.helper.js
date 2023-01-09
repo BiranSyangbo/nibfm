@@ -113,7 +113,7 @@ const update = (req, insertObj, tableId) => {
   }
 }
 
-const deleteCorporateMember = (req, tableId) => {
+const deleteDocument = (req, tableId) => {
   try {
     return req.db.collection(collectionName).updateOne({
       _id: tableId
@@ -151,21 +151,7 @@ const getList = (req, queryOpts, pagerOpts) => {
     throw error;
   }
 }
-const checkCorporateInfo = (req, uuid, projection) => {
-  try {
-    return req.db.collection(collectionName).findOne(
-      {
-        uuid: uuid,
-        deleted: false
-      },
-      {
-        projection: projection
-      }
-    )
-  } catch (error) {
-    throw error;
-  }
-}
+
 const countTotalItems = (req, queryOpts) => {
   try {
     return req.db.collection(collectionName).count(queryOpts);

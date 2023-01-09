@@ -80,53 +80,6 @@
             ]
           }
         },
-        '/membership-form/general/{uuid}': {
-          patch: {
-            tags: ['ADMIN:- membership-form'],
-            summary: 'ADMIN :: General membership-form DELETE api',
-            description: '',
-            operationId: 'deleteGeneralForm',
-            parameters: [
-              {
-                in: 'path',
-                name: 'uuid',
-                schema: {
-                  type: 'string'
-                },
-                description: 'uuis',
-                required: true
-              }
-            ],
-            requestBody: {
-              description: '',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/CreateGeneralMembershipFormRequest',
-                  },
-                },
-              },
-            },
-            responses: {
-              default: {
-                description: '',
-                content: {
-                  'application/json': {
-                    schema: {
-                      $ref: '#/components/schemas/CommonResponse',
-                    },
-                  },
-                },
-              },
-            },
-            security: [
-              {
-                api_key: []
-              }
-            ]
-          },
-        },
-
         '/membership-form/corporate': {
           post: {
             tags: ['USER:- membership-form'],
@@ -199,52 +152,6 @@
               }
             ]
           }
-        },
-        '/membership-form/corporate/{uuid}': {
-          patch: {
-            tags: ['ADMIN:- membership-form'],
-            summary: 'ADMIN :: corporate membership-form DELETE api',
-            description: '',
-            operationId: 'deleteGeneralForm',
-            parameters: [
-              {
-                in: 'path',
-                name: 'uuid',
-                schema: {
-                  type: 'string'
-                },
-                description: 'uuis',
-                required: true
-              }
-            ],
-            requestBody: {
-              description: '',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/components/schemas/CreateGeneralMembershipFormRequest',
-                  },
-                },
-              },
-            },
-            responses: {
-              default: {
-                description: '',
-                content: {
-                  'application/json': {
-                    schema: {
-                      $ref: '#/components/schemas/CommonResponse',
-                    },
-                  },
-                },
-              },
-            },
-            security: [
-              {
-                api_key: []
-              }
-            ]
-          },
         },
         '/membership-form/update-status/{uuid}': {
           post: {
