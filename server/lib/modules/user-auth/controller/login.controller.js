@@ -23,7 +23,6 @@ const generateLoginSessionInfo = (userinfo, token) => {
         return {
             _id: uuid.v4(),
             user: userinfo.uuid,
-            userinfo,
             token: token,
             type: 'user',
             expiry_time: new Date().setDate(new Date().getDate() + 1),
@@ -63,6 +62,7 @@ module.exports = async (req, res, next) => {
                                 status: HTTPStatus.OK,
                                 msg: 'You have successfully logged in!',
                                 token: token,
+                                userInfo
                             });
                         }
                     }
