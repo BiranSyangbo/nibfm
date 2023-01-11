@@ -62,7 +62,9 @@ module.exports = async (req, res, next) => {
                                 status: HTTPStatus.OK,
                                 msg: 'You have successfully logged in!',
                                 token: token,
-                                userInfo
+                                memberType:userInfo.memberType,
+                                uuid:userInfo.uuid,
+                                id:userInfo._id
                             });
                         }
                     }
