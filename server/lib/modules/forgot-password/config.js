@@ -12,7 +12,7 @@
             passwordNotMatch: "We're sorry, but password does not match",
             weakPassword: "We're sorry, but weak password provided",
             passwordNotProvided: "We're sorry, but password and confirm password required",
-            passwordResetSuccess: "We're sorry, but password reset success",
+            passwordResetSuccess: "Password Changed Sucessfully, Please relogin to the system.",
             passwordResetFail: "We're sorry, but password reset fail",
         },
         tables: {
