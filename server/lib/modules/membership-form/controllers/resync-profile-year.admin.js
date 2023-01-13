@@ -1,29 +1,5 @@
-/**
- * @format
- * @author janak
- * @method updateStatus
- */
-
 'use strict';
-
-const {
-  getCorporateFormDetail,
-  corporateFormUpdateStatus,
-} = require('../utils/corporate_form_db_query.helper');
-const {
-  getGeneralFormDetail,
-  generalFormUpdateStatus,
-} = require('../utils/general_form_db_query.helper');
-const { generateHashPassword, generateSalt } = require('../../../helpers/bcrypt');
-const {
-  insert,
-  getUserInfoByUsername,
-  checkMemberId
-} = require('../../../../lib/modules/user-auth/utils/mongo_query.helper');
-const emailHelper = require('../../../helpers/email.helper');
-const passwordGeneratorHelper = require('../../../helpers/password_generator_helper');
 const HTTPStatus = require('http-status');
-const { reject } = require('bluebird');
 
 const internalFun = {
   getProfileYear: async (req) => {
