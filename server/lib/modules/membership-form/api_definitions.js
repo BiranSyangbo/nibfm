@@ -200,7 +200,12 @@
                   },
                 },
               },
-            }
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
           },
         },
         '/membership-form/general-form-info': {
@@ -350,6 +355,98 @@
             ]
           },
         },
+        '/membership-form/resync/profile-year/{uuid}': {
+          put: {
+            tags: ['ADMIN:- membership-form'],
+            summary: 'ADMIN :: RESYNC PROFILE YEAR',
+            description: 'Admin hit this api to resync member profile expiry date',
+            operationId: 'resyncMemberProfileExpiryDate',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              },
+              {
+                in: 'query',
+                name: 'formType',
+                schema: {
+                  type: 'string'
+                },
+                description: 'Valid formType: [general, corporate] ',
+                required: true
+              }
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
+        },
+        '/membership-form/info/delete/{uuid}': {
+          patch: {
+            tags: ['ADMIN:- membership-form'],
+            summary: 'ADMIN :: DELETE MEMBERSHIP FORM',
+            description: 'Admin hit this api to delete membership form',
+            operationId: 'deleteMembershipform',
+            parameters: [
+              {
+                in: 'path',
+                name: 'uuid',
+                schema: {
+                  type: 'string'
+                },
+                description: 'uuis',
+                required: true
+              },
+              {
+                in: 'query',
+                name: 'formType',
+                schema: {
+                  type: 'string'
+                },
+                description: 'Valid formType: [general, corporate] ',
+                required: true
+              }
+            ],
+            responses: {
+              default: {
+                description: '',
+                content: {
+                  'application/json': {
+                    schema: {
+                      $ref: '#/components/schemas/CommonResponse',
+                    },
+                  },
+
+                },
+              },
+            },
+            security: [
+              {
+                api_key: []
+              }
+            ]
+          },
+        }
       },
 
       components: {
@@ -367,7 +464,7 @@
                 properties: {
                   name: { type: 'string' },
                   chairpersonName: { type: 'string' },
-                  organizationType: {type: 'string'},
+                  organizationType: { type: 'string' },
                   date: { type: 'string' },
                   email: { type: 'string' },
                   bussinessContactNumber: { type: 'string' },
