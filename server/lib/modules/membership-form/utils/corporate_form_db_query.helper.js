@@ -82,7 +82,7 @@ const update = (req, insertObj, tableId) => {
       name: insertObj?.organizationalInformation?.name,
       chairpersonName: insertObj?.organizationalInformation?.chairpersonName,
       establishedDate: new Date(insertObj?.organizationalInformation?.date),
-      email: insertObj?.organizationalInformation?.email,
+      email: insertObj?.organizationalInformation?.email.trim().toLowerCase(),
       bussinessContactNumber: insertObj?.organizationalInformation?.bussinessContactNumber,
       organizationPanNumber: insertObj?.organizationalInformation?.organizationPanNumber,
       phoneNumber: insertObj?.organizationalInformation?.phoneNumber,

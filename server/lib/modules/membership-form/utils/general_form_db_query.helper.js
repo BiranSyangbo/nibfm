@@ -21,7 +21,7 @@ const insert = (req, insertObj) => {
       phoneNumber: insertObj?.personalInformation?.phoneNumber,
       dateOfBirthBs: new Date(insertObj?.personalInformation?.dateOfBirthBs).toISOString().slice(0, 10),
       dateOfBirthAd: new Date(insertObj?.personalInformation?.dateOfBirthAd).toISOString().slice(0, 10),
-      email: insertObj?.personalInformation?.email,
+      email: insertObj?.personalInformation?.email.trim().toLowerCase(),
       nationality: insertObj?.personalInformation?.nationality,
       necLicenseNumber: insertObj?.personalInformation?.necLicenseNumber,
       address: address,
