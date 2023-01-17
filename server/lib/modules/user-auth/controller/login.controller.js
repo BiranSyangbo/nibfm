@@ -38,8 +38,6 @@ module.exports = async (req, res, next) => {
 
         if (isValid) {
             const userInfo = await getUserInfoByUsername(req, req.body.username);
-            console.log("userInfo", userInfo);
-
             if (userInfo && Object.keys(userInfo).length > 0) {
                 //@match user password
                 const match = await verifyPassword(req.body.password, userInfo.password);
