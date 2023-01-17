@@ -38,6 +38,8 @@ module.exports = async (req, res, next) => {
 
         if (isValid) {
             const userInfo = await getUserInfoByUsername(req, req.body.username);
+            console.log("userInfo", userInfo);
+
             if (userInfo && Object.keys(userInfo).length > 0) {
                 //@match user password
                 const match = await verifyPassword(req.body.password, userInfo.password);
@@ -62,9 +64,9 @@ module.exports = async (req, res, next) => {
                                 status: HTTPStatus.OK,
                                 msg: 'You have successfully logged in!',
                                 token: token,
-                                memberType:userInfo.memberType,
-                                uuid:userInfo.uuid,
-                                id:userInfo._id
+                                memberType: userInfo.memberType,
+                                uuid: userInfo.uuid,
+                                id: userInfo._id
                             });
                         }
                     }
@@ -77,7 +79,7 @@ module.exports = async (req, res, next) => {
 
             return res.status(HTTPStatus.BAD_REQUEST).json({
                 status: HTTPStatus.BAD_REQUEST,
-                msg: "We're sorry, but the credential you provided is invalid.",
+                msg: "Sorry!!! credential provided is invalid.",
             });
         }
 
