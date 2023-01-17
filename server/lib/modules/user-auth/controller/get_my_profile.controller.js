@@ -25,6 +25,7 @@ module.exports = async (req, res, next) => {
                 nationality: 1,
                 necLicenseNumber: 1,
                 address: 1,
+                profileImage: 1,
                 memberType: 1,
                 createdAt: 1
             };

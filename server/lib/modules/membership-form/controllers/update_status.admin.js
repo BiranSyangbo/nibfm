@@ -143,6 +143,7 @@ module.exports = async (req, res, next) => {
                 projection = {
                     uuid: 1,
                     personalInformation: 1,
+                    profileImage: 1
                 };
 
                 data = await getGeneralFormDetail(req, req.params.uuid, projection);
@@ -159,6 +160,8 @@ module.exports = async (req, res, next) => {
 
                 data.personalInformation['memberType'] = 'General';
                 data.personalInformation['memberId'] = await internalFun.getMemberId(req);//data.uuid;
+                data.personalInformation["profileImage"] = data['profileImage'] || "";
+
                 data.personalInformation['profileYear'] = profileYearObj?.profileYear || null;
                 registerUersRes = await internalFun.registerUser(req, data?.personalInformation);
 
@@ -180,6 +183,7 @@ module.exports = async (req, res, next) => {
                 projection = {
                     uuid: 1,
                     organizationalInformation: 1,
+                    profileImage: 1
                 };
 
                 data = await getCorporateFormDetail(req, req.params.uuid, projection);
@@ -196,6 +200,7 @@ module.exports = async (req, res, next) => {
                 }
 
                 data.organizationalInformation['memberType'] = 'Corporate';
+                data.organizationalInformation["profileImage"] = data['profileImage'] || "";
                 data.organizationalInformation['memberId'] = await internalFun.getMemberId(req);
                 data.organizationalInformation['profileYear'] = profileYearObj?.profileYear || null;
 
