@@ -59,8 +59,8 @@ const corporateFormUpdateStatus = (req, tableId, profileYearObj, memberId) => {
         $set: {
           isApproved: req.body.isApproved,
           status: req.body.isApproved === 1 ? 'Approved' : 'Rejected',
-          profileYear: profileYearObj?.profileYear ? new Date(profileYearObj?.profileYear) : null,
-          memberId: memberId || null
+          profileYear: (req.body.isApproved === 1 && profileYearObj?.profileYear) ? new Date(profileYearObj?.profileYear) : null,
+          memberId: (req.body.isApproved === 1 && memberId) ? memberId : null
         }
       })
   } catch (error) {
