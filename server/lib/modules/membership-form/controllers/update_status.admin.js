@@ -23,6 +23,7 @@ const {
 const emailHelper = require('../../../helpers/email.helper');
 const passwordGeneratorHelper = require('../../../helpers/password_generator_helper');
 const HTTPStatus = require('http-status');
+const moment = require("moment");
 
 const internalFun = {
     registerUser: async (req, memberInfo) => {
@@ -95,7 +96,8 @@ const internalFun = {
                 let memberId = null;
                 while (continueLoop) {
                     const randomByte = Date.now().toString().slice(6);
-                    memberId = new Date().getFullYear().toString().slice(2) + "-" + randomByte;
+                    let month = moment(new Date()).format("MM");
+                    memberId = month + new Date().getFullYear().toString().slice(2) + "-" + randomByte;
 
                     const checkMemberIdExists = await checkMemberId(req, memberId);
                     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
