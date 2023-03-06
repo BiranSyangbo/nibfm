@@ -25,7 +25,6 @@ module.exports = async (req, res, next) => {
                     uuid: 1,
                     date: 1,
                     corporateMembershipNumber: 1,
-                    date: 1,
                     enterpriseSize: 1,
                     profileImage: 1,
                     enterpriseSizeType: 1,
