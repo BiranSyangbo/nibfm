@@ -34,7 +34,10 @@ const getUserInfoByUserId = async (req, projection, userId) => {
     return req.db.collection(collectionName).findOne({
       deleted: false,
       uuid: userId
-    });
+    },
+      {
+        projection: projection
+      });
   } catch (error) {
     throw error;
   }

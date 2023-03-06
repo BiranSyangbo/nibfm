@@ -28,13 +28,19 @@ module.exports = async (req, res, next) => {
                 profileImage: 1,
                 memberType: 1,
                 createdAt: 1,
-                status: 1,
-                isApproved: 1,
-                organizationalInformation: 1,
-                membershipPeriod: 1,
-                enterpriseSizeType: 1,
-                enterpriseSize: 1,
-                corporateMembershipNumber: 1
+                bussinessContactNumber: 1,
+                chairpersonName: 1,
+                companyRegistration: 1,
+                establishedDate: 1,
+                memberId: 1,
+                organizatioHeadOfcaddress: 1,
+                organizatioType: 1,
+                organizationDesccription: 1,
+                organizationPanNumber: 1,
+                note: 1,
+                phoneNumber: 1,
+
+
             };
             const data = await getUserInfoByUserId(req, projection, userId);
 
