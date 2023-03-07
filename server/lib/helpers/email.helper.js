@@ -19,7 +19,7 @@
 
             // Get the send-grid sender email address
             const SENDGRID_SENDER_EMAIL = process.env.SENDGRID_SENDER_EMAIL || null;
-
+            console.log({ SENDGRID_SENDER_EMAIL })
             // Return if sender email is not found
             if (!SENDGRID_SENDER_EMAIL) {
                 return {
