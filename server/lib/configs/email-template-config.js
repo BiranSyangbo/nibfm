@@ -363,7 +363,7 @@ ul.social li{
                       <li><span class="text">Phone (Nepal): +977 9741803161 </span></a></li>
                       <li><span class="text">Otaniementie Finland, 02150 Espoo</span></li>
                               <li><span class="text">Phone (Finland): +358 451448433</span></a></li>
-                      <li><span class="text">Email: info@nbimf.com</span></a></li>
+                      <li><span class="text">Email: contact@nbimf.com</span></a></li>
                             </ul>
                           </td>
                         </tr>
