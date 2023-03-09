@@ -1,6 +1,6 @@
 /**
  * @format
- * @author janak
+ * @author Binod Nagarkoti
  * @method getBlogRequestDetail
  */
 
