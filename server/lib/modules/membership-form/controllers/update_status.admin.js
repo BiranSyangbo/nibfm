@@ -96,7 +96,7 @@ const internalFun = {
                 // let continueLoop = true;
                 let memberId = null;
                 let totalMembers = await countTotalItems(req);
-                totalMembers += 1;
+                // totalMembers += 1;
                 if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                 memberId = String(totalMembers).padStart(4, '0');
                 console.log("new member id,", memberId); ''
