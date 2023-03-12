@@ -111,8 +111,8 @@ const internalFun = {
                 //         continueLoop = false;
                 //     }
                 // }
-
-                return resolve(preLetter + memberId);
+                if (preLetter) return resolve(preLetter + "-" + memberId);
+                return resolve(memberId);
             } catch (error) {
                 return reject(error);
             }
@@ -168,7 +168,7 @@ module.exports = async (req, res, next) => {
                 }
 
                 data.personalInformation['memberType'] = 'General';
-                data.personalInformation['memberId'] = await internalFun.getMemberId(req, "");//data.uuid;
+                data.personalInformation['memberId'] = await internalFun.getMemberId(req);//data.uuid;
                 data.personalInformation["profileImage"] = data['profileImage'] || "";
 
                 data.personalInformation['profileYear'] = profileYearObj?.profileYear || null;
