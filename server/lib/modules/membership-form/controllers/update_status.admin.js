@@ -9,6 +9,7 @@
 const {
     getCorporateFormDetail,
     corporateFormUpdateStatus,
+    countTotalItems,
 } = require('../utils/corporate_form_db_query.helper');
 const {
     getGeneralFormDetail,
@@ -89,23 +90,28 @@ const internalFun = {
             }
         });
     },
-    getMemberId: async (req) => {
+    getMemberId: async (req, preLetter) => {
         return new Promise(async (resolve, reject) => {
             try {
-                let continueLoop = true;
+                // let continueLoop = true;
                 let memberId = null;
-                while (continueLoop) {
-                    const randomByte = Date.now().toString().slice(6);
-                    let month = moment(new Date()).format("MM");
-                    memberId = month + new Date().getFullYear().toString().slice(2) + "-" + randomByte;
+                let totalMembers = countTotalItems(req);
+                if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
+                memberId = String(totalMembers + 1).padStart(4, '0');
+                console.log("new member id,", memberId);
 
-                    const checkMemberIdExists = await checkMemberId(req, memberId);
-                    if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
-                        continueLoop = false;
-                    }
-                }
+                // while (continueLoop) {
+                //     const randomByte = Date.now().toString().slice(6);
+                //     let month = moment(new Date()).format("MM");
+                //     memberId = month + new Date().getFullYear().toString().slice(2) + "-" + randomByte;
 
-                return resolve(memberId);
+                //     const checkMemberIdExists = await checkMemberId(req, memberId);
+                //     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
+                //         continueLoop = false;
+                //     }
+                // }
+
+                return resolve(preLetter + memberId);
             } catch (error) {
                 return reject(error);
             }
@@ -161,7 +167,7 @@ module.exports = async (req, res, next) => {
                 }
 
                 data.personalInformation['memberType'] = 'General';
-                data.personalInformation['memberId'] = await internalFun.getMemberId(req);//data.uuid;
+                data.personalInformation['memberId'] = await internalFun.getMemberId(req, "");//data.uuid;
                 data.personalInformation["profileImage"] = data['profileImage'] || "";
 
                 data.personalInformation['profileYear'] = profileYearObj?.profileYear || null;
@@ -203,7 +209,7 @@ module.exports = async (req, res, next) => {
 
                 data.organizationalInformation['memberType'] = 'Corporate';
                 data.organizationalInformation["profileImage"] = data['profileImage'] || "";
-                data.organizationalInformation['memberId'] = await internalFun.getMemberId(req);
+                data.organizationalInformation['memberId'] = await internalFun.getMemberId(req, "C");
                 data.organizationalInformation['profileYear'] = profileYearObj?.profileYear || null;
 
                 registerUersRes = await internalFun.registerUser(
