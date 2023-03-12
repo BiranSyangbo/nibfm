@@ -102,11 +102,11 @@ const internalFun = {
                     if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                     totalMembers += 1;
                     if (preLetter) memberId = preLetter + "-" + memberId;
+                    memberId = String(totalMembers).padStart(4, '0');
+                    console.log("new member id,", memberId);
                     const checkMemberIdExists = await checkMemberId(req, memberId);
                     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
                         continueLoop = false;
-                        memberId = String(totalMembers).padStart(4, '0');
-                        console.log("new member id,", memberId);
                     }
                 }
                 return resolve(memberId);
