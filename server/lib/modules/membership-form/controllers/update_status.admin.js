@@ -9,8 +9,9 @@
 const {
     getCorporateFormDetail,
     corporateFormUpdateStatus,
-    countTotalItems,
 } = require('../utils/corporate_form_db_query.helper');
+const corporateDbQueryHelper = require('../utils/corporate_form_db_query.helper');
+const generalDbQueryHelper = require('../utils/general_form_db_query.helper');
 const {
     getGeneralFormDetail,
     generalFormUpdateStatus,
@@ -95,11 +96,11 @@ const internalFun = {
             try {
                 // let continueLoop = true;
                 let memberId = null;
-                let totalMembers = await countTotalItems(req);
+                let totalMembers = preLetter ? await corporateDbQueryHelper.countTotalItems(req) : generalDbQueryHelper.countTotalItems(req);
                 // totalMembers += 1;
                 if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                 memberId = String(totalMembers).padStart(4, '0');
-                console.log("new member id,", memberId, totalMembers); 
+                console.log("new member id,", memberId, totalMembers);
 
                 // while (continueLoop) {
                 //     const randomByte = Date.now().toString().slice(6);
