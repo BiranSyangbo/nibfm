@@ -94,13 +94,20 @@ const internalFun = {
     getMemberId: async (req, preLetter) => {
         return new Promise(async (resolve, reject) => {
             try {
-                // let continueLoop = true;
+                let continueLoop = true;
                 let memberId = null;
                 let totalMembers = preLetter ? await corporateDbQueryHelper.countTotalItems(req, { delete: false }) : await generalDbQueryHelper.countTotalItems(req, { delete: false });
-                // totalMembers += 1;
-                if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
-                memberId = String(totalMembers).padStart(4, '0');
-                console.log("new member id,", memberId, totalMembers);
+
+                while (continueLoop) {
+                    if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
+                    totalMembers += 1;
+                    const checkMemberIdExists = await checkMemberId(req, memberId);
+                    if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
+                        continueLoop = false;
+                        memberId = String(totalMembers).padStart(4, '0');
+                        console.log("new member id,", memberId, totalMembers);
+                    }
+                }
 
                 // while (continueLoop) {
                 //     const randomByte = Date.now().toString().slice(6);
@@ -108,10 +115,11 @@ const internalFun = {
                 //     memberId = month + new Date().getFullYear().toString().slice(2) + "-" + randomByte;
 
                 //     const checkMemberIdExists = await checkMemberId(req, memberId);
-                //     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
-                //         continueLoop = false;
-                //     }
+                // if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
+                //     continueLoop = false;
                 // }
+                // }
+
                 if (preLetter) return resolve(preLetter + "-" + memberId);
                 return resolve(memberId);
             } catch (error) {
