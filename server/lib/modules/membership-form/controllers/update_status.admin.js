@@ -101,6 +101,7 @@ const internalFun = {
                 while (continueLoop) {
                     if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                     totalMembers += 1;
+                    if (preLetter) memberId = preLetter + "-" + memberId;
                     const checkMemberIdExists = await checkMemberId(req, memberId);
                     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
                         continueLoop = false;
@@ -108,19 +109,6 @@ const internalFun = {
                         console.log("new member id,", memberId, totalMembers);
                     }
                 }
-
-                // while (continueLoop) {
-                //     const randomByte = Date.now().toString().slice(6);
-                //     let month = moment(new Date()).format("MM");
-                //     memberId = month + new Date().getFullYear().toString().slice(2) + "-" + randomByte;
-
-                //     const checkMemberIdExists = await checkMemberId(req, memberId);
-                // if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
-                //     continueLoop = false;
-                // }
-                // }
-
-                if (preLetter) return resolve(preLetter + "-" + memberId);
                 return resolve(memberId);
             } catch (error) {
                 return reject(error);
