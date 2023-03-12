@@ -97,7 +97,7 @@ const internalFun = {
                 let continueLoop = true;
                 let memberId = null;
                 let totalMembers = preLetter ? await corporateDbQueryHelper.countTotalItems(req, { delete: false }) : await generalDbQueryHelper.countTotalItems(req, { delete: false });
-
+                console.log("total member", totalMembers);
                 while (continueLoop) {
                     if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                     totalMembers += 1;
@@ -106,7 +106,7 @@ const internalFun = {
                     if (!checkMemberIdExists || Object.keys(checkMemberIdExists).length === 0) {
                         continueLoop = false;
                         memberId = String(totalMembers).padStart(4, '0');
-                        console.log("new member id,", memberId, totalMembers);
+                        console.log("new member id,", memberId);
                     }
                 }
                 return resolve(memberId);
