@@ -96,7 +96,7 @@ const internalFun = {
             try {
                 // let continueLoop = true;
                 let memberId = null;
-                let totalMembers = preLetter ? await corporateDbQueryHelper.countTotalItems(req) : generalDbQueryHelper.countTotalItems(req);
+                let totalMembers = preLetter ? await corporateDbQueryHelper.countTotalItems(req) : await generalDbQueryHelper.countTotalItems(req);
                 // totalMembers += 1;
                 if (totalMembers === 9999) throw new Error("Member count full. current membership count is 9999. contact your developer")
                 memberId = String(totalMembers).padStart(4, '0');
