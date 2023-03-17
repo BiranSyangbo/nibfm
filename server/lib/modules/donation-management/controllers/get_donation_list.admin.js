@@ -5,20 +5,19 @@
 const { getList, countTotalItems } = require('../utils/db_query.utils');
 const HTTPStatus = require('http-status');
 
-const pagerOptsHelper = (req) => {
-    try {
-        const page = req.query.page ? parseInt(req.query.page) : 1;
-        const perPage = req.query.perPage ? parseInt(req.query.perPage) : 10;
-        const offset = (page - 1) * perPage;
-        return { page, perPage, offset };
-    } catch (error) {
-        throw error;
-    }
-};
+// const pagerOptsHelper = (req) => {
+//     try {
+//         const page = req.query.page ? parseInt(req.query.page) : 1;
+//         const perPage = req.query.perPage ? parseInt(req.query.perPage) : 10;
+//         const offset = (page - 1) * perPage;
+//         return { page, perPage, offset };
+//     } catch (error) {
+//         throw error;
+//     }
+// };
 
 module.exports = async (req, res, next) => {
     try {
-        const pagerOpts = pagerOptsHelper(req);
 
         let queryOpts = {
             deleted: false,
@@ -31,7 +30,7 @@ module.exports = async (req, res, next) => {
         }
 
         const [dataList, count] = await Promise.all([
-            getList(req, queryOpts, pagerOpts),
+            getList(req, queryOpts),
             countTotalItems(req, queryOpts),
         ]);
 
@@ -40,12 +39,6 @@ module.exports = async (req, res, next) => {
                 status: HTTPStatus.OK,
                 message: 'All data has been successfully fetched',
                 dataList,
-                pagination: {
-                    totalItems: count,
-                    totalPages: Math.ceil(count / pagerOpts.perPage),
-                    perPage: pagerOpts.perPage,
-                    currentPage: pagerOpts.page,
-                },
             });
         }
 

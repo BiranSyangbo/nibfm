@@ -73,12 +73,10 @@ const deleteDocument = (req, tableId) => {
   }
 }
 
-const getList = (req, queryOpts, pagerOpts, projectionField) => {
+const getList = (req, queryOpts, projectionField) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
       .project(projectionField)
-      .skip(pagerOpts.offset)
-      .limit(pagerOpts.perPage)
       .sort({ createdAt: -1 })
       .toArray();
   } catch (error) {

@@ -128,7 +128,7 @@ const deleteDocument = (req, tableId) => {
     throw error;
   }
 }
-const getList = (req, queryOpts, pagerOpts) => {
+const getList = (req, queryOpts) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
       .project({
@@ -145,8 +145,6 @@ const getList = (req, queryOpts, pagerOpts) => {
         createdAt: 1
 
       })
-      .skip(pagerOpts.offset)
-      .limit(pagerOpts.perPage)
       .sort({ createdAt: -1 })
       .toArray();
   } catch (error) {

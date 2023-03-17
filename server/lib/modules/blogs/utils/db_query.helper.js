@@ -59,7 +59,7 @@ const updateBlog = (req, data, tableId) => {
   }
 }
 
-const getList = (req, queryOpts, pagerOpts) => {
+const getList = (req, queryOpts) => {
   try {
     return req.db.collection(collectionName).find(queryOpts)
       .project({
@@ -73,8 +73,6 @@ const getList = (req, queryOpts, pagerOpts) => {
         isActive: 1,
         metaTags: 1
       })
-      .skip(pagerOpts.offset)
-      .limit(pagerOpts.perPage)
       .sort({ createdAt: -1 })
       .toArray();
   } catch (error) {
