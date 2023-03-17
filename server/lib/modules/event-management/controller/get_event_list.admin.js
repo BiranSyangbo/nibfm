@@ -47,12 +47,6 @@ module.exports = async (req, res, next) => {
                 status: HTTPStatus.OK,
                 message: 'All data has been successfully fetched',
                 dataList,
-                pagination: {
-                    totalItems: count,
-                    totalPages: Math.ceil(count / pagerOpts.perPage),
-                    perPage: pagerOpts.perPage,
-                    currentPage: pagerOpts.page,
-                },
             });
         }
 
