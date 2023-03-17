@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
             return res.status(HTTPStatus.OK).json({
                 status: HTTPStatus.OK,
                 message: 'All data has been successfully fetched',
-                dataList,
+                dataList
             });
         }
 

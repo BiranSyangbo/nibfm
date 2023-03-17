@@ -32,13 +32,7 @@ module.exports = async (req, res, next) => {
             return res.status(HTTPStatus.OK).json({
                 status: HTTPStatus.OK,
                 message: 'All data has been successfully fetched',
-                dataList,
-                pagination: {
-                    totalItems: count,
-                    totalPages: Math.ceil(count / pagerOpts.perPage),
-                    perPage: pagerOpts.perPage,
-                    currentPage: pagerOpts.page,
-                },
+                dataList
             });
         }
 
