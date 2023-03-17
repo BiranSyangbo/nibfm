@@ -54,37 +54,9 @@
                         summary: 'Get Event List',
                         description: 'Using this api Admin gets event list',
                         operationId: 'getEventList',
-                        parameters: [
-                            {
-                                in: 'query',
-                                name: 'page',
-                                schema: {
-                                    type: 'string',
-                                },
-                                description: 'current page',
-                                required: true,
-                            },
-                            {
-                                in: 'query',
-                                name: 'perPage',
-                                schema: {
-                                    type: 'string',
-                                },
-                                description: 'total item per page',
-                                required: true,
-                            },
-                            {
-                                in: 'query',
-                                name: 'filter[title]',
-                                schema: {
-                                    type: 'string',
-                                },
-                                description: 'filter by event title',
-                            },
-                        ],
                         responses: {
                             default: {
-                                description: 'donation list response',
+                                description: 'event list response',
                                 content: {
                                     'application/json': {
                                         schema: {
@@ -131,7 +103,7 @@
                         },
                         responses: {
                             default: {
-                                description: 'common response',
+                                description: 'update event response',
                                 content: {
                                     'application/json': {
                                         schema: {
@@ -165,7 +137,7 @@
                         ],
                         responses: {
                             default: {
-                                description: 'event list response',
+                                description: 'event detail response',
                                 content: {
                                     'application/json': {
                                         schema: {
@@ -199,7 +171,7 @@
                         ],
                         responses: {
                             default: {
-                                description: 'common response',
+                                description: 'event delete response',
                                 content: {
                                     'application/json': {
                                         schema: {
@@ -222,26 +194,6 @@
                         summary: 'Get Event List',
                         description: 'Using this api user can list event',
                         operationId: 'getUserEventList',
-                        parameters: [
-                            {
-                                in: 'query',
-                                name: 'page',
-                                schema: {
-                                    type: 'string',
-                                },
-                                description: 'current page',
-                                required: true,
-                            },
-                            {
-                                in: 'query',
-                                name: 'perPage',
-                                schema: {
-                                    type: 'string',
-                                },
-                                description: 'total item per page',
-                                required: true,
-                            },
-                        ],
                         responses: {
                             default: {
                                 description: 'event list response',
@@ -275,7 +227,7 @@
                         ],
                         responses: {
                             default: {
-                                description: '',
+                                description: 'event details response',
                                 content: {
                                     'application/json': {
                                         schema: {
@@ -334,15 +286,6 @@
                                     },
                                 },
                             },
-                            pagination: {
-                                type: 'object',
-                                properties: {
-                                    perPage: { type: 'number' },
-                                    totalItems: { type: 'number' },
-                                    currentPage: { type: 'number' },
-                                    totalPages: { type: 'number' },
-                                },
-                            },
                         },
                     },
                     GetEventDetailResponse: {
@@ -385,9 +328,7 @@
                                     type: 'object',
                                     properties: {
                                         _id: { type: 'string' },
-                                        list: {
-                                            type: 'array',
-                                            items: {
+                                        list: {type: 'array',items: {
                                                 type: 'object',
                                                 properties: {
                                                     title: { type: 'string' },

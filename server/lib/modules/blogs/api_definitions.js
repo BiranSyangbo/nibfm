@@ -40,26 +40,7 @@
             summary: 'ADMIN :: Get blogs list api',
             description: 'Admin hits this api to get blogs list.',
             operationId: 'getblogsList',
-            parameters: [
-              {
-                in: 'query',
-                name: 'page',
-                schema: {
-                  type: 'string'
-                },
-                description: 'current page',
-                required: true
-              },
-              {
-                in: 'query',
-                name: 'perPage',
-                schema: {
-                  type: 'string'
-                },
-                description: 'total item per page',
-                required: true
-              }
-            ],
+
             responses: {
               default: {
                 description: '',
@@ -85,26 +66,6 @@
             summary: 'USER :: Get blogs list api',
             description: 'USER hits this api to get blogs list.',
             operationId: 'getblogsList',
-            parameters: [
-              {
-                in: 'query',
-                name: 'page',
-                schema: {
-                  type: 'string'
-                },
-                description: 'current page',
-                required: true
-              },
-              {
-                in: 'query',
-                name: 'perPage',
-                schema: {
-                  type: 'string'
-                },
-                description: 'total item per page',
-                required: true
-              }
-            ],
             responses: {
               default: {
                 description: '',
@@ -266,7 +227,7 @@
           }
         }
       },
-   
+
       components: {
         schemas: {
           CreateBlog: {
@@ -285,7 +246,7 @@
                   metaTitle: { type: 'string' },
                   metaKeyword: { type: 'string' },
                   metaDescription: { type: 'string' },
-                  
+
                 }
               },
             },
@@ -306,7 +267,7 @@
                   metaTitle: { type: 'string' },
                   metaKeyword: { type: 'string' },
                   metaDescription: { type: 'string' },
-                  
+
                 }
               },
             },

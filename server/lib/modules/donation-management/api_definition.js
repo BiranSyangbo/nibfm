@@ -54,34 +54,6 @@
             summary: 'Get Donation List',
             description: 'Using this api Admin gets donation list',
             operationId: 'getDonationList',
-            parameters: [
-              {
-                in: 'query',
-                name: 'page',
-                schema: {
-                  type: 'string'
-                },
-                description: 'current page',
-                required: true
-              },
-              {
-                in: 'query',
-                name: 'perPage',
-                schema: {
-                  type: 'string'
-                },
-                description: 'total item per page',
-                required: true
-              },
-              {
-                in: 'query',
-                name: 'filter[donerName]',
-                schema: {
-                  type: 'string'
-                },
-                description: 'filter by doner name'
-              }
-            ],
             responses: {
               default: {
                 description: 'donation list response',
@@ -165,7 +137,7 @@
             ],
             responses: {
               default: {
-                description: 'donation list response',
+                description: 'donation details response',
                 content: {
                   'application/json': {
                     schema: {
@@ -199,7 +171,7 @@
             ],
             responses: {
               default: {
-                description: 'common response',
+                description: 'donation delete response',
                 content: {
                   'application/json': {
                     schema: {
@@ -222,29 +194,9 @@
             summary: 'Get Donation List',
             description: 'Using this api user can list donation',
             operationId: 'getUserDonationList',
-            parameters: [
-              {
-                in: 'query',
-                name: 'page',
-                schema: {
-                  type: 'string'
-                },
-                description: 'current page',
-                required: true
-              },
-              {
-                in: 'query',
-                name: 'perPage',
-                schema: {
-                  type: 'string'
-                },
-                description: 'total item per page',
-                required: true
-              }
-            ],
             responses: {
               default: {
-                description: 'donation list response',
+                description: 'donation list response from user request',
                 content: {
                   'application/json': {
                     schema: {
@@ -291,15 +243,7 @@
                   }
                 }
               },
-              pagination: {
-                type: 'object',
-                properties: {
-                  perPage: { type: 'number' },
-                  totalItems: { type: 'number' },
-                  currentPage: { type: 'number' },
-                  totalPages: { type: 'number' }
-                }
-              }
+
             }
           },
           GetDonationDetailResponse: {
@@ -339,15 +283,7 @@
                   }
                 }
               },
-              pagination: {
-                type: 'object',
-                properties: {
-                  perPage: { type: 'number' },
-                  totalItems: { type: 'number' },
-                  currentPage: { type: 'number' },
-                  totalPages: { type: 'number' }
-                }
-              }
+
             }
           }
         }

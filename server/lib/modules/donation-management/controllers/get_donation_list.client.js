@@ -5,27 +5,26 @@
 const { getDonationListForCustomer, countTotalItems } = require('../utils/db_query.utils');
 const HTTPStatus = require('http-status');
 
-const pagerOptsHelper = (req) => {
-    try {
-        const page = req.query.page ? parseInt(req.query.page) : 1;
-        const perPage = req.query.perPage ? parseInt(req.query.perPage) : 10;
-        const offset = (page - 1) * perPage;
-        return { page, perPage, offset };
-    } catch (error) {
-        throw error;
-    }
-};
+// const pagerOptsHelper = (req) => {
+//     try {
+//         const page = req.query.page ? parseInt(req.query.page) : 1;
+//         const perPage = req.query.perPage ? parseInt(req.query.perPage) : 10;
+//         const offset = (page - 1) * perPage;
+//         return { page, perPage, offset };
+//     } catch (error) {
+//         throw error;
+//     }
+// };
 
 module.exports = async (req, res, next) => {
     try {
-        const pagerOpts = pagerOptsHelper(req);
 
         const queryOpts = {
             deleted: false,
         };
 
         const [dataList, count] = await Promise.all([
-            getDonationListForCustomer(req, queryOpts, pagerOpts),
+            getDonationListForCustomer(req, queryOpts),
             countTotalItems(req, queryOpts),
         ]);
 

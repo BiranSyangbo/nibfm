@@ -108,7 +108,7 @@ const checkDonationExists = (req, uuid, projection) => {
   }
 }
 
-const getDonationListForCustomer = (req, queryOpts, pagerOpts) => {
+const getDonationListForCustomer = (req, queryOpts) => {
   try {
     return req.db.collection(collectionName).aggregate([
       { $sort: { createdAt: -1 } },
@@ -124,12 +124,6 @@ const getDonationListForCustomer = (req, queryOpts, pagerOpts) => {
           currency: 1
         }
       },
-      {
-        $skip: pagerOpts.offset
-      },
-      {
-        $limit: pagerOpts.perPage
-      }
     ]).toArray()
   } catch (error) {
     throw error;
