@@ -11,7 +11,7 @@ const projectionField = {
     author: 1,
     date: 1,
     status: 1,
-    images: 1,
+    image: 1,
     createdAt: 1,
 };
 // const pagerOptsHelper = (req) => {
