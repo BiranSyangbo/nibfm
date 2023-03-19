@@ -24,7 +24,7 @@ app.use('/donation-management', donationManagementRouter);
 
 const eventManaagementRouter = require('./lib/modules/event-management/route.admin');
 app.use('/event-management', eventManaagementRouter);
-const newletterManagementRouter = require('./lib/modules/newsletter/rotues.admin');
+const newletterManagementRouter = require('./lib/modules/newsletter/routes.admin');
 app.use('/newsletter', newletterManagementRouter);
 
 
