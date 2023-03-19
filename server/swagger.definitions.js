@@ -52,7 +52,7 @@
         ...forgotPasswordApis.server.tags,
         ...donationManagementApis.server.tags,
         ...eventManagementApis.server.tags,
-        ...profileYearApis.server.tags
+        ...profileYearApis.server.tags,
         ...newsletterApis.server.tags
 
 
