@@ -13,7 +13,6 @@ const emailHelper = require('../../../helpers/email.helper');
 
 const sendResetEmail = async (email) => {
     try {
-        const username = name || '';
 
         const message = {
             email: process.env.ADMIN_EMAIL_RECEIVE_ID,
@@ -49,7 +48,7 @@ module.exports = async (req, res, next) => {
             //@insert user data if valid
             const insertRes = await insert(req, req.body);
             if (insertRes) {
-                await sendResetEmail(req.body.name);
+                await sendResetEmail(req.body.email);
                 //@send success response
                 return res.status(HTTPStatus.OK).json({
                     status: HTTPStatus.OK,
