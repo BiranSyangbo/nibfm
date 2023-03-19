@@ -27,12 +27,6 @@ module.exports = async (req, res, next) => {
             deleted: false,
         };
 
-        if (req.query.filter && req.query.filter['name']) {
-            queryOpts.name = {
-                $regex: new RegExp('.*' + req.query.filter['name'], 'i'),
-            };
-        }
-
         if (req.query.filter && req.query.filter['email']) {
             queryOpts.email = {
                 $regex: new RegExp('.*' + req.query.filter['email'], 'i'),
@@ -48,13 +42,7 @@ module.exports = async (req, res, next) => {
             return res.status(HTTPStatus.OK).json({
                 status: HTTPStatus.OK,
                 message: 'All data has been successfully fetched',
-                dataList,
-                pagination: {
-                    totalItems: count,
-                    totalPages: Math.ceil(count / pagerOpts.perPage),
-                    perPage: pagerOpts.perPage,
-                    currentPage: pagerOpts.page,
-                },
+                dataList
             });
         }
 
