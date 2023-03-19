@@ -71,7 +71,7 @@ try {
   });
 
   app.use('/api/*', (req, res, next) => {
-    return res.json({ message: 'Api route not found' })
+    return res.json({ message: 'ApiUrl route not found' })
   })
 
 } catch (error) {

@@ -28,6 +28,9 @@ app.use('/donation-management', donationManagementRouter)
 const eventManaagementRouter = require('./lib/modules/event-management/rotue.client');
 app.use('/event-management', eventManaagementRouter);
 
+const newletterManagementRouter = require('./lib/modules/newsletter/rotue.client');
+app.use('/newsletter', newletterManagementRouter);
+
 app.use('/health-check', (req, res, next) => {
   res.status(200);
   return res.json({
