@@ -11,6 +11,7 @@
   const donationManagementApis = require('./lib/modules/donation-management/api_definition');
   const eventManagementApis = require('./lib/modules/event-management/api_definition');
   const profileYearApis = require('./lib/modules/profile-year/api_definitions')
+  const newsletterApis = require('./lib/modules/newsletter/api_definitions')
 
 
 
@@ -52,6 +53,8 @@
         ...donationManagementApis.server.tags,
         ...eventManagementApis.server.tags,
         ...profileYearApis.server.tags
+        ...newsletterApis.server.tags
+
 
 
       ],
@@ -67,6 +70,7 @@
         ...donationManagementApis.server.paths,
         ...eventManagementApis.server.paths,
         ...profileYearApis.server.paths,
+        ...newsletterApis.server.paths,
         '/health-check': {
           get: {
             tags: ['Health Check'],
@@ -107,7 +111,9 @@
           ...forgotPasswordApis.server.components.schemas,
           ...donationManagementApis.server.components.schemas,
           ...eventManagementApis.server.components.schemas,
-          ...profileYearApis.server.components.schemas
+          ...profileYearApis.server.components.schemas,
+          ...newsletterApis.server.components.schemas
+
 
         },
         securitySchemes: {
