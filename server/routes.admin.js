@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const adminAuthRouter = require('./lib/modules/admin_auth/route');
+const adminAuthRouter = require('./lib/modules/admin_auth/routes');
 app.use('/auth', adminAuthRouter);
 
 const aboutUsRouter = require('./lib/modules/about-us/routes.admin');
@@ -19,10 +19,10 @@ app.use('/file-management', fileManagementRouter)
 const membershipFormRouter = require('./lib/modules/membership-form/routes.admin');
 app.use('/membership-form', membershipFormRouter);
 
-const donationManagementRouter = require('./lib/modules/donation-management/router.admin');
+const donationManagementRouter = require('./lib/modules/donation-management/routes.admin');
 app.use('/donation-management', donationManagementRouter);
 
-const eventManaagementRouter = require('./lib/modules/event-management/route.admin');
+const eventManaagementRouter = require('./lib/modules/event-management/routes.admin');
 app.use('/event-management', eventManaagementRouter);
 const newletterManagementRouter = require('./lib/modules/newsletter/routes.admin');
 app.use('/newsletter', newletterManagementRouter);
