@@ -28,7 +28,7 @@ app.use('/donation-management', donationManagementRouter)
 const eventManaagementRouter = require('./lib/modules/event-management/rotue.client');
 app.use('/event-management', eventManaagementRouter);
 
-const newletterManagementRouter = require('./lib/modules/newsletter/rotue.client');
+const newletterManagementRouter = require('./lib/modules/newsletter/rotues.client');
 app.use('/newsletter', newletterManagementRouter);
 
 app.use('/health-check', (req, res, next) => {
@@ -40,5 +40,3 @@ app.use('/health-check', (req, res, next) => {
 })
 
 module.exports = app;
-
-
