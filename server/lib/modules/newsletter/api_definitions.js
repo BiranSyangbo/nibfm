@@ -10,7 +10,7 @@
         }
       ],
       paths: {
-        '/newsletter/': {
+        '/newsletter': {
           post: {
             tags: ['newsletter'],
             summary: 'USER :: newsletter post api',
