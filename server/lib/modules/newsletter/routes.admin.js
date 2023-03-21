@@ -10,7 +10,7 @@ const authMiddleware = require('../../middleware/token_auth.middleware');
 router.route('/')
   .get(authMiddleware, getNewsletterList)
 
-router.route('/:email')
+router.route('/:id')
   .delete(authMiddleware, deleteNewsletter)
 
 

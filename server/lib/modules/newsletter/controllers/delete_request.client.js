@@ -12,18 +12,18 @@ const HTTPStatus = require('http-status');
 module.exports = async (req, res, next) => {
   try {
 
-    if (req.params.uuid) {
+    if (req.params.id) {
 
       const projection = {
         _id: 1
       }
 
       //@check document exists or not
-      const data = await getNewsletterDetail(req, req.params.email, projection)
+      const data = await getNewsletterDetail(req, req.params.id, projection)
       if (data && Object.keys(data).length > 0) {
 
         //@delete document
-        const deleteResponse = await deleteDocument(req, req.params.email);
+        const deleteResponse = await deleteDocument(req, req.params.id);
         if (deleteResponse) {
           return res.status(HTTPStatus.OK).json({
             status: HTTPStatus.OK,

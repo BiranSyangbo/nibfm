@@ -7,7 +7,7 @@ const deleteNewsletter = require('./controllers/delete_request.client');
 router.route('/')
   .post(postNewsLetterRequest)
 
-router.route('/:email')
+router.route('/:id')
   .delete(deleteNewsletter)
 
 module.exports = router;
