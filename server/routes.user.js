@@ -22,6 +22,9 @@ app.use('/user-auth', userAuthRouter);
 const forgotPasswordRouter = require('./lib/modules/forgot-password/routes');
 app.use('/forgot-password', forgotPasswordRouter);
 
+const fileManagementRouter = require('./lib/modules/file-management/routes.common');
+app.use('/file-management', fileManagementRouter);
+
 const donationManagementRouter = require('./lib/modules/donation-management/routes.client');
 app.use('/donation-management', donationManagementRouter)
 

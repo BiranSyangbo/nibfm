@@ -13,7 +13,7 @@ app.use('/blog', blogRouter);
 const contactUsRouter = require('./lib/modules/contact-us/routes.admin');
 app.use('/contact-us', contactUsRouter);
 
-const fileManagementRouter = require('./lib/modules/file-management/routes.admin');
+const fileManagementRouter = require('./lib/modules/file-management/routes.common');
 app.use('/file-management', fileManagementRouter)
 
 const membershipFormRouter = require('./lib/modules/membership-form/routes.admin');
