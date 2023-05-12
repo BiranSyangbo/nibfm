@@ -31,10 +31,10 @@
           url: 'http://localhost:4001/api/v1/user',
         },
         {
-          url: 'https://api.nbimf.com/api/v1/user'
+          url: 'http://api.nbimf.com/api/v1/user'
         },
         {
-          url: 'https://api.nbimf.com/api/v1/admin'
+          url: 'http://api.nbimf.com/api/v1/admin'
         }
       ],
       tags: [
