@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change directory to where the admin application is located
-cd /home/projects/nbimf/adminApp
+cd /home/projects/nbimf/admin-app
 
 echo "Pulling latest changes from Git..."
 git pull
