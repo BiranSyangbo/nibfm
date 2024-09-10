@@ -25,7 +25,7 @@ if pm2 list | grep -q "nbimf-server"; then
   pm2 restart nbimf-server --update-env
 else
   echo "Process nbimf-server is not running. Starting..."
-  pm2 start app.js --name nbimf-server
+  pm2 start server.js --name nbimf-server
 fi
 
 echo "Deployment of server application completed successfully."
