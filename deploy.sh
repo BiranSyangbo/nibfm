@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Change directory to where the server application is located
-cd /home/projects/nbimf/server/
+# place this file in the root directory of your project
 
 echo "Checking if Node.js version 16.18.0 is installed using nvm..."
 if nvm ls | grep -q "v16.18.0"; then
@@ -20,7 +19,13 @@ nvm use 16.18.0
 echo "Installing dependencies..."
 npm install
 
-echo "Restarting server with PM2..."
-pm2 restart 0 --update-env
+# Check if a process named nbimf-server is already running
+if pm2 list | grep -q "nbimf-server"; then
+  echo "Process nbimf-server is already running. Restarting..."
+  pm2 restart nbimf-server --update-env
+else
+  echo "Process nbimf-server is not running. Starting..."
+  pm2 start app.js --name nbimf-server
+fi
 
 echo "Deployment of server application completed successfully."
